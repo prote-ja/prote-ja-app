@@ -14,26 +14,32 @@ import NotAuthenticated from "./routes/NotAuthenticated";
 import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./routes/Dashboard";
 import Pairing from "./routes/Pairing";
+import UserProvider from "./contexts/UserContext";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider delayDuration={400}>
-        <BrowserRouter basename={"/prote-ja-app/"}>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/pairing" element={<Pairing />} />
+      <UserProvider>
+        <TooltipProvider delayDuration={400}>
+          <BrowserRouter basename={"/prote-ja-app/"}>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pairing" element={<Pairing />} />
 
-              <Route path="/not-authenticated" element={<NotAuthenticated />} />
-              <Route path="/not-authorized" element={<NotAuthorized />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+                <Route
+                  path="/not-authenticated"
+                  element={<NotAuthenticated />}
+                />
+                <Route path="/not-authorized" element={<NotAuthorized />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </UserProvider>
 
       <ToastContainer closeOnClick />
     </QueryClientProvider>
