@@ -8,7 +8,6 @@ interface DashboardProps {}
 const Dashboard: FunctionComponent<DashboardProps> = () => {
   return (
     <>
-      <AnimatedBackground />
       <div className="p-2">
         <BlurredContainer header="Dashboard">Hello</BlurredContainer>;
       </div>
