@@ -42,6 +42,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
         <Button color="primary" size="sm">
           asdf
         </Button>
+        {children}
       </div>
     </div>
   );
