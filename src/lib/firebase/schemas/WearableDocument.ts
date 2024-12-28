@@ -4,6 +4,7 @@ export enum WearableStatus {
   CONNECTED = "connected",
   DISABLED = "disabled",
   DISCONNECTED = "disconnected",
+  OUT_OF_BOUNDS = "out_of_bounds",
 }
 
 interface WearableDocument {

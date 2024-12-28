@@ -21,6 +21,8 @@ interface UserDocument {
   role: UserRoles;
   status: UserStatus;
 
+  linkedWearables: string[];
+
   createdAt: Timestamp;
 }
 

@@ -1,5 +1,6 @@
 import { Wifi, WifiOff } from "lucide-react";
 import { FunctionComponent } from "react";
+import { Button } from "./ui/button";
 
 interface BlurredContainerProps {
   header: React.ReactNode;
@@ -13,7 +14,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   children,
 }) => {
   return (
-    <div className="glass-panel p-6 dashboard-item">
+    <div className=" p-6 dashboard-item border rounded-lg backdrop-blur bg-background">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-white text-shadow">{header}</h2>
         <div
@@ -38,6 +39,9 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
               </p>
             )} */}
         </div>
+        <Button color="primary" size="sm">
+          asdf
+        </Button>
       </div>
     </div>
   );
