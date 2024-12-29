@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://prote-ja.github.io/prote-ja-app",
+  "homepage": "https://prote-ja.github.io/prote-ja-app/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

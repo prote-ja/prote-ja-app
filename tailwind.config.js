@@ -34,6 +34,11 @@ export default {
           DEFAULT: "hsla(var(--secondary))",
           foreground: "hsla(var(--secondary-foreground))",
         },
+        outline: {
+          DEFAULT: "hsla(var(--outline))",
+          foreground: "hsla(var(--outline-foreground))",
+        },
+
         muted: {
           DEFAULT: "hsla(var(--muted))",
           foreground: "hsla(var(--muted-foreground))",
@@ -41,6 +46,11 @@ export default {
         accent: {
           DEFAULT: "hsla(var(--accent))",
           foreground: "hsla(var(--accent-foreground))",
+        },
+
+        positive: {
+          DEFAULT: "hsla(var(--positive))",
+          foreground: "hsla(var(--positive-foreground))",
         },
         destructive: {
           DEFAULT: "hsla(var(--destructive))",

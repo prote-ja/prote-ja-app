@@ -1,7 +1,5 @@
-import AnimatedBackground from "@/components/AnimatedBackground";
-import BlurredContainer from "@/components/BlurredContainer";
-
 import { FunctionComponent } from "react";
+import ConnectionComponent from "./ConnectionComponent";
 
 interface DashboardProps {}
 
@@ -9,7 +7,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   return (
     <>
       <div className="p-2">
-        <BlurredContainer header="Dashboard">Hello</BlurredContainer>;
+        <ConnectionComponent />
       </div>
     </>
   );
