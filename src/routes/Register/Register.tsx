@@ -6,16 +6,16 @@ import { Input } from "@/components/ui/input";
 import ProtejaLogo from "@/assets/proteja_logo.svg";
 import BlurredContainer from "@/components/BlurredContainer";
 
-interface LoginProps {}
+interface RegisterProps {}
 
-const Login: FunctionComponent<LoginProps> = () => {
+const Register: FunctionComponent<RegisterProps> = () => {
   return (
-    <BlurredContainer>
+    <BlurredContainer className="col-span-1 lg:col-span-2">
       <div className="flex flex-col items-center justify-center space-y-6 w-full">
         <img src={ProtejaLogo} alt="proteja-logo" className="max-h-24" />
 
         <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white">
-          Faça login em sua conta
+          Registrar nova conta
         </h2>
         <form className="mt-10 space-y-4 w-full" action="#" method="POST">
           <div>
@@ -49,7 +49,24 @@ const Login: FunctionComponent<LoginProps> = () => {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
+                required
+                className="bg-white/10 text-white placeholder-white/50 border-white/20"
+              />
+            </div>
+          </div>
+
+          <div>
+            <Label
+              htmlFor="password-confirmation"
+              className="block text-sm font-medium leading-6 text-white"
+            >
+              Confirme sua senha
+            </Label>
+            <div className="mt-2">
+              <Input
+                id="confirm_password"
+                name="password-confirmation"
+                type="password"
                 required
                 className="bg-white/10 text-white placeholder-white/50 border-white/20"
               />
@@ -58,28 +75,19 @@ const Login: FunctionComponent<LoginProps> = () => {
 
           <div>
             <Button type="submit" className="w-full bg-[#fff] text-[#7F6AFF] ">
-              Entrar
+              Registrar
             </Button>
           </div>
-          {/* <div className="mt-6">
-                <Button
-                  variant="outline"
-                  className="w-full text-white border-white/20 hover:bg-white/20"
-                  disabled
-                >
-                  Sign in with Google
-                </Button>
-              </div> */}
         </form>
 
         <p className="mt-10 text-center text-sm text-white/70">
-          É novo aqui?{" "}
+          Já possui uma conta?{" "}
           <Link
-            to="/register"
+            to="/login"
             className="font-bold leading-6 text-[#fff] hover:text-primary/20 hover:border-b border-primary/20"
             viewTransition
           >
-            Registre-se agora
+            Faça login
           </Link>
         </p>
       </div>
@@ -87,4 +95,4 @@ const Login: FunctionComponent<LoginProps> = () => {
   );
 };
 
-export default Login;
+export default Register;

@@ -1,18 +1,17 @@
 import Header from "@/components/Header";
 import { FunctionComponent } from "react";
-import { motion } from "framer-motion";
-import { Outlet, useLocation } from "react-router";
+import { Outlet } from "react-router";
 import AnimatedBackground from "@/components/AnimatedBackground";
 
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
   return (
     <>
       <AnimatedBackground />
       <Header />
-      <motion.div
+      {/* <motion.div
         key={pathname}
         initial="initial"
         animate="in"
@@ -33,9 +32,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
           damping: 20,
           duration: 0.3,
         }}
-      >
-        <Outlet />
-      </motion.div>
+      > */}
+      <Outlet />
+      {/* </motion.div> */}
     </>
   );
 };

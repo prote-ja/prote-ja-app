@@ -13,6 +13,12 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
     <>
       <div className="p-2">
         <ConnectionComponent />
+        <ConnectionComponent />
+        <ConnectionComponent />
+        <ConnectionComponent />
+        <ConnectionComponent />
+        <ConnectionComponent />
+        <ConnectionComponent />
       </div>
     </>
   );

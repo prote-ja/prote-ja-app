@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 
 interface BlurredContainerProps {
-  title?: React.ReactNode;
+  title?: string;
   children: React.ReactNode;
   className?: string;
 }
@@ -15,7 +15,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
     <div
       className={
         className +
-        "p-6 dashboard-item border rounded-lg backdrop-blur bg-background"
+        " p-6 dashboard-item border rounded-lg backdrop-blur bg-background"
       }
     >
       {title && (

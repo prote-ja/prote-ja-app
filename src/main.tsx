@@ -17,6 +17,8 @@ import Dashboard from "./routes/Dashboard/Dashboard";
 import Pairing from "./routes/Pairing";
 import Login from "./routes/Login/Login";
 import { AuthProvider } from "./contexts/authContext";
+import AuthLayout from "./layouts/AuthLayout";
+import Register from "./routes/Register/Register";
 
 const queryClient = new QueryClient();
 
@@ -29,9 +31,13 @@ createRoot(document.getElementById("root")!).render(
             <Routes>
               <Route path="/" element={<MainLayout />}>
                 <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/pairing" element={<Pairing />} />
+
+                <Route element={<AuthLayout />}>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </Route>
 
                 <Route
                   path="/not-authenticated"

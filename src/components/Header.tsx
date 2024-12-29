@@ -12,7 +12,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
   const auth = useAuth();
 
   return (
-    <div className="p-2 border-b justify-between flex items-center">
+    <div className="p-2 border-b justify-between flex items-center sticky top-0 z-10 backdrop-blur">
       <div className="flex items-center space-x-2">
         <img src={ProtejaLogo} alt="proteja-logo" className="max-h-12" />
         <img src={ProtejaName} alt="proteja-name" className="max-w-32 h-12" />
