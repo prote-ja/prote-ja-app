@@ -10,7 +10,7 @@ const isConnected = true;
 const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = () => {
   return (
     <>
-      <BlurredContainer header="Conexão">
+      <BlurredContainer title="Conexão">
         <div>
           <div
             className={`w-3 h-3 rounded-full ${

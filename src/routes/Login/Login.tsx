@@ -14,21 +14,21 @@ const Login: FunctionComponent<LoginProps> = () => {
   return (
     <>
       <FloatingPartnerBubbles />
-      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 py-12 lg:px-8 relative z-10">
-        <BlurredContainer className="w-full max-w-6xl">
-          <div className="lg:flex-1 sm:mx-auto sm:w-full sm:max-w-sm mb-10 lg:mb-0">
+      <div className="flex flex-col p-6 gap-6 lg:flex-row justify-center">
+        <BlurredContainer className="w-full">
+          <div className="p-6 flex flex-col items-center justify-center space-y-6 w-full">
             <img src={ProtejaLogo} alt="proteja-logo" className="max-h-24" />
 
-            <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
               Faça login em sua conta
             </h2>
-            <form className="mt-10 space-y-6" action="#" method="POST">
+            <form className="mt-10 space-y-4 w-full" action="#" method="POST">
               <div>
                 <Label
                   htmlFor="email"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Email address
+                  Email
                 </Label>
                 <div className="mt-2">
                   <Input
@@ -47,7 +47,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Password
+                  Senha
                 </Label>
                 <div className="mt-2">
                   <Input
@@ -62,54 +62,50 @@ const Login: FunctionComponent<LoginProps> = () => {
               </div>
 
               <div>
+                <Button type="submit" className="w-full">
+                  Entrar
+                </Button>
+              </div>
+              <div className="mt-6">
                 <Button
-                  type="submit"
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                  variant="outline"
+                  className="w-full text-white border-white/20 hover:bg-white/20"
+                  disabled
                 >
-                  Sign in
+                  Sign in with Google
                 </Button>
               </div>
             </form>
 
-            <div className="mt-6">
-              <Button
-                variant="outline"
-                className="w-full text-white border-white/20 hover:bg-white/20"
-              >
-                Sign in with Google
-              </Button>
-            </div>
-
             <p className="mt-10 text-center text-sm text-white/70">
-              Not a member?{" "}
+              É novo aqui?{" "}
               <Link
                 to="/register"
                 className="font-semibold leading-6 text-primary hover:text-primary/90"
               >
-                Register now
+                Registre-se agora
               </Link>
             </p>
           </div>
+        </BlurredContainer>
 
-          <div className="lg:flex-1 w-full max-w-2xl mt-16 lg:mt-0 lg:ml-12">
-            <h3 className="text-2xl font-bold mb-6 text-center text-white">
-              Trusted by Industry Leaders
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <BlurredContainer title="Apoiado por">
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <PartnerCard
-                name="Amazon Web Services"
+                name="UTFPR"
                 logo="/placeholder.svg?height=40&width=80"
-                description="Powering our infrastructure with world-class cloud solutions."
+                description="Universidade Tecnológica Federal do Paraná"
               />
               <PartnerCard
-                name="META"
+                name="Biopark Educação"
                 logo="/placeholder.svg?height=40&width=80"
-                description="Collaborating on next-gen AR experiences for health monitoring."
+                description=""
               />
               <PartnerCard
-                name="Google Health"
+                name="Mãe do Reinaldo"
                 logo="/placeholder.svg?height=40&width=80"
-                description="Integrating cutting-edge AI for predictive health analytics."
+                description="Reinaldo's mom administration TM."
               />
             </div>
           </div>

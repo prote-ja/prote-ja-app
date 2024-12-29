@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 
 interface BlurredContainerProps {
-  header?: React.ReactNode;
+  title?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }
 
 const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
-  header,
+  title,
   children,
   className = "",
 }) => {
@@ -18,10 +18,12 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
         "p-6 dashboard-item border rounded-lg backdrop-blur bg-background"
       }
     >
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-white text-shadow">{header}</h2>
-      </div>
-      <div className="flex items-center space-x-4">{children}</div>
+      {title && (
+        <div className="flex items-center justify-center mb-4">
+          <h2 className="text-2xl font-bold text-white text-shadow">{title}</h2>
+        </div>
+      )}
+      {children}
     </div>
   );
 };
