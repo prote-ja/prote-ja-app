@@ -17,28 +17,26 @@ const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = () => {
               isConnected ? "bg-positive" : "bg-destructive"
             }`}
           ></div>
-          <p className="text-xl font-semibold text-white">
-            {isConnected ? (
-              <Wifi className="w-8 h-8 text-positive" />
-            ) : (
-              <WifiOff className="w-8 h-8 text-destructive" />
-            )}
-            <div>
-              <p className="text-xl font-semibold text-white">
-                {isConnected ? "Connected" : "Disconnected"}
-              </p>
-              {/* {lastPingTime && (
+          {isConnected ? (
+            <Wifi className="w-8 h-8 text-positive" />
+          ) : (
+            <WifiOff className="w-8 h-8 text-destructive" />
+          )}
+          <div>
+            <p className="text-xl font-semibold text-white">
+              {isConnected ? "Connected" : "Disconnected"}
+            </p>
+            {/* {lastPingTime && (
               <p className="text-sm text-white/70">
                 Last ping: {lastPingTime.toLocaleTimeString()}
               </p>
             )} */}
-            </div>
-            <Button size="sm" color="destructive">
-              asdf
-            </Button>
-            <Button variant={"outline"}>test</Button>
-            <Input placeholder="test" />
-          </p>
+          </div>
+          <Button size="sm" color="destructive">
+            asdf
+          </Button>
+          <Button variant={"outline"}>test</Button>
+          <Input placeholder="test" />
         </div>
       </BlurredContainer>
     </>

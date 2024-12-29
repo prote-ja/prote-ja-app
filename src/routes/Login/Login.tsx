@@ -2,28 +2,25 @@ import { FunctionComponent } from "react";
 import PartnerCard from "./PartnerCard";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { FloatingPartnerBubbles } from "./FloatingPartnerBubbles";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import ProtejaLogo from "@/assets/proteja_logo.svg";
+import BlurredContainer from "@/components/BlurredContainer";
 
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   return (
-    <div className="min-h-screen flex flex-col relative">
-      <AnimatedBackground />
+    <>
       <FloatingPartnerBubbles />
       <div className="flex-1 flex flex-col lg:flex-row items-center justify-center px-6 py-12 lg:px-8 relative z-10">
-        <div className="glass-panel p-8 rounded-lg w-full max-w-6xl">
+        <BlurredContainer className="w-full max-w-6xl">
           <div className="lg:flex-1 sm:mx-auto sm:w-full sm:max-w-sm mb-10 lg:mb-0">
-            <img
-              className="mx-auto h-20 w-auto"
-              src="/placeholder.svg?height=80&width=80"
-              alt="ProteJÁ Logo"
-            />
+            <img src={ProtejaLogo} alt="proteja-logo" className="max-h-24" />
+
             <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-white">
-              Sign in to your account
+              Faça login em sua conta
             </h2>
             <form className="mt-10 space-y-6" action="#" method="POST">
               <div>
@@ -116,9 +113,9 @@ const Login: FunctionComponent<LoginProps> = () => {
               />
             </div>
           </div>
-        </div>
+        </BlurredContainer>
       </div>
-    </div>
+    </>
   );
 };
 

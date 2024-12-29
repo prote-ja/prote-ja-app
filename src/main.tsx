@@ -16,29 +16,35 @@ import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import Pairing from "./routes/Pairing";
 import Login from "./routes/Login/Login";
+import { AuthProvider } from "./contexts/authContext";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider delayDuration={400}>
-        <BrowserRouter basename={"/prote-ja-app/"}>
-          <Routes>
-            <Route path="/" element={<MainLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/pairing" element={<Pairing />} />
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider delayDuration={400}>
+          <BrowserRouter basename={"/prote-ja-app/"}>
+            <Routes>
+              <Route path="/" element={<MainLayout />}>
+                <Route index element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pairing" element={<Pairing />} />
 
-              <Route path="/not-authenticated" element={<NotAuthenticated />} />
-              <Route path="/not-authorized" element={<NotAuthorized />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+                <Route
+                  path="/not-authenticated"
+                  element={<NotAuthenticated />}
+                />
+                <Route path="/not-authorized" element={<NotAuthorized />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
 
-      <ToastContainer closeOnClick />
-    </QueryClientProvider>
+        <ToastContainer closeOnClick />
+      </QueryClientProvider>
+    </AuthProvider>
   </StrictMode>
 );
