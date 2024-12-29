@@ -3,6 +3,7 @@ import ProtejaLogo from "@/assets/proteja_logo.svg";
 import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "./ui/button";
 import { Bell, User } from "lucide-react";
+import { Link } from "react-router";
 
 interface HeaderProps {}
 
@@ -18,10 +19,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
           <User />
           <span className="hidden sm:block">Meu Perfil</span>
         </Button>
-        <Button variant={"secondary"}>
-          <Bell />
-          <span className="hidden sm:block">Notificações</span>
-        </Button>
+        <Link to="/dashboard">
+          <Button variant={"secondary"}>
+            <Bell />
+            <span className="hidden sm:block">Notificações</span>
+          </Button>
+        </Link>
       </div>
     </div>
   );

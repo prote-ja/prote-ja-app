@@ -1,4 +1,4 @@
-import { Timestamp } from "firebase/firestore";
+// import { Timestamp } from "firebase/firestore";
 
 export enum UserRoles {
   ADMIN = "admin",
@@ -23,7 +23,7 @@ interface UserDocument {
 
   linkedWearables: string[];
 
-  createdAt: Timestamp;
+  // createdAt: Timestamp;
 }
 
 export default UserDocument;

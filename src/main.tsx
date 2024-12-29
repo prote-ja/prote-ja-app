@@ -15,7 +15,6 @@ import NotAuthenticated from "./routes/NotAuthenticated";
 import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import Pairing from "./routes/Pairing";
-import UserProvider from "./contexts/UserContext";
 import Login from "./routes/Login/Login";
 
 const queryClient = new QueryClient();
@@ -23,26 +22,21 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <TooltipProvider delayDuration={400}>
-          <BrowserRouter basename={"/prote-ja-app/"}>
-            <Routes>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/pairing" element={<Pairing />} />
+      <TooltipProvider delayDuration={400}>
+        <BrowserRouter basename={"/prote-ja-app/"}>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/pairing" element={<Pairing />} />
 
-                <Route
-                  path="/not-authenticated"
-                  element={<NotAuthenticated />}
-                />
-                <Route path="/not-authorized" element={<NotAuthorized />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </UserProvider>
+              <Route path="/not-authenticated" element={<NotAuthenticated />} />
+              <Route path="/not-authorized" element={<NotAuthorized />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
 
       <ToastContainer closeOnClick />
     </QueryClientProvider>

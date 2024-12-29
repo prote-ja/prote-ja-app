@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore";
-
 interface WearablePingDocument {
   uid: string;
 
@@ -11,6 +9,6 @@ interface WearablePingDocument {
 
   gateway: string; // UID of the totem used to relay the ping
 
-  createdAt: Timestamp;
+  // createdAt: Timestamp;
 }
 export default WearablePingDocument;

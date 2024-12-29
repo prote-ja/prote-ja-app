@@ -1,5 +1,3 @@
-import { Timestamp } from "firebase/firestore";
-
 export enum WearableStatus {
   CONNECTED = "connected",
   DISABLED = "disabled",
@@ -13,7 +11,7 @@ interface WearableDocument {
   battery: number;
   status: WearableStatus;
 
-  createdAt: Timestamp;
+  // createdAt: Timestamp;
 }
 
 export default WearableDocument;
