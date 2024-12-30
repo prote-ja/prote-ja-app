@@ -11,58 +11,146 @@ export type Database = {
     Tables: {
       profiles: {
         Row: {
+          avatar_url: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      totems: {
+        Row: {
           created_at: string
           id: string
-          owned_wearables: number | null
+          mac: string
+          name: string
+          owner: string
         }
         Insert: {
           created_at?: string
-          id: string
-          owned_wearables?: number | null
+          id?: string
+          mac: string
+          name?: string
+          owner?: string
         }
         Update: {
           created_at?: string
           id?: string
-          owned_wearables?: number | null
+          mac?: string
+          name?: string
+          owner?: string
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_owned_wearables_fkey"
-            columns: ["owned_wearables"]
+            foreignKeyName: "totems_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tracked_wearables: {
+        Row: {
+          created_at: string
+          disconected_alert: Database["public"]["Enums"]["alert_types"][]
+          fall_detected_alert: Database["public"]["Enums"]["alert_types"][]
+          half_battery_alert: Database["public"]["Enums"]["alert_types"][]
+          id: number
+          low_battery_alert: Database["public"]["Enums"]["alert_types"][]
+          out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
+          user: string
+          wearable: string
+        }
+        Insert: {
+          created_at?: string
+          disconected_alert: Database["public"]["Enums"]["alert_types"][]
+          fall_detected_alert: Database["public"]["Enums"]["alert_types"][]
+          half_battery_alert: Database["public"]["Enums"]["alert_types"][]
+          id?: number
+          low_battery_alert: Database["public"]["Enums"]["alert_types"][]
+          out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
+          user: string
+          wearable: string
+        }
+        Update: {
+          created_at?: string
+          disconected_alert?: Database["public"]["Enums"]["alert_types"][]
+          fall_detected_alert?: Database["public"]["Enums"]["alert_types"][]
+          half_battery_alert?: Database["public"]["Enums"]["alert_types"][]
+          id?: number
+          low_battery_alert?: Database["public"]["Enums"]["alert_types"][]
+          out_of_bounds_alert?: Database["public"]["Enums"]["alert_types"][]
+          user?: string
+          wearable?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracked_wearables_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracked_wearables_wearable_fkey"
+            columns: ["wearable"]
             isOneToOne: false
             referencedRelation: "wearables"
             referencedColumns: ["id"]
           },
         ]
       }
-      wearable_ping: {
+      wearable_pings: {
         Row: {
           battery: number
           created_at: string
           id: number
           pedometer: number
-          soc_temp: number | null
-          wearable: number | null
+          totem: string
+          wearable: string
         }
         Insert: {
           battery?: number
           created_at?: string
           id?: number
           pedometer?: number
-          soc_temp?: number | null
-          wearable?: number | null
+          totem: string
+          wearable: string
         }
         Update: {
           battery?: number
           created_at?: string
           id?: number
           pedometer?: number
-          soc_temp?: number | null
-          wearable?: number | null
+          totem?: string
+          wearable?: string
         }
         Relationships: [
           {
-            foreignKeyName: "wearable_ping_wearable_fkey"
+            foreignKeyName: "wearable_pings_totem_fkey"
+            columns: ["totem"]
+            isOneToOne: false
+            referencedRelation: "totems"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_wearable_fkey"
             columns: ["wearable"]
             isOneToOne: false
             referencedRelation: "wearables"
@@ -73,21 +161,27 @@ export type Database = {
       wearables: {
         Row: {
           created_at: string
-          id: number
+          id: string
+          out_of_bounds_delay: number
           owner: string
-          status: string
+          refresh_delay: number
+          status: Database["public"]["Enums"]["wearable_status"]
         }
         Insert: {
           created_at?: string
-          id?: number
-          owner: string
-          status?: string
+          id?: string
+          out_of_bounds_delay?: number
+          owner?: string
+          refresh_delay?: number
+          status?: Database["public"]["Enums"]["wearable_status"]
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
+          out_of_bounds_delay?: number
           owner?: string
-          status?: string
+          refresh_delay?: number
+          status?: Database["public"]["Enums"]["wearable_status"]
         }
         Relationships: [
           {
@@ -107,7 +201,13 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      alert_types:
+        | "messenger"
+        | "sms"
+        | "email"
+        | "push_notification"
+        | "in_app"
+      wearable_status: "active" | "inactive" | "out_of_range"
     }
     CompositeTypes: {
       [_ in never]: never

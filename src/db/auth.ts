@@ -1,30 +1,57 @@
 import { supabase } from "@/client";
+import { E164Number } from "libphonenumber-js/min";
 
-export async function signUpNewUser() {
-  const { data, error } = await supabase.auth.signUp({
-    email: "valid.email@supabase.io",
-    password: "example-password",
+/**
+ * Registers a new user with Supabase.
+ * Warning: The error should be handled by the caller.
+ *
+ * @param name
+ * @param email
+ * @param phone
+ * @param password
+ * @returns
+ */
+export async function registerNewUser(
+  name: string,
+  email: string,
+  phone: E164Number,
+  password: string
+) {
+  console.log({
+    name,
+    email,
+    phone,
+    password,
+  });
+
+  const redirectionURL = `${window.location.origin}${
+    import.meta.env.VITE_PUBLIC_BASE_PATH
+  }dashboard`;
+  console.log("Redirection URL: ", redirectionURL);
+
+  // Removes +
+  // const fixedPhone = phone.replace("+", "");
+
+  const response = await supabase.auth.signUp({
+    email: email,
+    password: password,
     options: {
-      emailRedirectTo: "https://example.com/welcome",
+      emailRedirectTo: redirectionURL,
+      data: {
+        full_name: name,
+        phone: phone,
+      },
     },
   });
 
-  if (error) {
-    throw error;
-  }
-
-  return data;
+  return response;
 }
 
-export async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: "valid.email@supabase.io",
-    password: "example-password",
+export async function signInWithEmail(email: string, password: string) {
+  const res = await supabase.auth.signInWithPassword({
+    email,
+    password,
   });
 
-  if (error) {
-    throw error;
-  }
-
-  return data;
+  return res;
 }

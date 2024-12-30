@@ -6,8 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 
 import "./index.css";
-
 import "react-toastify/dist/ReactToastify.css";
+import "react-phone-number-input/style.css";
 
 import Home from "./routes/Home";
 import NotAuthorized from "./routes/NotAuthorized";
@@ -19,6 +19,7 @@ import Login from "./routes/Login/Login";
 import { AuthProvider } from "./contexts/authContext";
 import AuthLayout from "./layouts/AuthLayout";
 import Register from "./routes/Register/Register";
+import CommonLayout from "./layouts/CommonLayout";
 
 const queryClient = new QueryClient();
 
@@ -27,23 +28,25 @@ createRoot(document.getElementById("root")!).render(
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider delayDuration={400}>
-          <BrowserRouter basename={"/prote-ja-app/"}>
+          <BrowserRouter basename={import.meta.env.VITE_PUBLIC_BASE_PATH!}>
             <Routes>
               <Route path="/" element={<MainLayout />}>
-                <Route index element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/pairing" element={<Pairing />} />
+                <Route element={<CommonLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/pairing" element={<Pairing />} />
+
+                  <Route
+                    path="/not-authenticated"
+                    element={<NotAuthenticated />}
+                  />
+                  <Route path="/not-authorized" element={<NotAuthorized />} />
+                </Route>
 
                 <Route element={<AuthLayout />}>
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                 </Route>
-
-                <Route
-                  path="/not-authenticated"
-                  element={<NotAuthenticated />}
-                />
-                <Route path="/not-authorized" element={<NotAuthorized />} />
               </Route>
             </Routes>
           </BrowserRouter>

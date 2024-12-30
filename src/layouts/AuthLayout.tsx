@@ -13,7 +13,7 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   return (
     <>
       <FloatingPartnerBubbles />
-      <div className="p-6 max-w-xl flex justify-center lg:max-w-6xl mx-auto">
+      <div className="p-6 max-w-xl  justify-center lg:max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           <AnimatePresence mode="popLayout">
             {/* Ensures animations play when switching pages */}
@@ -23,8 +23,8 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: "-20%" }}
               transition={{
-                opacity: { duration: 0.5 },
-                y: { duration: 0.5, ease: "easeOut" },
+                opacity: { duration: 0.3, ease: "easeOut" },
+                y: { duration: 0.7, ease: "easeOut" },
               }}
               className="col-span-1 lg:col-span-2"
             >
