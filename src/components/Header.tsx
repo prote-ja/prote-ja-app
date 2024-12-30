@@ -11,8 +11,6 @@ interface HeaderProps {}
 const Header: FunctionComponent<HeaderProps> = () => {
   const session = useAuth();
 
-  console.log(session);
-
   return (
     <div className="p-2 border-b justify-between flex items-center sticky top-0 z-10 backdrop-blur">
       <div className="flex items-center space-x-2">
@@ -22,10 +20,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
       <div className="gap-2 flex items-center">
         {session ? (
           <>
-            <Button variant={"secondary"}>
-              <User />
-              <span className="hidden sm:block">Meu Perfil</span>
-            </Button>
+            <Link to="/profile">
+              <Button variant={"secondary"}>
+                <User />
+                <span className="hidden sm:block">Meu Perfil</span>
+              </Button>
+            </Link>
             <Link to="/dashboard">
               <Button variant={"secondary"}>
                 <Bell />

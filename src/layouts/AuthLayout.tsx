@@ -1,14 +1,20 @@
 import BlurredContainer from "@/components/BlurredContainer";
 import { FloatingPartnerBubbles } from "@/components/FloatingPartnerBubbles";
 import PartnerCard from "@/components/PartnerCard";
+import { useAuth } from "@/hooks/useAuth";
 import { motion, AnimatePresence } from "framer-motion";
 import { FunctionComponent } from "react";
-import { Outlet, useLocation } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
 
 interface AuthLayoutProps {}
 
 const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   const { pathname } = useLocation();
+  const session = useAuth();
+
+  if (session) {
+    return <Navigate to="/already-authenticated" replace />;
+  }
 
   return (
     <>

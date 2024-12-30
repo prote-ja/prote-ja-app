@@ -55,3 +55,8 @@ export async function signInWithEmail(email: string, password: string) {
 
   return res;
 }
+
+export async function signOut() {
+  const res = await supabase.auth.signOut();
+  return res;
+}

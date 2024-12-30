@@ -5,9 +5,9 @@ import { Navigate } from "react-router";
 interface HomeProps {}
 
 const Home: FunctionComponent<HomeProps> = () => {
-  const auth = useAuth();
+  const session = useAuth();
 
-  if (!auth.session) {
+  if (!session) {
     return <Navigate to="/login" replace />;
   }
 

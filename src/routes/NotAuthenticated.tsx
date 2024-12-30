@@ -25,25 +25,25 @@ const NotAuthenticated: FunctionComponent<NotAuthenticatedProps> = () => {
   }, [searchParamRedirectTo]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-300 to-zinc-200 dark:from-gray-900 dark:to-gray-800 text-[#273C4E]">
+    <div className="flex items-center justify-center min-h-screen ">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-[#273C4E]">
+          <CardTitle className="flex items-center gap-2 text-primary">
             <AlertCircle className="h-5 w-5 text-yellow-500" />
             Não Autenticado
           </CardTitle>
-          <CardDescription className="text-[#273C4E]">
+          <CardDescription className="text-black">
             Você precisa estar logado para acessar esta página.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-[#273C4E]">
+          <p className="text-sm">
             Por favor, faça login para acessar este conteúdo e utilizar todas as
-            funcionalidades do Rman.
+            funcionalidades do ProteJÁ.
           </p>
         </CardContent>
         <CardFooter>
-          <Button asChild className="w-full bg-[#273C4E] hover:bg-[#1c2d3d]">
+          <Button asChild className="w-full">
             <Link to={loginLink}>Fazer Login</Link>
           </Button>
         </CardFooter>

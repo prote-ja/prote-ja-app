@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
 import { registerNewUser } from "@/db/auth";
 import PhoneInput from "react-phone-number-input";
 import pt_BR from "react-phone-number-input/locale/pt-BR";
-import { E164Number } from "libphonenumber-js/core";
-import { parsePhoneNumber } from "libphonenumber-js/min";
+import { parsePhoneNumber, E164Number } from "libphonenumber-js/min";
 import { AuthResponse } from "@supabase/supabase-js";
 import { authErrorParser } from "@/lib/helpers";
 
