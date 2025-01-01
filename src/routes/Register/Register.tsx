@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, Suspense, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -10,17 +10,20 @@ import PasswordInput from "@/components/PasswordInput";
 import { LogIn } from "lucide-react";
 import { toast } from "react-toastify";
 import { registerNewUser } from "@/db/auth";
-import PhoneInput from "react-phone-number-input";
 import pt_BR from "react-phone-number-input/locale/pt-BR";
-import { parsePhoneNumber, E164Number } from "libphonenumber-js/min";
 import { AuthResponse } from "@supabase/supabase-js";
 import { authErrorParser } from "@/lib/helpers";
+import React from "react";
+
+const PhoneInputComponent = React.lazy(
+  () => import("react-phone-number-input")
+);
 
 interface RegisterProps {}
 
 const Register: FunctionComponent<RegisterProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [phone, setPhone] = useState<E164Number | undefined>();
+  const [phone, setPhone] = useState<string | undefined>();
   const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +45,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
       return;
     }
 
-    const parsedPhone = parsePhoneNumber(phone);
+    const libphone = await import("libphonenumber-js/min");
+
+    const parsedPhone = libphone.parsePhoneNumber(phone);
 
     console.log("Parsed phone: ", parsedPhone);
 
@@ -140,19 +145,22 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 pattern="$$\d{2}$$\d{5}-\d{4}"
                 className="col-span-3"
               /> */}
-            <PhoneInput
-              placeholder="(99) 99999-9999"
-              value={phone}
-              onChange={(phone) => setPhone(phone)}
-              defaultCountry="BR"
-              labels={pt_BR}
-              inputComponent={Input}
-              className="col-span-3 placeholder-red-200 text-black"
-              autoComplete="tel"
-              // labels={{ BR: "Brazil" }}
-              // international
-              disabled={loading}
-            />
+            <Suspense fallback={<div>Carregando...</div>}>
+              <PhoneInputComponent
+                placeholder="(99) 99999-9999"
+                value={phone}
+                onChange={(phone: string) => setPhone(phone)}
+                defaultCountry="BR"
+                labels={pt_BR}
+                inputComponent={Input}
+                className="col-span-3 placeholder-red-200 text-black"
+                autoComplete="tel"
+                // labels={{ BR: "Brazil" }}
+                // international
+                disabled={loading}
+              />
+            </Suspense>
+
             <p className="mt-1 text-sm text-muted">
               Número de WhatsApp para contato.
             </p>

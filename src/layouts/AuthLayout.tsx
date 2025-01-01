@@ -2,7 +2,6 @@ import BlurredContainer from "@/components/BlurredContainer";
 import { FloatingPartnerBubbles } from "@/components/FloatingPartnerBubbles";
 import PartnerCard from "@/components/PartnerCard";
 import { useAuth } from "@/hooks/useAuth";
-import { motion, AnimatePresence } from "framer-motion";
 import { FunctionComponent } from "react";
 import { Navigate, Outlet, useLocation } from "react-router";
 
@@ -19,24 +18,15 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   return (
     <>
       <FloatingPartnerBubbles />
-      <div className="p-6 max-w-xl  justify-center lg:max-w-6xl mx-auto">
+      <div className="p-6 max-w-xl justify-center lg:max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <AnimatePresence mode="popLayout">
-            {/* Ensures animations play when switching pages */}
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: "-20%" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "-20%" }}
-              transition={{
-                opacity: { duration: 0.3, ease: "easeOut" },
-                y: { duration: 0.7, ease: "easeOut" },
-              }}
-              className="col-span-1 lg:col-span-2"
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          {/* Ensures animations play when switching pages */}
+          <div
+            key={pathname}
+            className="col-span-1 lg:col-span-2 animated-container"
+          >
+            <Outlet />
+          </div>
 
           <BlurredContainer className="col-span-1 lg:col-span-3 h-min">
             <div>

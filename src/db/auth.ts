@@ -1,5 +1,5 @@
 import { supabase } from "@/client";
-import { E164Number } from "libphonenumber-js/min";
+// import { E164Number } from "libphonenumber-js/min";
 
 /**
  * Registers a new user with Supabase.
@@ -14,7 +14,7 @@ import { E164Number } from "libphonenumber-js/min";
 export async function registerNewUser(
   name: string,
   email: string,
-  phone: E164Number,
+  phone: string,
   password: string
 ) {
   console.log({
