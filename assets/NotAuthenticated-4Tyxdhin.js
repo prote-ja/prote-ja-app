@@ -1,0 +1,6 @@
+import{c as t,a as c,r as i,j as e,B as o,L as n}from"./index-DpLWc226.js";import{C as l,a as d,b as x,c as m,d as h,e as p}from"./card-BEeTebOC.js";import"./react-D9AjKKxc.js";import"./react-dom-DyK_NDph.js";/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const u=t("CircleAlert",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["line",{x1:"12",x2:"12",y1:"8",y2:"12",key:"1pkeuh"}],["line",{x1:"12",x2:"12.01",y1:"16",y2:"16",key:"4dfq90"}]]),g=()=>{const[s]=c(),a=s.get("redirect_to"),r=i.useMemo(()=>a?`/login?redirect_to=${a}`:"/login",[a]);return e.jsx("div",{className:"flex items-center justify-center min-h-screen ",children:e.jsxs(l,{className:"w-[350px]",children:[e.jsxs(d,{children:[e.jsxs(x,{className:"flex items-center gap-2 text-primary",children:[e.jsx(u,{className:"h-5 w-5 text-yellow-500"}),"Não Autenticado"]}),e.jsx(m,{className:"text-black",children:"Você precisa estar logado para acessar esta página."})]}),e.jsx(h,{children:e.jsx("p",{className:"text-sm",children:"Por favor, faça login para acessar este conteúdo e utilizar todas as funcionalidades do ProteJÁ."})}),e.jsx(p,{children:e.jsx(o,{asChild:!0,className:"w-full",children:e.jsx(n,{to:r,children:"Fazer Login"})})})]})})};export{g as default};
