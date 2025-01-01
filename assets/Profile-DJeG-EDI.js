@@ -1,0 +1,1 @@
+import{j as r,B as t}from"./index-EWjrer3Q.js";import{a as o}from"./auth-BRY5w-tN.js";import"./react-D9AjKKxc.js";import"./react-dom-DyK_NDph.js";const e=()=>r.jsx(t,{variant:"secondary",onClick:o,children:"Sair"});export{e as default};
