@@ -88,7 +88,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   };
 
   return (
-    <BlurredContainer className="col-span-1 lg:col-span-2">
+    <BlurredContainer className="col-span-1 lg:col-span-2 p-4" border>
       <div className="flex flex-col items-center justify-center space-y-4 w-full">
         <img src={ProtejaLogo} alt="proteja-logo" className="max-h-20" />
 

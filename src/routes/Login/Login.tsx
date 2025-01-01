@@ -59,7 +59,7 @@ const Login: FunctionComponent<LoginProps> = () => {
     setLoading(false);
   };
   return (
-    <BlurredContainer>
+    <BlurredContainer border className="p-4">
       <div className="flex flex-col items-center justify-center space-y-6 w-full">
         <img src={ProtejaLogo} alt="proteja-logo" className="max-h-24" />
 

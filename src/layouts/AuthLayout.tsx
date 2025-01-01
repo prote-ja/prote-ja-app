@@ -24,7 +24,10 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
             {session ? <AlreadyAuth /> : <Outlet />}
           </div>
 
-          <BlurredContainer className="col-span-1 lg:col-span-3 h-min">
+          <BlurredContainer
+            border
+            className="col-span-1 lg:col-span-3 h-min p-4"
+          >
             <div>
               <h2 className="text-center text-3xl font-bold leading-9 tracking-tight text-white mb-6">
                 Apoiado por

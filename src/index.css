@@ -88,18 +88,18 @@
 
 .animated-container {
   opacity: 0;
-  transform: translateY(-20%);
-  animation: fadeInSlideDown 0.7s ease-out forwards;
+  transform: scale(0.8);
+  animation: fadeInSlideDown 0.4s cubic-bezier(0.46, 1.36, 0.58, 1.35) forwards;
 }
 
 @keyframes fadeInSlideDown {
   0% {
     opacity: 0;
-    transform: translateY(-20%);
+    transform: scale(0.8);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 

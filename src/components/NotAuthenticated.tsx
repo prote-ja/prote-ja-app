@@ -9,20 +9,26 @@ interface NotAuthenticatedProps {}
 
 const NotAuthenticated: FunctionComponent<NotAuthenticatedProps> = () => {
   return (
-    <BlurredContainer title="Não autenticado">
-      <p className="text-white">
-        Você precisa estar logado para acessar esta página. Por favor, faça
-        login para acessar este conteúdo.
-      </p>
-      <Link to={"/login"}>
-        <Button
-          type="submit"
-          className="w-full bg-[#fff] text-[#7F6AFF] hover:bg-[#c2c2c2c2] mt-1"
-        >
-          <LogIn />
-          Fazer Login
-        </Button>
-      </Link>
+    <BlurredContainer
+      border
+      className="max-w-lg mx-auto h-full mt-8"
+      title="Não autenticado"
+    >
+      <div className="p-6">
+        <p className="text-white">
+          Você precisa estar logado para acessar esta página. Por favor, faça
+          login para acessar este conteúdo.
+        </p>
+        <Link to={"/login"}>
+          <Button
+            type="submit"
+            className="w-full bg-[#fff] text-[#7F6AFF] hover:bg-[#c2c2c2c2] mt-1"
+          >
+            <LogIn />
+            Fazer Login
+          </Button>
+        </Link>
+      </div>
     </BlurredContainer>
   );
 };
