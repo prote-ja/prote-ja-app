@@ -1,0 +1,1 @@
+import{u as e,j as s,N as t}from"./index-DuB4X04Z.js";import"./react-D9AjKKxc.js";import"./react-dom-DyK_NDph.js";const u=()=>e()?s.jsx(t,{to:"/dashboard",replace:!0}):s.jsx(t,{to:"/login",replace:!0});export{u as default};
