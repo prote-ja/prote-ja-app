@@ -1,9 +1,10 @@
+import AlreadyAuth from "@/components/AlreadyAuth";
 import BlurredContainer from "@/components/BlurredContainer";
 import { FloatingPartnerBubbles } from "@/components/FloatingPartnerBubbles";
 import PartnerCard from "@/components/PartnerCard";
 import { useAuth } from "@/hooks/useAuth";
 import { FunctionComponent } from "react";
-import { Navigate, Outlet, useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 interface AuthLayoutProps {}
 
@@ -11,21 +12,16 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   const { pathname } = useLocation();
   const session = useAuth();
 
-  if (session) {
-    return <Navigate to="/already-authenticated" replace />;
-  }
-
   return (
     <>
       <FloatingPartnerBubbles />
       <div className="p-6 max-w-xl justify-center lg:max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          {/* Ensures animations play when switching pages */}
           <div
             key={pathname}
             className="col-span-1 lg:col-span-2 animated-container"
           >
-            <Outlet />
+            {session ? <AlreadyAuth /> : <Outlet />}
           </div>
 
           <BlurredContainer className="col-span-1 lg:col-span-3 h-min">

@@ -18,13 +18,9 @@ import RestrictedLayout from "./layouts/RestrictedLayout";
 
 const Home = React.lazy(() => import("./routes/Home"));
 const NotAuthorized = React.lazy(() => import("./routes/NotAuthorized"));
-const NotAuthenticated = React.lazy(() => import("./routes/NotAuthenticated"));
 const Dashboard = React.lazy(() => import("./routes/Dashboard/Dashboard"));
 const Pairing = React.lazy(() => import("./routes/Pairing"));
 const Login = React.lazy(() => import("./routes/Login/Login"));
-const AlreadyAuthenticated = React.lazy(
-  () => import("./routes/AlreadyAuthenticated")
-);
 const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 
@@ -75,22 +71,6 @@ createRoot(document.getElementById("root")!).render(
                     />
                   </Route>
 
-                  <Route
-                    path="/not-authenticated"
-                    element={
-                      <Suspense fallback={<div>Carregando...</div>}>
-                        <NotAuthenticated />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/already-authenticated"
-                    element={
-                      <Suspense fallback={<div>Carregando...</div>}>
-                        <AlreadyAuthenticated />
-                      </Suspense>
-                    }
-                  />
                   <Route
                     path="/not-authorized"
                     element={
