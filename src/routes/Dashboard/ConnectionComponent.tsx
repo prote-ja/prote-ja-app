@@ -1,42 +1,98 @@
 import BlurredContainer from "@/components/BlurredContainer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Wifi, WifiOff } from "lucide-react";
+import { Database } from "@/types/database.types";
+import { BatteryFull, Footprints, Wifi, WifiOff } from "lucide-react";
 import { FunctionComponent } from "react";
+import WearableIcon from "@/assets/wearable_icon.png";
 
-interface ConnectionComponentProps {}
-const isConnected = true;
+interface ConnectionComponentProps {
+  wearableStatus: Database["public"]["Enums"]["wearable_status"];
+  lastPingTime?: Date;
+  batteryLevel?: number;
+  pedometer?: number;
+  avatarUrl?: string;
+  name: string;
+}
 
-const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = () => {
+const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = ({
+  wearableStatus,
+  lastPingTime,
+  batteryLevel,
+  pedometer,
+  avatarUrl,
+  name,
+}) => {
+  const isConnected = wearableStatus === "active";
+
   return (
     <>
-      <BlurredContainer title="Conexão">
-        <div>
-          <div
-            className={`w-3 h-3 rounded-full ${
-              isConnected ? "bg-positive" : "bg-destructive"
-            }`}
-          ></div>
-          {isConnected ? (
-            <Wifi className="w-8 h-8 text-positive" />
-          ) : (
-            <WifiOff className="w-8 h-8 text-destructive" />
-          )}
-          <div>
-            <p className="text-xl font-semibold text-white">
-              {isConnected ? "Connected" : "Disconnected"}
-            </p>
-            {/* {lastPingTime && (
-              <p className="text-sm text-white/70">
-                Last ping: {lastPingTime.toLocaleTimeString()}
-              </p>
-            )} */}
+      <BlurredContainer
+        title={name}
+        titleBackground
+        border
+        className="max-w-lg"
+        preIcon={
+          <img src={WearableIcon} alt="wearable-icon" className="w-8 h-8" />
+        }
+        clickable
+        postIcon={
+          <div className="flex items-center gap-1">
+            <BatteryFull className="text-white" />
+            <p className="text-white font-bold">{batteryLevel}%</p>
           </div>
-          <Button size="sm" color="destructive">
-            asdf
-          </Button>
-          <Button variant={"outline"}>test</Button>
-          <Input placeholder="test" />
+        }
+      >
+        <div className="flex p-4 gap-4">
+          <img
+            src={avatarUrl}
+            className="w-20 h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
+            alt={name + " avatar"}
+          />
+          {/* <div className="flex w-full border rounded-sm ">
+            {isConnected ? (
+              <Wifi className="w-8 h-8 text-positive" />
+            ) : (
+              <WifiOff className="w-8 h-8 text-destructive" />
+            )}
+            <div>
+              <p className="text-xl font-semibold text-white">
+                {isConnected ? "Connected" : "Disconnected"}
+              </p>
+              {lastPingTime && (
+                <p className="text-sm text-white/70">
+                  Last ping: {lastPingTime.toLocaleTimeString()}
+                </p>
+              )}
+            </div>
+            <div className="flex items-center gap-1">
+              <Footprints className="text-white" />
+              <p className=" font-semibold text-white">{pedometer}</p>
+            </div>
+          </div> */}
+          <BlurredContainer className="w-full">
+            <div className="flex w-full h-full justify-between items-center px-2">
+              <div className="flex items-center gap-2">
+                {isConnected ? (
+                  <Wifi className="w-8 h-8 text-positive" />
+                ) : (
+                  <WifiOff className="w-8 h-8 text-destructive" />
+                )}
+                <div>
+                  <p className="text-xl font-semibold text-white">
+                    {isConnected ? "Conectado" : "Desconectado"}
+                  </p>
+                  {lastPingTime && (
+                    <p className="text-sm text-muted">
+                      Ultimo ping: {lastPingTime.toLocaleTimeString()}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-white">
+                <Footprints />
+                <p className=" font-semibold">{pedometer}</p>
+              </div>
+            </div>
+          </BlurredContainer>
         </div>
       </BlurredContainer>
     </>

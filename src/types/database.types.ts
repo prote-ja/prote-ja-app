@@ -160,6 +160,7 @@ export type Database = {
       }
       wearables: {
         Row: {
+          avatar_url: string | null
           created_at: string
           id: string
           out_of_bounds_delay: number
@@ -168,6 +169,7 @@ export type Database = {
           status: Database["public"]["Enums"]["wearable_status"]
         }
         Insert: {
+          avatar_url?: string | null
           created_at?: string
           id?: string
           out_of_bounds_delay?: number
@@ -176,6 +178,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["wearable_status"]
         }
         Update: {
+          avatar_url?: string | null
           created_at?: string
           id?: string
           out_of_bounds_delay?: number
