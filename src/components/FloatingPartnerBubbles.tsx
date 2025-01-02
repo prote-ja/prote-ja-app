@@ -3,14 +3,10 @@ import { useEffect, useRef, useState } from "react";
 // Constants for configuration
 const CONFIG = {
   sizeRange: { min: 20, max: 40 },
-  speedYRange: { min: 0.4, max: 1.3 },
-  speedXRange: { min: -0.6, max: 0.6 },
-  animationInterval: 30, // in milliseconds
+  speedYRange: { min: 0.8, max: 1.0 },
+  speedXRange: { min: -0.3, max: 0.3 },
+  animationInterval: 100, // in milliseconds
   partnerLogos: [
-    "/placeholder.svg?height=40&width=80",
-    "/placeholder.svg?height=40&width=80",
-    "/placeholder.svg?height=40&width=80",
-    "/placeholder.svg?height=40&width=80",
     "/placeholder.svg?height=40&width=80",
     "/placeholder.svg?height=40&width=80",
     "/placeholder.svg?height=40&width=80",
@@ -101,7 +97,7 @@ export function FloatingPartnerBubbles() {
     <div
       ref={containerRef}
       className="fixed inset-0 pointer-events-none"
-      style={{ zIndex: -1 }}
+      style={{ zIndex: 0 }}
     >
       {bubbles.map((bubble) => (
         <div

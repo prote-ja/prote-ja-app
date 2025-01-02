@@ -29,7 +29,7 @@ const PasswordInput: FunctionComponent<PasswordInputProps> = ({
         // onChange={(e) => setPassword(e.target.value)}
         required
         disabled={disabled}
-        autoComplete="new-password"
+        autoComplete="password"
         className={inputClassName}
         minLength={6}
       />

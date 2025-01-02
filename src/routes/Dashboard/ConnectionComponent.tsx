@@ -29,7 +29,7 @@ const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = ({
         title={name}
         titleBackground
         border
-        className="max-w-lg"
+        className="w-full"
         preIcon={
           <img src={WearableIcon} alt="wearable-icon" className="w-8 h-8" />
         }
@@ -47,27 +47,7 @@ const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = ({
             className="w-20 h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
             alt={name + " avatar"}
           />
-          {/* <div className="flex w-full border rounded-sm ">
-            {isConnected ? (
-              <Wifi className="w-8 h-8 text-positive" />
-            ) : (
-              <WifiOff className="w-8 h-8 text-destructive" />
-            )}
-            <div>
-              <p className="text-xl font-semibold text-white">
-                {isConnected ? "Connected" : "Disconnected"}
-              </p>
-              {lastPingTime && (
-                <p className="text-sm text-white/70">
-                  Last ping: {lastPingTime.toLocaleTimeString()}
-                </p>
-              )}
-            </div>
-            <div className="flex items-center gap-1">
-              <Footprints className="text-white" />
-              <p className=" font-semibold text-white">{pedometer}</p>
-            </div>
-          </div> */}
+
           <BlurredContainer className="w-full">
             <div className="flex w-full h-full justify-between items-center px-2">
               <div className="flex items-center gap-2">
