@@ -4,7 +4,7 @@ import { BatteryFull, Footprints, Wifi, WifiOff } from "lucide-react";
 import { FunctionComponent } from "react";
 import WearableIcon from "@/assets/wearable_icon.png";
 
-interface ConnectionComponentProps {
+interface WearableConnectionComponentProps {
   wearableStatus: Database["public"]["Enums"]["wearable_status"];
   lastPingTime?: Date;
   batteryLevel?: number;
@@ -13,7 +13,9 @@ interface ConnectionComponentProps {
   name: string;
 }
 
-const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = ({
+const WearableConnectionComponent: FunctionComponent<
+  WearableConnectionComponentProps
+> = ({
   wearableStatus,
   lastPingTime,
   batteryLevel,
@@ -79,4 +81,4 @@ const ConnectionComponent: FunctionComponent<ConnectionComponentProps> = ({
   );
 };
 
-export default ConnectionComponent;
+export default WearableConnectionComponent;

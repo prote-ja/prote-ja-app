@@ -45,7 +45,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
         >
           <div className="col-span-2">{preIcon && <div>{preIcon}</div>}</div>
           <div className="col-span-6">
-            <h2 className="text-xl font-medium text-white text-center line-clamp-2 ">
+            <h2 className="text-xl font-medium text-white text-center line-clamp-1 ">
               {title}
             </h2>
           </div>
