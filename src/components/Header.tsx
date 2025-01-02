@@ -57,7 +57,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
           src={ProtejaLogo}
           alt="proteja-logo"
           className={`max-h-10 absolute ${
-            showBackButton ? "translate-x-20 pointer-events-none ml-1" : ""
+            showBackButton ? "translate-x-[5.25rem] pointer-events-none" : ""
           }`}
           style={{
             transition: "transform 500ms ease-in-out",

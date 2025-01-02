@@ -7,7 +7,7 @@ import ProtejaLogo from "@/assets/proteja_logo.svg";
 import BlurredContainer from "@/components/BlurredContainer";
 import { RotatingLines } from "react-loader-spinner";
 import PasswordInput from "@/components/PasswordInput";
-import { LogIn } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { toast } from "react-toastify";
 import { registerNewUser } from "@/db/auth";
 import pt_BR from "react-phone-number-input/locale/pt-BR";
@@ -213,7 +213,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 </>
               ) : (
                 <>
-                  <LogIn />
+                  <Pencil />
                   Registrar
                 </>
               )}
