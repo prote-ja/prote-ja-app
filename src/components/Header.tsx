@@ -34,12 +34,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
       >
         {/* Back Button */}
         <Link
-          to={session ? "/dashboard" : "/"}
+          to={".."}
           className={cn(
             "flex items-center w-32 absolute h-12 rounded-md hover:bg-secondary/80",
             showBackButton
               ? "translate-x-0 opacity-100 bg-background border"
-              : "-translate-x-full opacity-0"
+              : "-translate-x-full opacity-0 pointer-events-none"
           )}
           style={{
             transition:
@@ -56,6 +56,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
         <img
           src={ProtejaLogo}
           alt="proteja-logo"
+          // Translation based on https://tailwindcss.com/docs/customizing-spacing#default-spacing-scale
           className={`max-h-10 absolute ${
             showBackButton ? "translate-x-[5.25rem] pointer-events-none" : ""
           }`}
