@@ -39,7 +39,7 @@ const WearableConnectionComponent: FunctionComponent<
         postIcon={
           <div className="flex items-center gap-1">
             <BatteryFull className="text-white" />
-            <p className="text-white font-bold">{batteryLevel}%</p>
+            <p className="text-white font-medium">{batteryLevel}%</p>
           </div>
         }
       >
@@ -59,7 +59,7 @@ const WearableConnectionComponent: FunctionComponent<
                   <WifiOff className="w-8 h-8 text-destructive" />
                 )}
                 <div>
-                  <p className="text-xl font-semibold text-white">
+                  <p className="font-medium text-white">
                     {isConnected ? "Conectado" : "Desconectado"}
                   </p>
                   {lastPingTime && (
@@ -71,7 +71,7 @@ const WearableConnectionComponent: FunctionComponent<
               </div>
               <div className="flex items-center gap-1 text-white">
                 <Footprints />
-                <p className=" font-semibold">{pedometer}</p>
+                <p className=" font-medium">{pedometer}</p>
               </div>
             </div>
           </BlurredContainer>
