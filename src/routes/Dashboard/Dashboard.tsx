@@ -23,7 +23,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "inactive",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -32,7 +32,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -41,7 +41,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -50,7 +50,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -59,7 +59,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "inactive",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -68,7 +68,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -77,7 +77,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -86,7 +86,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -95,7 +95,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -104,7 +104,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -113,7 +113,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -122,7 +122,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -131,7 +131,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -140,7 +140,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -149,61 +149,7 @@ const wearables: WearablesType[] = [
     name: "Joana Santa Maria",
     wearableStatus: "active",
     avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.pexels.com/photos/4057693/pexels-photo-4057693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
     lastPingTime: new Date(),
     pedometer: 23827,
@@ -269,7 +215,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col h-[calc(100vh-4rem)] text-white">
+    <div className="relative flex flex-col h-[calc(100dvh-4rem)] text-white">
       {/* Top Section */}
       <div className="flex items-center justify-between p-2">
         <div className="flex gap-3 items-center">

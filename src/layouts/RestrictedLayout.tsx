@@ -8,7 +8,17 @@ interface RestrictedLayoutProps {}
 const RestrictedLayout: FunctionComponent<RestrictedLayoutProps> = () => {
   const session = useAuth();
 
-  return <>{session ? <Outlet /> : <NotAuthenticated />}</>;
+  return (
+    <>
+      {session ? (
+        <Outlet />
+      ) : (
+        <div className="px-3">
+          <NotAuthenticated />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default RestrictedLayout;
