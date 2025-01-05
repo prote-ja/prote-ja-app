@@ -105,14 +105,14 @@ const Login: FunctionComponent<LoginProps> = () => {
           <div>
             <Button
               type="submit"
-              className="w-full bg-[#fff] text-[#7F6AFF] hover:bg-[#c2c2c2c2] mt-1"
+              className="w-full bg-[#fff] text-[#7357FF] hover:bg-[#c2c2c2c2] mt-1"
               disabled={loading}
             >
               {loading ? (
                 <>
                   <RotatingLines
                     ariaLabel="submitting-spinner"
-                    strokeColor="#7F6AFF"
+                    strokeColor="#7357FF"
                   />
                   Fazendo login...
                 </>

@@ -22,7 +22,7 @@ const NotAuthenticated: FunctionComponent<NotAuthenticatedProps> = () => {
         <Link to={"/login"}>
           <Button
             type="submit"
-            className="w-full bg-[#fff] text-[#7F6AFF] hover:bg-[#c2c2c2c2] mt-1"
+            className="w-full bg-[#fff] text-[#7357FF] hover:bg-[#c2c2c2c2] mt-1"
           >
             <LogIn />
             Fazer Login

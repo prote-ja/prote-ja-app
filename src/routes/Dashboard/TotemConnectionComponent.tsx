@@ -1,6 +1,6 @@
 import BlurredContainer from "@/components/BlurredContainer";
 import { Database } from "@/types/database.types";
-import { Link, Wifi, WifiOff } from "lucide-react";
+import { BatteryFull, Link, Wifi, WifiOff } from "lucide-react";
 import { FunctionComponent } from "react";
 import TotemIcon from "@/assets/totem_icon.png";
 
@@ -26,9 +26,9 @@ const TotemConnectionComponent: FunctionComponent<
       preIcon={<img src={TotemIcon} alt="wearable-icon" className="w-8 h-8" />}
       clickable
     >
-      {batteryLevel}
-      <div className="flex w-full h-full justify-between items-center px-2">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col w-full items-center px-2">
+        {/* Connection status */}
+        <div className="flex items-center gap-2 pt-2">
           {isConnected ? (
             <Wifi className="w-8 h-8 text-positive" />
           ) : (
@@ -40,14 +40,24 @@ const TotemConnectionComponent: FunctionComponent<
             </p>
             {lastPingTime && (
               <p className="text-sm text-muted">
-                Ultimo ping: {lastPingTime.toLocaleTimeString()}
+                Ping: {lastPingTime.toLocaleTimeString()}
               </p>
             )}
           </div>
         </div>
-        <div className="flex items-center gap-1 text-white">
-          <Link />
-          <p className="font-medium">{connections}</p>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between w-full px-2 gap-1 h-12 absolute bottom-0 text-white">
+          {/* Linked devices */}
+          <div className="flex items-center gap-1">
+            <Link size={18} />
+            {connections}
+          </div>
+
+          <div className="flex items-center gap-1">
+            <BatteryFull />
+            <p className="text-white font-medium">{batteryLevel}%</p>
+          </div>
         </div>
       </div>
     </BlurredContainer>

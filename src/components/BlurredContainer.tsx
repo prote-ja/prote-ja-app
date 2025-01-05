@@ -24,6 +24,13 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   clickable,
   onClick,
 }) => {
+  const colSpan =
+    preIcon && postIcon
+      ? "col-span-6"
+      : preIcon || postIcon
+      ? "col-span-8"
+      : "col-span-10";
+
   return (
     <div
       className={cn(
@@ -44,14 +51,16 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
           )}
         >
           <div className="col-span-2">{preIcon && <div>{preIcon}</div>}</div>
-          <div className="col-span-6">
+          <div className={colSpan}>
             <h2 className="text-xl font-medium text-white text-center line-clamp-1 ">
               {title}
             </h2>
           </div>
-          <div className="col-span-2 justify-end flex">
-            {postIcon && <div>{postIcon}</div>}
-          </div>
+          {postIcon && (
+            <div className="col-span-2 justify-end flex">
+              {<div>{postIcon}</div>}
+            </div>
+          )}
         </div>
       )}
       {children}

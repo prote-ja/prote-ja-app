@@ -215,7 +215,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col h-[calc(100dvh-4rem)] text-white">
+    <div className="relative w-full max-w-screen-xl flex flex-col h-[calc(100dvh-4rem)] mx-auto text-white">
       {/* Top Section */}
       <div className="flex items-center justify-between p-2">
         <div className="flex gap-3 items-center">
@@ -234,8 +234,8 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
       {/* <div className="w-full bg-secondary-foreground h-4 mb-2" /> */}
 
       {/* Scrollable Content Section */}
-      <ScrollArea className="px-2">
-        <div className="grid gap-3 w-full max-w-screen-2xl mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <ScrollArea scrollHideDelay={500}>
+        <div className="grid px-2 gap-3 w-full max-w-screen-xl mx-auto grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {wearables.map((wearable, index) => (
             <div key={index} className="flex justify-center">
               <WearableConnectionComponent
