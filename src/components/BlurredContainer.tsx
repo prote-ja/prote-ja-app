@@ -11,6 +11,7 @@ interface BlurredContainerProps {
   border?: boolean;
   clickable?: boolean;
   onClick?: () => void;
+  square?: boolean;
 }
 
 const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
@@ -23,6 +24,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   border,
   clickable,
   onClick,
+  square,
 }) => {
   const colSpan =
     preIcon && postIcon
@@ -34,12 +36,13 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   return (
     <div
       className={cn(
-        "dashboard-item rounded-lg backdrop-blur bg-background overflow-clip",
+        "dashboard-item backdrop-blur bg-background overflow-clip",
         className,
         border ? "border" : "",
         clickable
           ? "transition-all cursor-pointer hover:shadow-md hover:scale-[1.01] active:scale-[1] active:shadow-inner active:opacity-60"
-          : ""
+          : "",
+        square ? "" : "rounded-md"
       )}
       onClick={onClick}
     >

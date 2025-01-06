@@ -6,6 +6,7 @@ import { Link, Plus, SatelliteDish } from "lucide-react";
 import { Database } from "@/types/database.types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import TotemConnectionComponent from "./TotemConnectionComponent";
+import ElementTitleHeader from "@/components/ElementTitleHeader";
 
 interface DashboardProps {}
 
@@ -58,51 +59,6 @@ const wearables: WearablesType[] = [
   {
     name: "Joana Santa Maria",
     wearableStatus: "inactive",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
     avatarUrl:
       "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
     batteryLevel: 40,
@@ -217,18 +173,21 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   return (
     <div className="relative w-full max-w-screen-xl flex flex-col h-[calc(100dvh-4rem)] mx-auto text-white">
       {/* Top Section */}
-      <div className="flex items-center justify-between p-2">
-        <div className="flex gap-3 items-center">
-          <h2 className="text-3xl font-semibold">Pulseiras</h2>
+      <ElementTitleHeader
+        className="p-2"
+        title="Pulseiras"
+        titleAppend={
           <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
             {wearables.length}
             <Link className="w-5 h-5" />
           </div>
-        </div>
-        <Button variant={"secondary"} size={"sm"}>
-          Adicionar <Plus className="w-5 h-5" />
-        </Button>
-      </div>
+        }
+        endElement={
+          <Button variant={"secondary"} size={"sm"}>
+            Adicionar <Plus />
+          </Button>
+        }
+      />
 
       {/* Scroll indicator */}
       {/* <div className="w-full bg-secondary-foreground h-4 mb-2" /> */}
@@ -254,18 +213,22 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
 
       {/* Bottom Section */}
       <div className="flex flex-col justify-between p-2 pb-0">
-        <div className="flex items-center justify-between pb-2">
-          <div className="flex gap-3 items-center">
-            <h2 className="text-3xl font-semibold">Totems</h2>
+        <ElementTitleHeader
+          className="pb-2"
+          title="Totems"
+          titleAppend={
             <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
               {totems.length}
               <SatelliteDish className="w-5 h-5" />
             </div>
-          </div>
-          <Button variant={"secondary"} size={"sm"}>
-            Adicionar <Plus className="w-5 h-5" />
-          </Button>
-        </div>
+          }
+          endElement={
+            <Button variant={"secondary"} size={"sm"}>
+              Adicionar <Plus />
+            </Button>
+          }
+        />
+
         <ScrollArea>
           <div className="h-44 flex gap-3 pb-4">
             {totems.map((totem, index) => (
