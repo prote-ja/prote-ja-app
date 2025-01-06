@@ -84,17 +84,21 @@ const Profile: FunctionComponent<ProfileProps> = () => {
         <div className="space-y-4 mt-4">
           <AlertConfiguration
             title="Detecção de quedas"
+            id="fall-detection"
             onChange={handleAlertChange}
           />
           <AlertConfiguration
+            id="out-of-area"
             title="Saiu da área de segurança"
             onChange={handleAlertChange}
           />
           <AlertConfiguration
+            id="battery-50"
             title="50% de bateria"
             onChange={handleAlertChange}
           />
           <AlertConfiguration
+            id="battery-5"
             title="5% de bateria"
             onChange={handleAlertChange}
           />

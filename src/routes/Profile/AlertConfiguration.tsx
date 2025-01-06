@@ -6,11 +6,13 @@ import AlertCheckbox from "@/components/AlertCheckbox";
 interface AlertConfigurationProps {
   title: string;
   onChange: (value: Database["public"]["Enums"]["alert_types"]) => void;
+  id: string;
 }
 
 const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
   title,
   onChange,
+  id,
 }) => {
   const handleAlertChange = (id: string, value: boolean) => {
     console.log("Alert type changed: ", id, value);
@@ -23,28 +25,28 @@ const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
     <BlurredContainer title={title} titleBackground>
       <div className="p-4 grid gap-4 grid-cols-2">
         <AlertCheckbox
-          id="notification"
+          id={id + "-notification"}
           label="Notificação"
           onChange={(value: boolean) => {
             handleAlertChange("notification", value);
           }}
         />
         <AlertCheckbox
-          id="whatsapp"
+          id={id + "-whatsapp"}
           label="WhatsApp"
           onChange={(value: boolean) => {
             handleAlertChange("whatsapp", value);
           }}
         />
         <AlertCheckbox
-          id="sms"
+          id={id + "-sms"}
           label="SMS"
           onChange={(value: boolean) => {
             handleAlertChange("sms", value);
           }}
         />
         <AlertCheckbox
-          id="email"
+          id={id + "-email"}
           label="Email"
           onChange={(value: boolean) => {
             handleAlertChange("email", value);
