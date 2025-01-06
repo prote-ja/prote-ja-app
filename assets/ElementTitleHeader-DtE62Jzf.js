@@ -1,0 +1,1 @@
+import{j as e,a as l}from"./index-B7fGK4q7.js";const r=({title:s,endElement:t,titleAppend:a,className:i})=>e.jsxs("div",{className:l("flex items-center justify-between",i),children:[e.jsxs("div",{className:"flex gap-3 items-center",children:[e.jsx("h2",{className:"text-3xl font-semibold",children:s}),a]}),t]});export{r as E};
