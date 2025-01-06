@@ -18,8 +18,8 @@ export default defineConfig({
         "mask-icon.svg",
       ],
       manifest: {
-        theme_color: "#8168ff",
-        background_color: "#8168ff",
+        theme_color: "#7357FF",
+        background_color: "#7357FF",
         icons: [
           {
             src: "icon192_maskable.png",
