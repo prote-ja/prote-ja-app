@@ -74,6 +74,7 @@ export type Database = {
           id: number
           low_battery_alert: Database["public"]["Enums"]["alert_types"][]
           out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
+          permission: Database["public"]["Enums"]["tracker_permition"]
           user: string
           wearable: string
         }
@@ -85,6 +86,7 @@ export type Database = {
           id?: number
           low_battery_alert: Database["public"]["Enums"]["alert_types"][]
           out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
+          permission: Database["public"]["Enums"]["tracker_permition"]
           user: string
           wearable: string
         }
@@ -96,6 +98,7 @@ export type Database = {
           id?: number
           low_battery_alert?: Database["public"]["Enums"]["alert_types"][]
           out_of_bounds_alert?: Database["public"]["Enums"]["alert_types"][]
+          permission?: Database["public"]["Enums"]["tracker_permition"]
           user?: string
           wearable?: string
         }
@@ -163,6 +166,7 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           id: string
+          mac: string
           out_of_bounds_delay: number
           owner: string
           refresh_delay: number
@@ -172,6 +176,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           id?: string
+          mac: string
           out_of_bounds_delay?: number
           owner?: string
           refresh_delay?: number
@@ -181,6 +186,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           id?: string
+          mac?: string
           out_of_bounds_delay?: number
           owner?: string
           refresh_delay?: number
@@ -210,6 +216,7 @@ export type Database = {
         | "email"
         | "push_notification"
         | "in_app"
+      tracker_permition: "editor" | "viewer" | "pending" | "blocked"
       wearable_status: "active" | "inactive" | "out_of_range"
     }
     CompositeTypes: {

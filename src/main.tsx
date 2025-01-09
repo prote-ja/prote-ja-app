@@ -23,6 +23,7 @@ const Pairing = React.lazy(() => import("./routes/Pairing"));
 const Login = React.lazy(() => import("./routes/Login/Login"));
 const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
+const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
 
 const queryClient = new QueryClient();
 
@@ -100,6 +101,7 @@ createRoot(document.getElementById("root")!).render(
                   />
                 </Route>
               </Route>
+              <Route path="/first-login" element={<FirstLogin />} />
             </Routes>
           </HashRouter>
         </TooltipProvider>
