@@ -9,9 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      alert_settings: {
+        Row: {
+          created_at: string
+          fall_detection: Database["public"]["Enums"]["alert_types"][]
+          half_battery: Database["public"]["Enums"]["alert_types"][]
+          low_battery: Database["public"]["Enums"]["alert_types"][]
+          low_battery_percentage: number
+          out_of_bounds: Database["public"]["Enums"]["alert_types"][]
+          updated_at: string
+          user: string
+        }
+        Insert: {
+          created_at?: string
+          fall_detection: Database["public"]["Enums"]["alert_types"][]
+          half_battery: Database["public"]["Enums"]["alert_types"][]
+          low_battery: Database["public"]["Enums"]["alert_types"][]
+          low_battery_percentage?: number
+          out_of_bounds: Database["public"]["Enums"]["alert_types"][]
+          updated_at?: string
+          user: string
+        }
+        Update: {
+          created_at?: string
+          fall_detection?: Database["public"]["Enums"]["alert_types"][]
+          half_battery?: Database["public"]["Enums"]["alert_types"][]
+          low_battery?: Database["public"]["Enums"]["alert_types"][]
+          low_battery_percentage?: number
+          out_of_bounds?: Database["public"]["Enums"]["alert_types"][]
+          updated_at?: string
+          user?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alert_settings_user_fkey"
+            columns: ["user"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
+          first_login: boolean
           full_name: string | null
           id: string
           phone: string | null
@@ -19,6 +61,7 @@ export type Database = {
         }
         Insert: {
           avatar_url?: string | null
+          first_login?: boolean
           full_name?: string | null
           id: string
           phone?: string | null
@@ -26,6 +69,7 @@ export type Database = {
         }
         Update: {
           avatar_url?: string | null
+          first_login?: boolean
           full_name?: string | null
           id?: string
           phone?: string | null
@@ -68,36 +112,21 @@ export type Database = {
       tracked_wearables: {
         Row: {
           created_at: string
-          disconected_alert: Database["public"]["Enums"]["alert_types"][]
-          fall_detected_alert: Database["public"]["Enums"]["alert_types"][]
-          half_battery_alert: Database["public"]["Enums"]["alert_types"][]
           id: number
-          low_battery_alert: Database["public"]["Enums"]["alert_types"][]
-          out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
           permission: Database["public"]["Enums"]["tracker_permition"]
           user: string
           wearable: string
         }
         Insert: {
           created_at?: string
-          disconected_alert: Database["public"]["Enums"]["alert_types"][]
-          fall_detected_alert: Database["public"]["Enums"]["alert_types"][]
-          half_battery_alert: Database["public"]["Enums"]["alert_types"][]
           id?: number
-          low_battery_alert: Database["public"]["Enums"]["alert_types"][]
-          out_of_bounds_alert: Database["public"]["Enums"]["alert_types"][]
           permission: Database["public"]["Enums"]["tracker_permition"]
           user: string
           wearable: string
         }
         Update: {
           created_at?: string
-          disconected_alert?: Database["public"]["Enums"]["alert_types"][]
-          fall_detected_alert?: Database["public"]["Enums"]["alert_types"][]
-          half_battery_alert?: Database["public"]["Enums"]["alert_types"][]
           id?: number
-          low_battery_alert?: Database["public"]["Enums"]["alert_types"][]
-          out_of_bounds_alert?: Database["public"]["Enums"]["alert_types"][]
           permission?: Database["public"]["Enums"]["tracker_permition"]
           user?: string
           wearable?: string
@@ -112,6 +141,38 @@ export type Database = {
           },
           {
             foreignKeyName: "tracked_wearables_wearable_fkey"
+            columns: ["wearable"]
+            isOneToOne: false
+            referencedRelation: "wearables"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wearable_alerts: {
+        Row: {
+          created_at: string
+          data: string | null
+          id: number
+          type: string
+          wearable: string
+        }
+        Insert: {
+          created_at?: string
+          data?: string | null
+          id?: number
+          type: string
+          wearable: string
+        }
+        Update: {
+          created_at?: string
+          data?: string | null
+          id?: number
+          type?: string
+          wearable?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_alerts_wearable_fkey"
             columns: ["wearable"]
             isOneToOne: false
             referencedRelation: "wearables"

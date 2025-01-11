@@ -35,7 +35,7 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
         },
         {
           percentage: 25,
-          label: "Baixa",
+          label: "Normal",
         },
         {
           percentage: 50,
@@ -51,8 +51,8 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
         },
       ]}
       tipParser={tooltipParser}
-      min={-12}
-      max={112}
+      min={-8}
+      max={108}
       clamped
       step={2}
       onChangeComplete={handleOnChangeComplete}

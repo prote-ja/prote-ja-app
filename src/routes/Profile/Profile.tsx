@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import AlertConfiguration from "./AlertConfiguration";
 import { Database } from "@/types/database.types";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
+import BatteryAlert from "@/components/Sliders/BatteryAlert";
 
 interface ProfileProps {}
 
@@ -85,8 +86,22 @@ const Profile: FunctionComponent<ProfileProps> = () => {
             id="fall-detection"
             onChange={handleAlertChange}
           >
-            <div className="p-4">
+            <div className="py-4 px-6">
               <WearableRefreshRate />
+            </div>
+          </AlertConfiguration>
+          <AlertConfiguration
+            id="battery-50"
+            title="50% de bateria"
+            onChange={handleAlertChange}
+          />
+          <AlertConfiguration
+            title="Bateria baixa"
+            id="low-battery"
+            onChange={handleAlertChange}
+          >
+            <div className="py-4 px-6">
+              <BatteryAlert />
             </div>
           </AlertConfiguration>
           <AlertConfiguration
@@ -97,16 +112,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
           <AlertConfiguration
             id="out-of-area"
             title="Saiu da área de segurança"
-            onChange={handleAlertChange}
-          />
-          <AlertConfiguration
-            id="battery-50"
-            title="50% de bateria"
-            onChange={handleAlertChange}
-          />
-          <AlertConfiguration
-            id="battery-5"
-            title="5% de bateria"
             onChange={handleAlertChange}
           />
         </div>

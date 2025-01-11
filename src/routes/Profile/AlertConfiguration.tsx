@@ -33,6 +33,7 @@ const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
           onChange={(value: boolean) => {
             handleAlertChange("notification", value);
           }}
+          defaultChecked
         />
         <AlertCheckbox
           id={id + "-whatsapp"}

@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useMemo, useState } from "react";
 import Slider from "rc-slider";
 import DefaultMark from "./DefaultMark";
+import { SemanticName } from "rc-slider/lib/interface";
+import { cn } from "@/lib/utils";
 
 interface MarkedSliderProps {
   step?: number;
@@ -21,6 +23,9 @@ interface MarkedSliderProps {
   clamped?: boolean;
 
   showTrack?: boolean;
+
+  className?: string;
+  style?: Partial<Record<SemanticName, React.CSSProperties>>;
 }
 
 const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
@@ -33,6 +38,8 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   min = 0,
   max = 100,
   showTrack,
+  className,
+  style,
 }) => {
   const [value, setValue] = useState(0);
 
@@ -71,7 +78,7 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   };
 
   return (
-    <div className="pb-10 pt-7 ">
+    <div className={cn("pb-10 pt-7", className)}>
       <Slider
         min={min}
         max={max}
@@ -111,6 +118,7 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
             opacity: 1,
             border: "none",
           },
+          ...style,
         }}
         dotStyle={{ display: "none" }}
         handleRender={(origin, props) => {

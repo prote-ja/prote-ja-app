@@ -5,12 +5,14 @@ interface AlertCheckboxProps {
   id: string;
   label: string;
   onChange: (value: boolean) => void;
+  defaultChecked?: boolean;
 }
 
 const AlertCheckbox: FunctionComponent<AlertCheckboxProps> = ({
   id,
   label,
   onChange,
+  defaultChecked,
 }) => {
   return (
     <div className="flex items-center space-x-2">
@@ -24,6 +26,7 @@ const AlertCheckbox: FunctionComponent<AlertCheckboxProps> = ({
           }
           onChange(checked);
         }}
+        defaultChecked={defaultChecked}
       />
       <label
         htmlFor={id}
