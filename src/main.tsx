@@ -16,7 +16,6 @@ import CommonLayout from "./layouts/CommonLayout";
 
 import { AuthProvider } from "./contexts/authContext";
 import RestrictedLayout from "./layouts/RestrictedLayout";
-import Error from "./routes/Error";
 
 const Home = React.lazy(() => import("./routes/Home"));
 const NotAuthorized = React.lazy(() => import("./routes/NotAuthorized"));
