@@ -1,78 +1,57 @@
-import { FunctionComponent, useMemo, useState } from "react";
-import Slider from "rc-slider";
-import DefaultMark from "./DefaultMark";
+import { FunctionComponent } from "react";
+import MarkedSlider from "./MarkedSlider";
 
 interface WearableRefreshRateProps {}
 
 const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
-  const [value, setValue] = useState(0);
-  const marks = useMemo(
-    () => ({
-      0: <DefaultMark value="Longa Bateria" active={value === 0} />,
-      25: <DefaultMark value="Baixa" active={value === 25} />,
-      50: <DefaultMark value="Padrão" active={value === 50} />,
-      75: <DefaultMark value="Alta" active={value === 75} />,
-      100: <DefaultMark value="Performance" active={value === 100} />,
-    }),
-    [value]
-  );
-  const min = 0;
-  const max = 100;
+  const percentageToRefreshRate = (percentage: number) => {
+    // Boundary cases
+    if (percentage <= 0) return 60; // Longa Bateria
+    if (percentage >= 100) return 1; // Performance
 
-  const calculatePercentage = (v: number) => {
-    const range = max - min;
+    const maxSeconds = 60; // Longa Bateria
 
-    return ((v - min) * 100) / range;
+    // Exponential decay formula for smooth transition
+    const factor = 2; // Adjust this factor to control the curve steepness
+
+    const calculatedSeconds = maxSeconds / Math.pow(factor, percentage / 25);
+    return Math.floor(calculatedSeconds);
   };
-  return (
-    <div className="py-10">
-      <Slider
-        min={min}
-        max={max}
-        marks={marks}
-        step={5}
-        onChange={(v) => {
-          if (typeof v === "number") setValue(v);
-        }}
-        value={value}
-        defaultValue={20}
-        onChangeComplete={(v) => console.log("AfterChange:", v)}
-        styles={{
-          rail: {
-            backgroundColor: "white",
-            opacity: 0.2,
-            height: "5px",
-          },
-          track: { backgroundColor: "transparent" },
-          handle: {
-            backgroundColor: "white",
-            border: "none",
-            // translate: "0 2px",
-          },
-        }}
-        dotStyle={{ display: "none" }}
-        handleRender={(origin, props) => {
-          console.log(props);
 
-          return (
-            <>
-              <div
-                className={"absolute flex -top-7 justify-center"}
-                style={{
-                  width: "20rem",
-                  left: `calc(${calculatePercentage(props.value)}% - 10rem)`,
-                }}
-              >
-                <div className="absolute flex items-center justify-center border-2 px-2 border-white/20 text-sm font-medium rounded-md">
-                  {props.value}s
-                </div>
-              </div>
-              {origin}
-            </>
-          );
-        }}
-      />
-    </div>
+  const tooltipParser = (percentage: number) => {
+    return `${percentageToRefreshRate(percentage)}s`;
+  };
+
+  return (
+    <MarkedSlider
+      marks={[
+        {
+          percentage: 0,
+          label: "Longa Bateria",
+        },
+        {
+          percentage: 25,
+          label: "Baixa",
+        },
+        {
+          percentage: 50,
+          label: "Padrão",
+        },
+        {
+          percentage: 75,
+          label: "Alta",
+        },
+        {
+          percentage: 100,
+          label: "Performance",
+        },
+      ]}
+      tipParser={tooltipParser}
+      min={-5}
+      max={105}
+      clamped
+      step={2}
+    />
   );
 };
 
