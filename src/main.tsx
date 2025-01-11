@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-phone-number-input/style.css";
+import "rc-slider/assets/index.css";
 
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
