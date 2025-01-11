@@ -2,7 +2,7 @@ import ElementTitleHeader from "@/components/ElementTitleHeader";
 import InformationContainer from "@/components/InformationContainer";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/db/auth";
-import { KeyRound, LogOut } from "lucide-react";
+import { CircleUser, KeyRound, LogOut } from "lucide-react";
 import { FunctionComponent } from "react";
 import { toast } from "react-toastify";
 import AlertConfiguration from "./AlertConfiguration";
@@ -32,15 +32,22 @@ const Profile: FunctionComponent<ProfileProps> = () => {
 
   return (
     <div className="text-white max-w-md mx-auto space-y-4 py-4">
-      <ElementTitleHeader
-        className="px-2"
-        title="Meu perfil"
-        endElement={
-          <Button variant={"secondary"} size={"sm"} onClick={handleSignOut}>
-            Sair <LogOut />
-          </Button>
-        }
-      />
+      <div className="flex-col justify-items-center space-y-2 px-2">
+        <div className="grid grid-cols-7 gap-4 items-center">
+          <div className="col-span-1" />
+          <div className="col-span-5 justify-items-center">
+            <h1 className="text-4xl font-semibold">Meu Perfil</h1>
+          </div>
+
+          <div className="col-span-1 flex justify-end">
+            <Button variant={"secondary"} size={"sm"} onClick={handleSignOut}>
+              Sair <LogOut />
+            </Button>
+          </div>
+        </div>
+
+        <CircleUser className="h-40 w-40" strokeWidth={0.7} />
+      </div>
 
       <div className="space-y-2">
         <InformationContainer
@@ -77,7 +84,11 @@ const Profile: FunctionComponent<ProfileProps> = () => {
 
       <hr className="mt-4" />
 
-      <ElementTitleHeader className="px-2" title="Configuração de alertas" />
+      <ElementTitleHeader
+        className="px-2"
+        title="Configuração de alertas"
+        description="Defina o tipo de alerta que será enviado quando um evento for detectado pela pulseira."
+      />
 
       <div className="px-2">
         <div className="space-y-4 mt-4">

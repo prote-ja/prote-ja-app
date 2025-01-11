@@ -39,7 +39,7 @@
 
     --radius: 0.5rem;
 
-    background-color: #61a9ff;
+    background-color: #4b33be;
   }
   /* .dark {
     --background: 222.2 84% 4.9%;
@@ -85,7 +85,7 @@
 
 /* html {
   height: 100%;
-  background-image: linear-gradient(to bottom, #7357FF, #61a9ff);
+  background-image: linear-gradient(to bottom, #7357FF, #4b33be);
 } */
 
 .animated-container {

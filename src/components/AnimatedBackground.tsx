@@ -7,7 +7,7 @@ const AnimatedBackground: FunctionComponent<AnimatedBackgroundProps> = () => {
     <div className="fixed top-0 left-0 w-full h-lvh -z-1 bg-gradient-to-b from-[#7357FF] to-[#4b33be]"></div>
   );
   // return (
-  //   <div className="fixed top-0 left-0 w-full h-full -z-10 bg-gradient-to-b from-[#7357FF] to-[#61A9FF] animate-gradient"></div>
+  //   <div className="fixed top-0 left-0 w-full h-full -z-10 bg-gradient-to-b from-[#7357FF] to-[#4b33be] animate-gradient"></div>
   // );
 };
 

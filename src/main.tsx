@@ -16,6 +16,7 @@ import CommonLayout from "./layouts/CommonLayout";
 
 import { AuthProvider } from "./contexts/authContext";
 import RestrictedLayout from "./layouts/RestrictedLayout";
+import Error from "./routes/Error";
 
 const Home = React.lazy(() => import("./routes/Home"));
 const NotAuthorized = React.lazy(() => import("./routes/NotAuthorized"));
@@ -47,34 +48,37 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route element={<CommonLayout />}>
                   <Route element={<RestrictedLayout />}>
+                    <Route path="dashboard">
+                      <Route
+                        index
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Dashboard />
+                          </Suspense>
+                        }
+                      />
+
+                      <Route
+                        path="profile"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Profile />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
                     <Route
-                      path="/dashboard"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <Dashboard />
-                        </Suspense>
-                      }
-                    />
-                    <Route
-                      path="/pairing"
+                      path="pairing"
                       element={
                         <Suspense fallback={<div>Carregando...</div>}>
                           <Pairing />
                         </Suspense>
                       }
                     />
-                    <Route
-                      path="/profile"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <Profile />
-                        </Suspense>
-                      }
-                    />
                   </Route>
 
                   <Route
-                    path="/not-authorized"
+                    path="not-authorized"
                     element={
                       <Suspense fallback={<div>Carregando...</div>}>
                         <NotAuthorized />
@@ -85,7 +89,7 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route element={<AuthLayout />}>
                   <Route
-                    path="/login"
+                    path="login"
                     element={
                       <Suspense fallback={<div>Carregando...</div>}>
                         <Login />
@@ -93,7 +97,7 @@ createRoot(document.getElementById("root")!).render(
                     }
                   />
                   <Route
-                    path="/register"
+                    path="register"
                     element={
                       <Suspense fallback={<div>Carregando...</div>}>
                         <Register />
@@ -102,7 +106,14 @@ createRoot(document.getElementById("root")!).render(
                   />
                 </Route>
               </Route>
-              <Route path="/first-login" element={<FirstLogin />} />
+              <Route
+                path="first-login"
+                element={
+                  <Suspense fallback={<div>Carregando...</div>}>
+                    <FirstLogin />
+                  </Suspense>
+                }
+              />
             </Routes>
           </HashRouter>
         </TooltipProvider>

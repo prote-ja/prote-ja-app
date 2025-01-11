@@ -85,7 +85,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
       <div className="gap-2 flex items-center ml-auto">
         {session ? (
           <>
-            <Link to="/profile">
+            <Link to="/dashboard/profile">
               <Button
                 variant={"secondary"}
                 className="w-12 h-12 sm:w-auto sm:h-auto [&_svg]:size-5"

@@ -8,7 +8,9 @@ const FirstLogin: FunctionComponent<FirstLoginProps> = () => {
   return (
     <>
       <AnimatedBackground />
-      <TutorialHandler />
+      <div className="max-w-lg mx-auto">
+        <TutorialHandler />
+      </div>
     </>
   );
 };
