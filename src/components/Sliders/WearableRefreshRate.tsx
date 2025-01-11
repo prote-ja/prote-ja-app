@@ -22,6 +22,10 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
     return `${percentageToRefreshRate(percentage)}s`;
   };
 
+  const handleOnChangeComplete = (value: number) => {
+    console.log("Refresh rate changed: ", percentageToRefreshRate(value));
+  };
+
   return (
     <MarkedSlider
       marks={[
@@ -47,10 +51,11 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
         },
       ]}
       tipParser={tooltipParser}
-      min={-5}
-      max={105}
+      min={-12}
+      max={112}
       clamped
       step={2}
+      onChangeComplete={handleOnChangeComplete}
     />
   );
 };

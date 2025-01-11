@@ -12,6 +12,8 @@ interface MarkedSliderProps {
   min?: number;
   max?: number;
 
+  onChange?: (value: number) => void;
+  onChangeComplete?: (value: number) => void;
   /**
    * Clamps the value to the smallest and largest percentage
    * Useful for when marks do not start at min and end at max
@@ -23,11 +25,16 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   step,
   marks,
   tipParser,
+  onChange,
+  onChangeComplete,
   clamped,
   min = 0,
   max = 100,
 }) => {
   const [value, setValue] = useState(0);
+
+  const minimumMark = marks[0].percentage;
+  const maximumMark = marks[marks.length - 1].percentage;
 
   const marksRecord = useMemo(() => {
     const returnRecord: Record<number, React.ReactNode> = {};
@@ -61,7 +68,7 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   };
 
   return (
-    <div className="py-10">
+    <div className="pb-10 pt-7 ">
       <Slider
         min={min}
         max={max}
@@ -69,13 +76,26 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
         step={step ?? null}
         onChange={(v) => {
           if (typeof v !== "number") return;
-          const clampedValue = v < 0 ? 0 : v > 100 ? 100 : v;
+          const clampedValue =
+            v < minimumMark ? minimumMark : v > maximumMark ? maximumMark : v;
 
-          setValue(clamped ? clampedValue : v);
+          const newValue = clamped ? clampedValue : v;
+          setValue(newValue);
+
+          onChange?.(newValue);
         }}
         value={value}
         defaultValue={20}
-        onChangeComplete={(v) => console.log("AfterChange:", v)}
+        onChangeComplete={(v) => {
+          if (typeof v !== "number") return;
+          const clampedValue =
+            v < minimumMark ? minimumMark : v > maximumMark ? maximumMark : v;
+
+          const newValue = clamped ? clampedValue : v;
+          setValue(newValue);
+
+          onChangeComplete?.(newValue);
+        }}
         styles={{
           rail: {
             backgroundColor: "white",

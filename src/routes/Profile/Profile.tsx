@@ -80,10 +80,15 @@ const Profile: FunctionComponent<ProfileProps> = () => {
 
       <div className="px-2">
         <div className="space-y-4 mt-4">
-          <div className="pb-24">
-            <WearableRefreshRate />
-          </div>
-
+          <AlertConfiguration
+            title="Taxa de atualização"
+            id="fall-detection"
+            onChange={handleAlertChange}
+          >
+            <div className="p-4">
+              <WearableRefreshRate />
+            </div>
+          </AlertConfiguration>
           <AlertConfiguration
             title="Detecção de quedas"
             id="fall-detection"
