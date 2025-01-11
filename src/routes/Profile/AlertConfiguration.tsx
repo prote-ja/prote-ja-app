@@ -7,12 +7,14 @@ interface AlertConfigurationProps {
   title: string;
   onChange: (value: Database["public"]["Enums"]["alert_types"]) => void;
   id: string;
+  children?: React.ReactNode;
 }
 
 const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
   title,
   onChange,
   id,
+  children,
 }) => {
   const handleAlertChange = (id: string, value: boolean) => {
     console.log("Alert type changed: ", id, value);
@@ -23,6 +25,7 @@ const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
 
   return (
     <BlurredContainer title={title} titleBackground>
+      {children}
       <div className="p-4 grid gap-4 grid-cols-2">
         <AlertCheckbox
           id={id + "-notification"}

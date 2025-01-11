@@ -7,6 +7,7 @@ import { FunctionComponent } from "react";
 import { toast } from "react-toastify";
 import AlertConfiguration from "./AlertConfiguration";
 import { Database } from "@/types/database.types";
+import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 
 interface ProfileProps {}
 
@@ -48,7 +49,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
             alert("Editando nome");
           }}
         />
-
         <InformationContainer
           name="Email"
           value="joao@hotmail.com"
@@ -56,7 +56,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
             alert("Editando nome");
           }}
         />
-
         <InformationContainer
           name="Telefone"
           value="(24)9 9983-1283"
@@ -64,7 +63,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
             alert("Editando nome");
           }}
         />
-
         <InformationContainer
           name="Senha"
           value={
@@ -82,6 +80,15 @@ const Profile: FunctionComponent<ProfileProps> = () => {
 
       <div className="px-2">
         <div className="space-y-4 mt-4">
+          <AlertConfiguration
+            title="Taxa de atualização"
+            id="fall-detection"
+            onChange={handleAlertChange}
+          >
+            <div className="p-4">
+              <WearableRefreshRate />
+            </div>
+          </AlertConfiguration>
           <AlertConfiguration
             title="Detecção de quedas"
             id="fall-detection"
