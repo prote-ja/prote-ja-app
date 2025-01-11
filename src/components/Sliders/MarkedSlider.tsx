@@ -19,6 +19,8 @@ interface MarkedSliderProps {
    * Useful for when marks do not start at min and end at max
    */
   clamped?: boolean;
+
+  showTrack?: boolean;
 }
 
 const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
@@ -30,6 +32,7 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   clamped,
   min = 0,
   max = 100,
+  showTrack,
 }) => {
   const [value, setValue] = useState(0);
 
@@ -102,9 +105,10 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
             opacity: 0.2,
             height: "5px",
           },
-          track: { backgroundColor: "transparent" },
+          track: { backgroundColor: showTrack ? "white" : "transparent" },
           handle: {
             backgroundColor: "white",
+            opacity: 1,
             border: "none",
           },
         }}
