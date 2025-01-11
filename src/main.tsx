@@ -24,7 +24,10 @@ const Login = React.lazy(() => import("./routes/Login/Login"));
 const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
-
+const AddTotem = React.lazy(() => import("./routes/AddTotem/AddTotem"));
+const AddWeareable = React.lazy(
+  () => import("./routes/AddWearable/AddWearable")
+);
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -51,6 +54,22 @@ createRoot(document.getElementById("root")!).render(
                       element={
                         <Suspense fallback={<div>Carregando...</div>}>
                           <Dashboard />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/add-totem"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <AddTotem />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/add-wearable"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <AddWeareable />
                         </Suspense>
                       }
                     />

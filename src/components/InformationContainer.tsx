@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 interface InformationContainerProps {
   onEdit?: () => void;
-  name: string;
+  name: React.ReactNode;
   value: React.ReactNode;
 }
 
