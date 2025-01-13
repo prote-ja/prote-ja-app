@@ -23,7 +23,7 @@ body:
       required: true
   - type: markdown
     attributes:
-      label: Description
-      description: A description of the feature / implementation suggestions
+      value: |
+        Thanks for taking the time to fill out this bug report!
     validations:
       required: true
