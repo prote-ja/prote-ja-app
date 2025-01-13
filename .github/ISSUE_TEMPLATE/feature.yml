@@ -2,12 +2,6 @@ name: Feature
 description: Requestes or updates a feature
 labels: [feature]
 body:
-  - type: textarea
-    attributes:
-      label: Summary
-      description: A brief summary of the feature
-    validations:
-      required: false
   - type: dropdown
     id: feature-type
     attributes:
@@ -21,9 +15,9 @@ body:
       default: 0
     validations:
       required: true
-  - type: markdown
+  - type: textarea
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
+      label: Description
+      description: A description of the feature / implementation suggestions
     validations:
       required: true
