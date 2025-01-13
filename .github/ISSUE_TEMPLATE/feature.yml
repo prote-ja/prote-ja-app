@@ -8,17 +8,20 @@ body:
       description: A brief summary of the feature
     validations:
       required: false
-  - type: checkboxes
+  - type: dropdown
+    id: feature-type
     attributes:
       label: Type
       description: Please choose one.
       options:
-        - label: New Feature
-        - label: Update
-        - label: Remove Feature
+        - New Feature
+        - Update
+        - Remove Feature
+        - Bug Fix
+      default: 0
     validations:
       required: true
-  - type: textarea
+  - type: markdown
     attributes:
       label: Description
       description: A description of the feature / implementation suggestions
