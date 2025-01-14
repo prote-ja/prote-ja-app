@@ -1,5 +1,4 @@
-import { FunctionComponent, useState } from "react";
-import { useSearchParams } from "react-router";
+import { FunctionComponent } from "react";
 
 import { Link } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
@@ -9,8 +8,6 @@ import HardwarePassword from "@/components/HardwarePassword";
 interface AddWearableProps {}
 
 const AddWearable: FunctionComponent<AddWearableProps> = () => {
-  const [search] = useSearchParams();
-
   return (
     <div className="space-y-4">
       {/* Imagem do Totem */}

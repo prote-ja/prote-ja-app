@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from "react";
-import { useSearchParams } from "react-router";
 import { Button } from "@/components/ui/button";
 import InformationContainer from "@/components/InformationContainer";
 import { CircleUserRound, Upload } from "lucide-react";
@@ -13,8 +12,6 @@ import Avatar from "@/db/upload_avatar";
 interface EditWearableProps {}
 
 const EditWearable: FunctionComponent<EditWearableProps> = () => {
-  const [search] = useSearchParams();
-
   const [userName, setUserName] = useState("Nome");
 
   const handleSaveName = (newName: string) => {
@@ -24,7 +21,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
   const [avatarPath, setAvatarPath] = useState<string | null>(null);
 
   const handleUpload = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    _: React.ChangeEvent<HTMLInputElement>,
     filePath: string
   ) => {
     setAvatarPath(filePath);

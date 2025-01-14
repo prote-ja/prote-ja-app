@@ -1,8 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { useSearchParams } from "react-router";
 import InformationContainer from "@/components/InformationContainer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 import { SatelliteDish } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
@@ -12,9 +9,6 @@ import DefaultInput from "@/components/DefaultInput";
 interface AddTotemProps {}
 
 const AddTotem: FunctionComponent<AddTotemProps> = () => {
-  const [search] = useSearchParams();
-
-  const [editingName, setEditingName] = useState(false);
   const [totemName, setTotemName] = useState("Nome do Totem");
 
   return (
