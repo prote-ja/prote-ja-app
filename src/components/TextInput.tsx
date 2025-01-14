@@ -1,70 +1,72 @@
 import { FunctionComponent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, Save } from "lucide-react";
+import { Check } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { TooltipArrow } from "@radix-ui/react-tooltip";
+import { cn } from "@/lib/utils";
 
-interface TextInputProps {}
+interface TextInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+  errorMessage?: string;
+  onSave?: () => void;
+  valid?: boolean;
+}
 
-const TextInput: FunctionComponent<TextInputProps> = () => {
-  const [macAddress, setMacAddress] = useState("00:00:00:00:00:00");
+const TextInput: FunctionComponent<TextInputProps> = ({
+  value,
+  onChange,
+  placeholder,
+  className,
+  errorMessage,
+  onSave,
+  valid,
+}) => {
   const [editing, setEditing] = useState(false);
 
-  const isValidMac = (mac: string): boolean => {
-    const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
-    return macRegex.test(mac);
-  };
-
-  const handleMacChange = (value: string) => {
-    const cleaned = value.replace(/[^0-9A-Fa-f]/g, "");
-    const formatted = cleaned
-      .match(/.{1,2}/g)
-      ?.join(":")
-      .substring(0, 17);
-    setMacAddress(formatted || "");
-  };
-
-  const handleSaveMacClick = () => {
-    if (isValidMac(macAddress)) {
-      setEditing(false);
-    }
-  };
-
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-1.5">
-      <Input
-        value={macAddress}
-        onChange={(e) => handleMacChange(e.target.value)}
-        placeholder="Digite o endereço MAC"
-        className="w-64 sm:w-64"
-        onFocus={(e) => {
-          setEditing(true);
-        }}
-        onBlur={(e) => {
-          setEditing(false);
-        }}
-      />
+    <div className="relative flex">
+      <Tooltip open={!valid && !editing}>
+        <TooltipTrigger>
+          <Input
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            className={cn("w-52", className)}
+            onFocus={() => {
+              setEditing(true);
+            }}
+            onBlur={() => {
+              setEditing(false);
+            }}
+          />
+        </TooltipTrigger>
+        <TooltipContent>
+          {!valid && (
+            <span className="text-red-500 text-sm mt-2">{errorMessage}</span>
+          )}
+          <TooltipArrow className="stroke-white fill-white " />
+        </TooltipContent>
+      </Tooltip>
+
       {editing && (
         <>
-          <Tooltip>
-            <TooltipTrigger>
-              <Button
-                variant="secondary"
-                onClick={handleSaveMacClick}
-                disabled={!isValidMac(macAddress)}
-                size={"icon"}
-              >
-                <Check />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              {!isValidMac(macAddress) && (
-                <span className="text-red-500 text-sm mt-2">
-                  O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX
-                </span>
-              )}
-            </TooltipContent>
-          </Tooltip>
+          <Button
+            onClick={() => {
+              setEditing(false);
+              if (onSave) onSave();
+            }}
+            disabled={!valid}
+            type="button"
+            variant="ghost"
+            size="sm"
+            className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+          >
+            <Check className="h-4 w-4 horizontal-grow z-10" color="white" />
+          </Button>
         </>
       )}
     </div>

@@ -118,3 +118,16 @@
     opacity: 1;
   }
 }
+
+.horizontal-grow {
+  animation: horizontal-grow 0.3s forwards;
+}
+
+@keyframes horizontal-grow {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
