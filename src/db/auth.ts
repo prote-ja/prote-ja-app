@@ -1,5 +1,12 @@
 import { supabase } from "@/client";
 // import { E164Number } from "libphonenumber-js/min";
+import { Database } from "@/types/database.types";
+
+type RegistrationData = {
+  type: Database["public"]["Enums"]["profile_type"];
+  name: string;
+  phone: string;
+};
 
 /**
  * Registers a new user with Supabase.
@@ -32,15 +39,20 @@ export async function registerNewUser(
   // Removes +
   // const fixedPhone = phone.replace("+", "");
 
+  const data: RegistrationData = {
+    type: "user",
+    name: name,
+    phone: phone,
+  };
+
+  console.log({ ...data });
+
   const response = await supabase.auth.signUp({
     email: email,
     password: password,
     options: {
       emailRedirectTo: redirectionURL,
-      data: {
-        full_name: name,
-        phone: phone,
-      },
+      data: { ...data },
     },
   });
 

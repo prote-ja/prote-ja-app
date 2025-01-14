@@ -52,28 +52,16 @@ export type Database = {
       }
       profiles: {
         Row: {
-          avatar_url: string | null
-          first_login: boolean
-          full_name: string | null
           id: string
-          phone: string | null
-          updated_at: string | null
+          type: Database["public"]["Enums"]["profile_type"]
         }
         Insert: {
-          avatar_url?: string | null
-          first_login?: boolean
-          full_name?: string | null
           id: string
-          phone?: string | null
-          updated_at?: string | null
+          type?: Database["public"]["Enums"]["profile_type"]
         }
         Update: {
-          avatar_url?: string | null
-          first_login?: boolean
-          full_name?: string | null
           id?: string
-          phone?: string | null
-          updated_at?: string | null
+          type?: Database["public"]["Enums"]["profile_type"]
         }
         Relationships: []
       }
@@ -82,24 +70,31 @@ export type Database = {
           created_at: string
           id: string
           mac: string
-          name: string
-          owner: string
+          name: string | null
+          owner: string | null
         }
         Insert: {
           created_at?: string
-          id?: string
+          id: string
           mac: string
-          name?: string
-          owner?: string
+          name?: string | null
+          owner?: string | null
         }
         Update: {
           created_at?: string
           id?: string
           mac?: string
-          name?: string
-          owner?: string
+          name?: string | null
+          owner?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "totems_owner_fkey"
             columns: ["owner"]
@@ -144,6 +139,41 @@ export type Database = {
             columns: ["wearable"]
             isOneToOne: false
             referencedRelation: "wearables"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          first_login: boolean
+          id: string
+          name: string
+          phone: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          first_login?: boolean
+          id: string
+          name: string
+          phone?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          first_login?: boolean
+          id?: string
+          name?: string
+          phone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_data_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -228,32 +258,42 @@ export type Database = {
           created_at: string
           id: string
           mac: string
+          name: string | null
           out_of_bounds_delay: number
-          owner: string
+          owner: string | null
           refresh_delay: number
-          status: Database["public"]["Enums"]["wearable_status"]
+          status: Database["public"]["Enums"]["wearable_status"] | null
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
-          id?: string
+          id: string
           mac: string
+          name?: string | null
           out_of_bounds_delay?: number
-          owner?: string
+          owner?: string | null
           refresh_delay?: number
-          status?: Database["public"]["Enums"]["wearable_status"]
+          status?: Database["public"]["Enums"]["wearable_status"] | null
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
           id?: string
           mac?: string
+          name?: string | null
           out_of_bounds_delay?: number
-          owner?: string
+          owner?: string | null
           refresh_delay?: number
-          status?: Database["public"]["Enums"]["wearable_status"]
+          status?: Database["public"]["Enums"]["wearable_status"] | null
         }
         Relationships: [
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "wearables_owner_fkey"
             columns: ["owner"]
@@ -277,6 +317,7 @@ export type Database = {
         | "email"
         | "push_notification"
         | "in_app"
+      profile_type: "user" | "wearable" | "totem"
       tracker_permition: "editor" | "viewer" | "pending" | "blocked"
       wearable_status: "active" | "inactive" | "out_of_range"
     }
