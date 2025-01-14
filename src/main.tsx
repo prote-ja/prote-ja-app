@@ -28,6 +28,9 @@ const AddTotem = React.lazy(() => import("./routes/AddTotem/AddTotem"));
 const AddWeareable = React.lazy(
   () => import("./routes/AddWearable/AddWearable")
 );
+const EditWearable = React.lazy(
+  () => import("./routes/EditWearable/EditWearable")
+);
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -70,6 +73,14 @@ createRoot(document.getElementById("root")!).render(
                       element={
                         <Suspense fallback={<div>Carregando...</div>}>
                           <AddWeareable />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/edit-wearable"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <EditWearable />
                         </Suspense>
                       }
                     />

@@ -3,16 +3,12 @@ import { useSearchParams } from "react-router";
 import InformationContainer from "@/components/InformationContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
-import { CircleHelp, SatelliteDish } from "lucide-react";
+import { SatelliteDish } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
 import HardwarePassword from "@/components/HardwarePassword";
+import DefaultInput from "@/components/DefaultInput";
 interface AddTotemProps {}
 
 const AddTotem: FunctionComponent<AddTotemProps> = () => {
@@ -20,9 +16,6 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
 
   const [editingName, setEditingName] = useState(false);
   const [totemName, setTotemName] = useState("Nome do Totem");
-
-  const handleEditNameClick = () => setEditingName(true);
-  const handleSaveNameClick = () => setEditingName(false);
 
   return (
     <div className="space-y-4">
@@ -49,32 +42,11 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
       <InformationContainer
         name="Nome"
         value={
-          editingName ? (
-            <div className="flex flex-col sm:flex-row items-center gap-1.5">
-              <Input
-                value={totemName}
-                onChange={(e) => setTotemName(e.target.value)}
-                placeholder="Digite o nome do Totem"
-                className="w-64 sm:w-64"
-              />
-              <Button
-                variant="secondary"
-                onClick={handleSaveNameClick}
-                className="w-full sm:w-auto"
-              >
-                Salvar
-              </Button>
-            </div>
-          ) : (
-            <Button
-              variant="secondary"
-              onClick={handleEditNameClick}
-              className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
-              title={totemName}
-            >
-              {totemName}
-            </Button>
-          )
+          <DefaultInput
+            inputState={totemName}
+            placeholder="Nome do Totem"
+            onSave={setTotemName}
+          />
         }
       />
 

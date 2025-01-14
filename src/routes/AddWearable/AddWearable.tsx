@@ -6,9 +6,9 @@ import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
 import HardwarePassword from "@/components/HardwarePassword";
 
-interface AddTotemProps {}
+interface AddWearableProps {}
 
-const AddTotem: FunctionComponent<AddTotemProps> = () => {
+const AddWearable: FunctionComponent<AddWearableProps> = () => {
   const [search] = useSearchParams();
 
   return (
@@ -42,4 +42,4 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
   );
 };
 
-export default AddTotem;
+export default AddWearable;

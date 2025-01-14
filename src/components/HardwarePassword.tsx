@@ -14,14 +14,12 @@ const HardwarePassword: React.FC = () => {
   const [hardwarePassword, setHardwarePassword] = useState("Senha");
   const [editingPassword, setEditingPassword] = useState(false);
 
-  // Validação: apenas 6 caracteres alfanuméricos
   const isValidPassword = (password: string): boolean => {
     const passwordRegex = /^[A-Za-z0-9]{6}$/;
     return passwordRegex.test(password);
   };
 
   const handlePasswordChange = (value: string) => {
-    // Limita apenas caracteres alfanuméricos e restringe a 6 caracteres
     const cleaned = value.replace(/[^A-Za-z0-9]/g, "").substring(0, 6);
     setHardwarePassword(cleaned || "");
   };

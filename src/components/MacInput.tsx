@@ -69,7 +69,7 @@ const MacInput: React.FC = () => {
                 variant="secondary"
                 onClick={handleSaveMacClick}
                 className="w-full sm:w-auto"
-                disabled={!isValidMac(macAddress)} // Botão desabilitado se o MAC for inválido
+                disabled={!isValidMac(macAddress)}
               >
                 Salvar
               </Button>
