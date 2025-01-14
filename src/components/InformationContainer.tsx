@@ -17,7 +17,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
   return (
     <BlurredContainer square>
       <div className="flex justify-between items-center text-white py-2 px-3">
-        <p className="text-lg font-medium">{name}</p>
+        <div className="text-lg font-medium">{name}</div>
         <div className="text-lg flex gap-4 items-center">
           {value}
           {onEdit && (

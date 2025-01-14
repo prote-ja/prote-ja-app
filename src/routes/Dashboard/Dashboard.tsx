@@ -2,11 +2,12 @@ import { FunctionComponent, useEffect } from "react";
 import WearableConnectionComponent from "./WearableConnectionComponent";
 import { getAllWearables } from "@/db/wearables";
 import { Button } from "@/components/ui/button";
-import { Link, Plus, SatelliteDish } from "lucide-react";
+import { Link as LinkIcon, Plus, SatelliteDish } from "lucide-react";
 import { Database } from "@/types/database.types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import TotemConnectionComponent from "./TotemConnectionComponent";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
+import { Link } from "react-router";
 
 interface DashboardProps {}
 
@@ -179,13 +180,15 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         titleAppend={
           <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
             {wearables.length}
-            <Link className="w-5 h-5" />
+            <LinkIcon className="w-5 h-5" />
           </div>
         }
         endElement={
-          <Button variant={"secondary"} size={"sm"}>
-            Adicionar <Plus />
-          </Button>
+          <Link to={"/dashboard/add-wearable"}>
+            <Button variant={"secondary"} size={"sm"}>
+              Registrar <Plus />
+            </Button>
+          </Link>
         }
       />
 
@@ -223,9 +226,11 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             </div>
           }
           endElement={
-            <Button variant={"secondary"} size={"sm"}>
-              Adicionar <Plus />
-            </Button>
+            <Link to={"/dashboard/add-totem"}>
+              <Button variant={"secondary"} size={"sm"}>
+                Registrar <Plus />
+              </Button>
+            </Link>
           }
         />
 

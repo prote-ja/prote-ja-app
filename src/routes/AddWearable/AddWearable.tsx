@@ -4,12 +4,13 @@ import { Link } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
 import HardwarePassword from "@/components/HardwarePassword";
+import Wristband300 from "@/assets/wristband_300.png";
 
 interface AddWearableProps {}
 
 const AddWearable: FunctionComponent<AddWearableProps> = () => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-lg mx-auto py-4">
       {/* Imagem do Totem */}
 
       <div className="flex flex-col items-center">
@@ -23,11 +24,7 @@ const AddWearable: FunctionComponent<AddWearableProps> = () => {
           }
         />
 
-        <img
-          src="src\assets\wristband_300.png"
-          alt="Totem"
-          className="w-64 h-auto"
-        />
+        <img src={Wristband300} alt="Pulseira" className="w-64 h-auto" />
       </div>
 
       {/* Campo MAC */}
