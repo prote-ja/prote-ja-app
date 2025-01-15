@@ -3,17 +3,19 @@ import InformationContainer from "@/components/InformationContainer";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/db/auth";
 import { CircleUser, KeyRound, LogOut } from "lucide-react";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { toast } from "react-toastify";
 import AlertConfiguration from "./AlertConfiguration";
 import { Database } from "@/types/database.types";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import BatteryAlert from "@/components/Sliders/BatteryAlert";
-
+import TextInput from "@/components/TextInput";
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
   const name = "João da silva";
+  const [telefone, setTelefone] = useState<string>("");
+  const [isValid, setIsValid] = useState<boolean>(true);
   const handleSignOut = async () => {
     const res = await signOut();
 
@@ -30,6 +32,18 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     console.log("Alert type changed: ", value);
   };
 
+  const handleTelefoneChange = (value: string) => {
+    if (value.length > 15) return;
+
+    const formattedValue = value
+      .replace(/\D/g, "")
+      .replace(/^(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
+
+    setTelefone(formattedValue);
+    const isValidTelefone = /^\(\d{2}\) \d{5}-\d{4}$/.test(formattedValue);
+    setIsValid(isValidTelefone);
+  };
   return (
     <div className="text-white max-w-md mx-auto space-y-4 py-4">
       <div className="flex-col justify-items-center space-y-2 px-2">
@@ -127,6 +141,19 @@ const Profile: FunctionComponent<ProfileProps> = () => {
           />
         </div>
       </div>
+      <hr className="mt-4" />
+      <ElementTitleHeader
+        className="px-2"
+        title="Contato de Emergência"
+        description="Adicione um número de telefone para realizar uma discagem rápida."
+      />
+      <TextInput
+        value={telefone}
+        onChange={handleTelefoneChange}
+        placeholder="Número de telefone"
+        errorMessage={isValid ? "" : "Número de telefone inválido."}
+        valid={isValid}
+      />
     </div>
   );
 };
