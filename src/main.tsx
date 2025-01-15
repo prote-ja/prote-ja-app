@@ -1,7 +1,6 @@
 import React, { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { Routes, Route, HashRouter } from "react-router";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 
@@ -16,6 +15,7 @@ import CommonLayout from "./layouts/CommonLayout";
 
 import { AuthProvider } from "./contexts/authContext";
 import RestrictedLayout from "./layouts/RestrictedLayout";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 const Home = React.lazy(() => import("./routes/Home"));
 const NotAuthorized = React.lazy(() => import("./routes/NotAuthorized"));
@@ -53,30 +53,6 @@ createRoot(document.getElementById("root")!).render(
 
                 <Route element={<CommonLayout />}>
                   <Route element={<RestrictedLayout />}>
-                    <Route
-                      path="/add-totem"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <AddTotem />
-                        </Suspense>
-                      }
-                    />
-                    <Route
-                      path="/add-wearable"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <AddWeareable />
-                        </Suspense>
-                      }
-                    />
-                    <Route
-                      path="/edit-wearable"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <EditWearable />
-                        </Suspense>
-                      }
-                    />
                     <Route path="dashboard">
                       <Route
                         index
@@ -95,15 +71,39 @@ createRoot(document.getElementById("root")!).render(
                           </Suspense>
                         }
                       />
+                      <Route
+                        path="pairing"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Pairing />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="add-totem"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <AddTotem />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="add-wearable"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <AddWeareable />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="edit-wearable"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <EditWearable />
+                          </Suspense>
+                        }
+                      />
                     </Route>
-                    <Route
-                      path="pairing"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <Pairing />
-                        </Suspense>
-                      }
-                    />
                   </Route>
 
                   <Route

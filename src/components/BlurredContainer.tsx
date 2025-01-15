@@ -36,7 +36,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   return (
     <div
       className={cn(
-        "dashboard-item backdrop-blur bg-background overflow-clip",
+        "dashboard-item backdrop-blur bg-background ",
         className,
         border ? "border" : "",
         clickable
