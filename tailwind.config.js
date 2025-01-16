@@ -69,11 +69,16 @@ export default {
       },
       animation: {
         gradient: "gradient-rotate 4s ease infinite",
+        blink: "alert-blink 1s ease infinite",
       },
       keyframes: {
         "gradient-rotate": {
           "0%, 100%": { transform: "scale(1,1)" },
           "50%": { transform: "scale(3,3)" },
+        },
+        "alert-blink": {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
         },
       },
     },

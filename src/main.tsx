@@ -32,6 +32,10 @@ const AddWeareable = React.lazy(
 const EditWearable = React.lazy(
   () => import("./routes/EditWearable/EditWearable")
 );
+const OutOfRange = React.lazy(() => import("./routes/OutOfRange/OutOfRange"));
+const FallDetected = React.lazy(
+  () => import("./routes/FallDetected/FallDetected")
+);
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -100,6 +104,22 @@ createRoot(document.getElementById("root")!).render(
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <EditWearable />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="out-of-range"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <OutOfRange />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="fall-detected"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <FallDetected />
                           </Suspense>
                         }
                       />
