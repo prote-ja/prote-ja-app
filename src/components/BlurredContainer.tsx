@@ -11,7 +11,7 @@ interface BlurredContainerProps {
   border?: boolean;
   clickable?: boolean;
   onClick?: () => void;
-  square?: boolean;
+  cornerType?: "rounded" | "square" | "auto-md";
 }
 
 const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
@@ -24,8 +24,20 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   border,
   clickable,
   onClick,
-  square,
+  cornerType,
 }) => {
+  const calculateCornerType = (): string => {
+    switch (cornerType) {
+      case "square":
+        return "";
+      case "rounded":
+        return "rounded-md";
+      case "auto-md":
+        return "md:rounded-md";
+    }
+    return "rounded-md";
+  };
+
   const colSpan =
     preIcon && postIcon
       ? "col-span-6"
@@ -42,7 +54,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
         clickable
           ? "transition-all cursor-pointer hover:shadow-md hover:scale-[1.01] active:scale-[1] active:shadow-inner active:opacity-60"
           : "",
-        square ? "" : "rounded-md"
+        calculateCornerType()
       )}
       onClick={onClick}
     >

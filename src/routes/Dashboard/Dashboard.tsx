@@ -172,10 +172,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-screen-xl flex flex-col h-[calc(100dvh-4rem)] mx-auto text-white">
+    <div className="relative w-full flex flex-col h-[calc(100dvh-4rem)] text-white">
       {/* Top Section */}
       <ElementTitleHeader
-        className="p-2"
+        className="pb-2"
         title="Pulseiras"
         titleAppend={
           <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
@@ -197,7 +197,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
 
       {/* Scrollable Content Section */}
       <ScrollArea scrollHideDelay={500}>
-        <div className="grid px-2 gap-3 w-full max-w-screen-xl mx-auto grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 w-full max-w-screen-xl grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
           {wearables.map((wearable, index) => (
             <div key={index} className="flex justify-center">
               <WearableConnectionComponent
@@ -215,12 +215,12 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
       </ScrollArea>
 
       {/* Bottom Section */}
-      <div className="flex flex-col justify-between p-2 pb-0">
+      <div className="flex flex-col justify-between pt-2">
         <ElementTitleHeader
           className="pb-2"
           title="Totems"
           titleAppend={
-            <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
+            <div className="flex gap-2 border rounded-md items-center text-lg font-medium">
               {totems.length}
               <SatelliteDish className="w-5 h-5" />
             </div>

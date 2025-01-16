@@ -13,7 +13,7 @@ const InformationContainerVertical: FunctionComponent<
   InformationContainerVerticalProps
 > = ({ onEdit, name, value }) => {
   return (
-    <BlurredContainer square>
+    <BlurredContainer cornerType="square">
       <div className="flex flex-col py-2 px-3 text-white">
         {/* Nome da seção */}
         <p className="text-lg font-medium mb-4">{name}</p>
