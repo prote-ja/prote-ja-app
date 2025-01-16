@@ -12,7 +12,7 @@ const HorizontalDivider: FunctionComponent<HorizontalDividerProps> = ({
 }) => {
   return (
     <div className={cn(disableMarginOffset ? "" : "-mx-2 md:-mx-4 lg:-mx-6")}>
-      <hr className={cn(className, "mt-4")} />
+      <hr className={cn("mt-4", className)} />
     </div>
   );
 };

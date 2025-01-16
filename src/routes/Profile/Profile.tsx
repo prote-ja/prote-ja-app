@@ -97,7 +97,7 @@ const Profile: FunctionComponent<ProfileProps> = () => {
         />
       </div>
 
-      <HorizontalDivider className="sm:-mx-2" />
+      <HorizontalDivider className="sm:-mx-2 mt-8" />
 
       <ElementTitleHeader
         title="Configuração de alertas"
@@ -139,9 +139,8 @@ const Profile: FunctionComponent<ProfileProps> = () => {
           onChange={handleAlertChange}
         />
       </div>
-      <HorizontalDivider className="sm:-mx-2" />
+      <HorizontalDivider className="sm:-mx-2 mt-8" />
       <ElementTitleHeader
-        className="px-2 md:px-0"
         title="Contato de Emergência"
         description="Adicione um número de telefone para realizar uma discagem rápida."
       />

@@ -11,7 +11,7 @@ const BorderWrapper: FunctionComponent<BorderWrapperProps> = ({
   children,
 }) => {
   return (
-    <div className="w-full md:px-4">
+    <div className="w-full md:px-4 transition-all">
       <div
         className={cn(
           className,

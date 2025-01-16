@@ -46,7 +46,7 @@ const WearableConnectionComponent: FunctionComponent<
         <div className="flex p-2 sm:p-4 md:p-2 gap-2 sm:gap-4 md:gap-2">
           <img
             src={avatarUrl}
-            className="w-20 h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
+            className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
             alt={name + " avatar"}
           />
 

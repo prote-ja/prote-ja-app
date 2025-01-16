@@ -22,7 +22,7 @@ const TotemConnectionComponent: FunctionComponent<
       title={name}
       titleBackground
       border
-      className="h-full w-40"
+      className="h-full w-40 relative"
       preIcon={<img src={TotemIcon} alt="wearable-icon" className="w-8 h-8" />}
       clickable
     >
@@ -47,7 +47,7 @@ const TotemConnectionComponent: FunctionComponent<
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between w-full px-2 gap-1 h-12 absolute bottom-0 text-white">
+        <div className="flex items-center justify-between w-full px-2 gap-1 h-12 text-white absolute bottom-0">
           {/* Linked devices */}
           <div className="flex items-center gap-1">
             <Link size={18} />

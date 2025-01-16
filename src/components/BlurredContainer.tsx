@@ -49,20 +49,21 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
     <div
       className={cn(
         // "dashboard-item backdrop-blur bg-background ",
-        "dashboard-item bg-background ",
-        className,
+        "dashboard-item bg-background",
+
         border ? "border" : "",
         clickable
           ? "transition-all cursor-pointer hover:shadow-md hover:scale-[1.01] active:scale-[1] active:shadow-inner active:opacity-60"
           : "",
-        calculateCornerType()
+        calculateCornerType(),
+        className
       )}
       onClick={onClick}
     >
       {title && (
         <div
           className={cn(
-            "grid grid-cols-10 items-center p-2 rounded-t-lg",
+            "grid grid-cols-10 items-center py-1 px-2 sm:py-2 rounded-t-lg",
             `${titleBackground ? "bg-background" : ""}`
           )}
         >
