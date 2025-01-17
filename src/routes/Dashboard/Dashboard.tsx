@@ -271,7 +271,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         <ScrollArea scrollHideDelay={500} className="h-full">
           <div className="grid gap-2 sm:gap-3 grid-cols-1 p-1 sm:grid-cols-1 md:grid-cols-2">
             {wearables.map((wearable, index) => (
-              <div key={index} className="flex justify-center">
+              <div key={`wearable-${index}`} className="flex justify-center">
                 <WearableConnectionComponent
                   name={wearable.name}
                   wearableStatus={wearable.wearableStatus}
@@ -289,7 +289,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         <ScrollArea scrollHideDelay={500} className="h-full">
           <div className="grid gap-2 sm:gap-3 grid-cols-1 p-1 sm:grid-cols-1 md:grid-cols-2">
             {wearablesShared.map((wearable, index) => (
-              <div key={index} className="flex justify-center">
+              <div
+                key={`wearableShared-${index}`}
+                className="flex justify-center"
+              >
                 <WearableConnectionComponent
                   name={wearable.name}
                   wearableStatus={wearable.wearableStatus}
@@ -349,7 +352,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
           <ScrollArea>
             <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 p-1 pb-4">
               {totems.map((totem, index) => (
-                <div key={index} className="justify-center">
+                <div key={`totem-${index}`} className="justify-center">
                   <TotemConnectionComponent
                     name={totem.name}
                     totemStatus={totem.totemStatus}
@@ -366,7 +369,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
           <ScrollArea>
             <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 p-1 pb-4">
               {totemsShared.map((totem, index) => (
-                <div key={index} className="justify-center">
+                <div key={`totemShared-${index}`} className="justify-center">
                   <TotemConnectionComponent
                     name={totem.name}
                     totemStatus={totem.totemStatus}
