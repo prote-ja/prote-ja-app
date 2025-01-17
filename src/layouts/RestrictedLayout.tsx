@@ -6,8 +6,7 @@ import { Outlet } from "react-router";
 interface RestrictedLayoutProps {}
 
 const RestrictedLayout: FunctionComponent<RestrictedLayoutProps> = () => {
-  const session = useAuth();
-
+  const { session } = useAuth();
   return (
     <>
       {session ? (

@@ -11,7 +11,7 @@ import { usePWAInstall } from "react-use-pwa-install";
 interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
-  const session = useAuth();
+  const { session } = useAuth();
   const location = useLocation();
   const [showBackButton, setShowBackButton] = useState(false);
   const install = usePWAInstall();

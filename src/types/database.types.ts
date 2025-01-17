@@ -45,25 +45,10 @@ export type Database = {
             foreignKeyName: "alert_settings_user_fkey"
             columns: ["user"]
             isOneToOne: true
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
         ]
-      }
-      profiles: {
-        Row: {
-          id: string
-          type: Database["public"]["Enums"]["profile_type"]
-        }
-        Insert: {
-          id: string
-          type?: Database["public"]["Enums"]["profile_type"]
-        }
-        Update: {
-          id?: string
-          type?: Database["public"]["Enums"]["profile_type"]
-        }
-        Relationships: []
       }
       totems: {
         Row: {
@@ -92,14 +77,14 @@ export type Database = {
             foreignKeyName: "totems_id_fkey"
             columns: ["id"]
             isOneToOne: true
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "totems_owner_fkey"
             columns: ["owner"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
         ]
@@ -131,7 +116,7 @@ export type Database = {
             foreignKeyName: "tracked_wearables_user_fkey"
             columns: ["user"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
           {
@@ -142,6 +127,21 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_role: {
+        Row: {
+          id: string
+          type: Database["public"]["Enums"]["profile_type"]
+        }
+        Insert: {
+          id: string
+          type?: Database["public"]["Enums"]["profile_type"]
+        }
+        Update: {
+          id?: string
+          type?: Database["public"]["Enums"]["profile_type"]
+        }
+        Relationships: []
       }
       users: {
         Row: {
@@ -168,15 +168,7 @@ export type Database = {
           name?: string
           phone?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "user_data_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       wearable_alerts: {
         Row: {
@@ -291,14 +283,14 @@ export type Database = {
             foreignKeyName: "wearables_id_fkey"
             columns: ["id"]
             isOneToOne: true
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "wearables_owner_fkey"
             columns: ["owner"]
             isOneToOne: false
-            referencedRelation: "profiles"
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
         ]
