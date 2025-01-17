@@ -7,8 +7,8 @@ interface AlertPageProps {}
 
 const AlertPage: FunctionComponent<AlertPageProps> = () => {
   return (
-    <div className="space-y-4 max-w-lg mx-auto py-4">
-      <div className="flex-col justify-items-center space-y-4 px-2 w-[600px] h-[200px]">
+    <div className="space-y-4 w-full py-4">
+      <div className="flex-col justify-items-center space-y-4 px-2 ">
         <ElementTitleHeader
           title="Alertas"
           description="Aqui você pode ver todos os alertas do sistema."

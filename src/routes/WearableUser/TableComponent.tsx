@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-
-import { CardContent } from "@/components/ui/card";
 import BlurredContainer from "@/components/BlurredContainer";
 
 interface TableComponentProps {

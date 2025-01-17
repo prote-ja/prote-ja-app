@@ -137,7 +137,7 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                       <Route
-                        path="alert-page"
+                        path="alerts"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <AlertPage />
