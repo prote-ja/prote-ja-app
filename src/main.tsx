@@ -36,6 +36,11 @@ const OutOfRange = React.lazy(() => import("./routes/OutOfRange/OutOfRange"));
 const FallDetected = React.lazy(
   () => import("./routes/FallDetected/FallDetected")
 );
+const WearableUser = React.lazy(
+  () => import("./routes/WearableUser/WearableUser")
+);
+
+const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -120,6 +125,22 @@ createRoot(document.getElementById("root")!).render(
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <FallDetected />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="wearable/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <WearableUser />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="alert-page"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <AlertPage />
                           </Suspense>
                         }
                       />

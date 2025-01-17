@@ -65,7 +65,7 @@ const OutOfRange: FunctionComponent<OutOfRangeProps> = () => {
       />
       <div className="grid px-2 gap-3 w-full max-w-screen-xl mx-auto grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {wearables.map((wearable, index) => (
-          <div key={index} className="flex justify-center">
+          <div key={`wearable-${index}`} className="flex justify-center">
             <WearableConnectionComponent
               name={wearable.name}
               wearableStatus={wearable.wearableStatus}
@@ -84,7 +84,7 @@ const OutOfRange: FunctionComponent<OutOfRangeProps> = () => {
       />
       <div className="h-44 flex gap-3 pb-4 px-2 mt-6">
         {totems.map((totem, index) => (
-          <div key={index} className="justify-center">
+          <div key={`totem-${index}`} className="justify-center">
             <TotemConnectionComponent
               name={totem.name}
               totemStatus={totem.totemStatus}

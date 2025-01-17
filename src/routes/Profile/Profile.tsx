@@ -3,20 +3,28 @@ import InformationContainer from "@/components/InformationContainer";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/db/auth";
 import { CircleUser, KeyRound, LogOut } from "lucide-react";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, Suspense, useState } from "react";
 import { toast } from "react-toastify";
 import AlertConfiguration from "./AlertConfiguration";
 import { Database } from "@/types/database.types";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import BatteryAlert from "@/components/Sliders/BatteryAlert";
-import TextInput from "@/components/TextInput";
+import pt_BR from "react-phone-number-input/locale/pt-BR";
+import { Input } from "@/components/ui/input";
+import React from "react";
+
+const PhoneInputComponent = React.lazy(
+  () => import("react-phone-number-input")
+);
+
 import HorizontalDivider from "@/components/HorizontalDivider";
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
   const name = "João da silva";
-  const [telefone, setTelefone] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(true);
+  const [phone, setPhone] = useState<string | undefined>();
+  const [loading] = useState<boolean>(false);
+
   const handleSignOut = async () => {
     const res = await signOut();
 
@@ -33,18 +41,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     console.log("Alert type changed: ", value);
   };
 
-  const handleTelefoneChange = (value: string) => {
-    if (value.length > 15) return;
-
-    const formattedValue = value
-      .replace(/\D/g, "")
-      .replace(/^(\d{2})(\d)/, "($1) $2")
-      .replace(/(\d{5})(\d{1,4})$/, "$1-$2");
-
-    setTelefone(formattedValue);
-    const isValidTelefone = /^\(\d{2}\) \d{5}-\d{4}$/.test(formattedValue);
-    setIsValid(isValidTelefone);
-  };
   return (
     <div className="text-white space-y-4 px-0 sm:px-2">
       <div className="flex-col justify-items-center space-y-2 ">
@@ -144,13 +140,23 @@ const Profile: FunctionComponent<ProfileProps> = () => {
         title="Contato de Emergência"
         description="Adicione um número de telefone para realizar uma discagem rápida."
       />
-      <TextInput
-        value={telefone}
-        onChange={handleTelefoneChange}
-        placeholder="Número de telefone"
-        errorMessage={isValid ? "" : "Número de telefone inválido."}
-        valid={isValid}
-      />
+      <div>
+        <Suspense fallback={<div>Carregando...</div>}>
+          <PhoneInputComponent
+            placeholder="(99) 99999-9999"
+            value={phone}
+            onChange={(phone: string) => setPhone(phone)}
+            defaultCountry="BR"
+            labels={pt_BR}
+            inputComponent={Input}
+            className="col-span-3 placeholder-red-200 text-black"
+            autoComplete="tel"
+            // labels={{ BR: "Brazil" }}
+            // international
+            disabled={loading}
+          />
+        </Suspense>
+      </div>
     </div>
   );
 };
