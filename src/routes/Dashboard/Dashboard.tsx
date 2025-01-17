@@ -111,6 +111,69 @@ const wearables: WearablesType[] = [
     lastPingTime: new Date(),
     pedometer: 23827,
   },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "inactive",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
+  {
+    name: "Joana Santa Maria",
+    wearableStatus: "active",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
+    batteryLevel: 40,
+    lastPingTime: new Date(),
+    pedometer: 23827,
+  },
 ];
 
 type TotemType = {
@@ -172,10 +235,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-screen-xl flex flex-col h-[calc(100dvh-4rem)] mx-auto text-white">
+    <div className="relative w-full flex flex-col justify-between min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
       {/* Top Section */}
       <ElementTitleHeader
-        className="p-2"
+        className="pb-2"
         title="Pulseiras"
         titleAppend={
           <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
@@ -197,7 +260,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
 
       {/* Scrollable Content Section */}
       <ScrollArea scrollHideDelay={500}>
-        <div className="grid px-2 gap-3 w-full max-w-screen-xl mx-auto grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-2 sm:gap-3 w-full max-w-screen-xl grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
           {wearables.map((wearable, index) => (
             <div key={index} className="flex justify-center">
               <WearableConnectionComponent
@@ -215,12 +278,12 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
       </ScrollArea>
 
       {/* Bottom Section */}
-      <div className="flex flex-col justify-between p-2 pb-0">
+      <div className="flex flex-col justify-between pt-2">
         <ElementTitleHeader
           className="pb-2"
           title="Totems"
           titleAppend={
-            <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
+            <div className="flex gap-2 border rounded-md items-center text-lg font-medium">
               {totems.length}
               <SatelliteDish className="w-5 h-5" />
             </div>
@@ -235,7 +298,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         />
 
         <ScrollArea>
-          <div className="h-44 flex gap-3 pb-4">
+          <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 pb-4">
             {totems.map((totem, index) => (
               <div key={index} className="justify-center">
                 <TotemConnectionComponent

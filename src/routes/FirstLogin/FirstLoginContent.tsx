@@ -3,6 +3,8 @@ import ProtejaLogo from "@/assets/proteja_logo.svg";
 import { Button } from "@/components/ui/button";
 
 import "./animations.css";
+import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router";
 
 interface FirstLoginContentProps {
   onSkip?: () => void;
@@ -27,10 +29,16 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
   footer,
   showLogo,
 }) => {
+  const navigate = useNavigate();
+
+  const handleNavigationDot = (index: number) => {
+    navigate(`?step=${index}`);
+  };
+
   return (
-    <div className="relative w-full max-w-screen-xl flex flex-col h-dvh text-white">
+    <div className="relative w-full max-w-screen-xl flex flex-col max-h-[60rem] h-[calc(100dvh-4rem)] md:h-[calc(100dvh-10rem)] text-white -mx-2 md:mx-0">
       {/* Header */}
-      <div className="px-4 pt-8">
+      <div className="px-2 md:px-0 ">
         <div className="flex w-full justify-between h-24">
           {/* Skip Button */}
           {onSkip && (
@@ -80,11 +88,8 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
         )}
       </div>
 
-      {/* Spacer */}
-      <div className="flex-1 max-h-80"></div>
-
       {/* Footer */}
-      <div className="h-44">
+      <div className="absolute bottom-0 w-full flex h-44 flex-col justify-between">
         {/* Progress */}
         <div>
           <div className="flex justify-center items-center h-12">
@@ -92,9 +97,13 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
               {[...Array(totalSteps)].map((_, index) => (
                 <div
                   key={index}
-                  className={`w-2 h-2 rounded-full ${
-                    currentStep === index + 1 ? "bg-white" : "bg-white/30"
-                  }`}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-100",
+                    currentStep === index + 1
+                      ? "bg-white"
+                      : "bg-white/30 hover:bg-white/60 hover:cursor-pointer"
+                  )}
+                  onClick={() => handleNavigationDot(index + 1)}
                 ></div>
               ))}
             </div>

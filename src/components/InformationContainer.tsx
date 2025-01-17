@@ -19,7 +19,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
   tooltip,
 }) => {
   return (
-    <BlurredContainer square>
+    <BlurredContainer>
       <div className="flex justify-between items-center text-white py-2 px-3">
         <div className="text-lg font-medium">
           {tooltip ? (
