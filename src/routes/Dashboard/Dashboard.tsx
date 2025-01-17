@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import WearableConnectionComponent from "./WearableConnectionComponent";
 import { getAllWearables } from "@/db/wearables";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,8 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import TotemConnectionComponent from "./TotemConnectionComponent";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { Link } from "react-router";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HorizontalDivider from "@/components/HorizontalDivider";
 
 interface DashboardProps {}
 
@@ -57,8 +59,11 @@ const wearables: WearablesType[] = [
     lastPingTime: new Date(),
     pedometer: 23827,
   },
+];
+
+const wearablesShared: WearablesType[] = [
   {
-    name: "Joana Santa Maria",
+    name: "Miramanha Santa Maria",
     wearableStatus: "inactive",
     avatarUrl:
       "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
@@ -67,7 +72,7 @@ const wearables: WearablesType[] = [
     pedometer: 23827,
   },
   {
-    name: "Joana Santa Maria",
+    name: "Miramanha Santa Maria",
     wearableStatus: "active",
     avatarUrl:
       "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
@@ -76,79 +81,7 @@ const wearables: WearablesType[] = [
     pedometer: 23827,
   },
   {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "inactive",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "active",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-  {
-    name: "Joana Santa Maria",
+    name: "Miramanha Santa Maria",
     wearableStatus: "active",
     avatarUrl:
       "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
@@ -228,14 +161,37 @@ const totems: TotemType[] = [
     connections: 2,
   },
 ];
+const totemsShared: TotemType[] = [
+  {
+    name: "Sala",
+    totemStatus: "active",
+    lastPingTime: new Date(),
+    batteryLevel: 40,
+    connections: 10,
+  },
+  {
+    name: "Cozinha",
+    totemStatus: "active",
+    lastPingTime: new Date(),
+    batteryLevel: 99,
+    connections: 7,
+  },
+];
+
+type ViewType = "personal" | "shared";
 
 const Dashboard: FunctionComponent<DashboardProps> = () => {
+  const [currentWearableView, setCurrentWearableView] =
+    useState<ViewType>("personal");
+  const [currentTotemView, setCurrentTotemView] =
+    useState<ViewType>("personal");
+
   useEffect(() => {
     getAllWearables();
   }, []);
 
   return (
-    <div className="relative w-full flex flex-col justify-between min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
+    <div className="relative w-full flex flex-col min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
       {/* Top Section */}
       <ElementTitleHeader
         className="pb-2"
@@ -255,35 +211,71 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         }
       />
 
-      {/* Scroll indicator */}
-      {/* <div className="w-full bg-secondary-foreground h-4 mb-2" /> */}
+      <Tabs
+        defaultValue={"personal" as ViewType}
+        onValueChange={(value) => {
+          if (value === "personal" || value === "shared")
+            setCurrentWearableView(value);
+          else setCurrentWearableView("personal");
+        }}
+        value={currentWearableView}
+        className="pb-2"
+      >
+        <TabsList className="w-full flex justify-center">
+          <TabsTrigger value={"personal" as ViewType}>Minhas</TabsTrigger>
+          <TabsTrigger value={"shared" as ViewType}>Compartilhados</TabsTrigger>
+        </TabsList>
+      </Tabs>
 
       {/* Scrollable Content Section */}
-      <ScrollArea scrollHideDelay={500}>
-        <div className="grid gap-2 sm:gap-3 w-full max-w-screen-xl grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
-          {wearables.map((wearable, index) => (
-            <div key={index} className="flex justify-center">
-              <WearableConnectionComponent
-                name={wearable.name}
-                wearableStatus={wearable.wearableStatus}
-                avatarUrl={wearable.avatarUrl}
-                batteryLevel={wearable.batteryLevel}
-                lastPingTime={wearable.lastPingTime}
-                pedometer={wearable.pedometer}
-              />
-            </div>
-          ))}
-        </div>
-        <ScrollBar />
-      </ScrollArea>
+
+      {currentWearableView === "personal" ? (
+        <ScrollArea scrollHideDelay={500} className="h-full">
+          <div className="grid gap-2 sm:gap-3 grid-cols-1 p-1 sm:grid-cols-1 md:grid-cols-2">
+            {wearables.map((wearable, index) => (
+              <div key={index} className="flex justify-center">
+                <WearableConnectionComponent
+                  name={wearable.name}
+                  wearableStatus={wearable.wearableStatus}
+                  avatarUrl={wearable.avatarUrl}
+                  batteryLevel={wearable.batteryLevel}
+                  lastPingTime={wearable.lastPingTime}
+                  pedometer={wearable.pedometer}
+                />
+              </div>
+            ))}
+          </div>
+          <ScrollBar />
+        </ScrollArea>
+      ) : (
+        <ScrollArea scrollHideDelay={500} className="h-full">
+          <div className="grid gap-2 sm:gap-3 grid-cols-1 p-1 sm:grid-cols-1 md:grid-cols-2">
+            {wearablesShared.map((wearable, index) => (
+              <div key={index} className="flex justify-center">
+                <WearableConnectionComponent
+                  name={wearable.name}
+                  wearableStatus={wearable.wearableStatus}
+                  avatarUrl={wearable.avatarUrl}
+                  batteryLevel={wearable.batteryLevel}
+                  lastPingTime={wearable.lastPingTime}
+                  pedometer={wearable.pedometer}
+                />
+              </div>
+            ))}
+          </div>
+          <ScrollBar />
+        </ScrollArea>
+      )}
+
+      <HorizontalDivider className="my-3" />
 
       {/* Bottom Section */}
-      <div className="flex flex-col justify-between pt-2">
+      <div className="flex flex-col justify-between">
         <ElementTitleHeader
           className="pb-2"
           title="Totems"
           titleAppend={
-            <div className="flex gap-2 border rounded-md items-center text-lg font-medium">
+            <div className="flex gap-2 border rounded-md px-2 items-center text-lg font-medium">
               {totems.length}
               <SatelliteDish className="w-5 h-5" />
             </div>
@@ -297,22 +289,59 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
           }
         />
 
-        <ScrollArea>
-          <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 pb-4">
-            {totems.map((totem, index) => (
-              <div key={index} className="justify-center">
-                <TotemConnectionComponent
-                  name={totem.name}
-                  totemStatus={totem.totemStatus}
-                  lastPingTime={totem.lastPingTime}
-                  batteryLevel={totem.batteryLevel}
-                  connections={totem.connections}
-                />
-              </div>
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <Tabs
+          defaultValue={"personal" as ViewType}
+          onValueChange={(value) => {
+            if (value === "personal" || value === "shared")
+              setCurrentTotemView(value);
+            else setCurrentTotemView("personal");
+          }}
+          value={currentTotemView}
+          className="pb-2"
+        >
+          <TabsList className="w-full flex justify-center">
+            <TabsTrigger value={"personal" as ViewType}>Meus</TabsTrigger>
+            <TabsTrigger value={"shared" as ViewType}>
+              Compartilhados
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        {currentTotemView === "personal" ? (
+          <ScrollArea>
+            <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 p-1 pb-4">
+              {totems.map((totem, index) => (
+                <div key={index} className="justify-center">
+                  <TotemConnectionComponent
+                    name={totem.name}
+                    totemStatus={totem.totemStatus}
+                    lastPingTime={totem.lastPingTime}
+                    batteryLevel={totem.batteryLevel}
+                    connections={totem.connections}
+                  />
+                </div>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        ) : (
+          <ScrollArea>
+            <div className="h-40 sm:h-44 flex gap-2 sm:gap-3 p-1 pb-4">
+              {totemsShared.map((totem, index) => (
+                <div key={index} className="justify-center">
+                  <TotemConnectionComponent
+                    name={totem.name}
+                    totemStatus={totem.totemStatus}
+                    lastPingTime={totem.lastPingTime}
+                    batteryLevel={totem.batteryLevel}
+                    connections={totem.connections}
+                  />
+                </div>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        )}
       </div>
     </div>
   );

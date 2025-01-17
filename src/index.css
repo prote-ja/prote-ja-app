@@ -4,6 +4,7 @@
 @layer base {
   :root {
     --background: 0, 0%, 100%, 0.1;
+
     --foreground: 222.2, 84%, 4.9%, 1;
     --card: 0, 0%, 100%, 1;
     --card-foreground: 222.2, 84%, 4.9%, 1;
@@ -11,6 +12,7 @@
     --popover-foreground: 222.2, 84%, 4.9%, 1;
 
     --primary: 248, 100%, 71%, 1;
+    --primary-dark: 225, 76%, 18%, 1;
     --primary-foreground: 210, 40%, 98%, 1;
     --secondary: var(--background);
     --secondary-foreground: 0, 0%, 100%, 1; /* foreground is the text color */

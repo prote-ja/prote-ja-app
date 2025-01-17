@@ -16,7 +16,10 @@ export default {
       // },
 
       colors: {
-        background: "hsla(var(--background))",
+        background: {
+          DEFAULT: "hsla(var(--background))",
+        },
+
         foreground: "hsla(var(--foreground))",
         card: {
           DEFAULT: "hsla(var(--card))",
@@ -29,6 +32,7 @@ export default {
         primary: {
           DEFAULT: "hsla(var(--primary))",
           foreground: "hsla(var(--primary-foreground))",
+          dark: "hsla(var(--primary-dark))",
         },
         secondary: {
           DEFAULT: "hsla(var(--secondary))",

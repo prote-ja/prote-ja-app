@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import ProtejaLogo from "@/assets/proteja_logo.svg";
 import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "./ui/button";
-import { Bell, User, ChevronLeft, Download, BadgePlus } from "lucide-react";
+import { Bell, User, ChevronLeft, Download } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -98,12 +98,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
                   <span className="hidden md:block">Download</span>
                 </Button>
               ) : null}
-              <Link to="/subscribe">
+              <Link to="/dashboard/subscribe">
                 <Button
                   variant={"secondary"}
-                  className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
+                  className="w-12 h-12 md:w-auto md:h-auto py-2 px-2 md:px-4"
                 >
-                  <BadgePlus />
+                  <img src={ProtejaLogo} className="h-6 md:h-5" alt="" />
                   <span className="hidden md:block">ProteJÁ Plus</span>
                 </Button>
               </Link>
@@ -116,7 +116,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
                   <span className="hidden md:block">Meu Perfil</span>
                 </Button>
               </Link>
-              <Link to="/dashboard">
+              <Link to="/dashboard/alerts">
                 <Button
                   variant={"secondary"}
                   className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
