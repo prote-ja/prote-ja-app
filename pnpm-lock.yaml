@@ -71,6 +71,9 @@ dependencies:
   react-toastify:
     specifier: ^10.0.6
     version: 10.0.6(react-dom@18.3.1)(react@18.3.1)
+  react-use-pwa-install:
+    specifier: ^1.0.3
+    version: 1.0.3(react@18.3.1)
   source-map-explorer:
     specifier: ^2.5.3
     version: 2.5.3
@@ -4745,6 +4748,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /pwa-install-handler@2.6.2:
+    resolution: {integrity: sha512-9hMpqWNxGZx4ZoBe9k9gHkdZC/d/mvMJLA08FCVVMxOhwHBNuQVzb0DwH8ffEaqFvqu7GaotcvYgGNT1yVWduQ==}
+    dev: false
+
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -4918,6 +4925,15 @@ packages:
       clsx: 2.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
+  /react-use-pwa-install@1.0.3(react@18.3.1):
+    resolution: {integrity: sha512-poF5teATOCblAchP61+Hx/FIQJtSkjGFcZsJjiyXmG9SfmJWkj8M890lXKlu6QPg/bmG6GE3d+KP3aEO9ehgDw==}
+    peerDependencies:
+      react: 18 || 19
+    dependencies:
+      pwa-install-handler: 2.6.2
+      react: 18.3.1
     dev: false
 
   /react@18.3.1:

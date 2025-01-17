@@ -2,10 +2,11 @@ import { FunctionComponent, useEffect, useState } from "react";
 import ProtejaLogo from "@/assets/proteja_logo.svg";
 import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "./ui/button";
-import { Bell, User, ChevronLeft } from "lucide-react";
+import { Bell, User, ChevronLeft, Download, BadgePlus } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
+import { usePWAInstall } from "react-use-pwa-install";
 
 interface HeaderProps {}
 
@@ -13,6 +14,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
   const session = useAuth();
   const location = useLocation();
   const [showBackButton, setShowBackButton] = useState(false);
+  const install = usePWAInstall();
 
   useEffect(() => {
     // Update back button visibility based on route
@@ -86,22 +88,41 @@ const Header: FunctionComponent<HeaderProps> = () => {
         <div className="gap-2 flex items-center ml-auto">
           {session ? (
             <>
+              {install ? (
+                <Button
+                  variant={"secondary"}
+                  className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
+                  onClick={install}
+                >
+                  <Download />
+                  <span className="hidden md:block">Download</span>
+                </Button>
+              ) : null}
+              <Link to="/subscribe">
+                <Button
+                  variant={"secondary"}
+                  className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
+                >
+                  <BadgePlus />
+                  <span className="hidden md:block">ProteJÁ Plus</span>
+                </Button>
+              </Link>
               <Link to="/dashboard/profile">
                 <Button
                   variant={"secondary"}
-                  className="w-12 h-12 sm:w-auto sm:h-auto [&_svg]:size-5"
+                  className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
                 >
                   <User />
-                  <span className="hidden sm:block">Meu Perfil</span>
+                  <span className="hidden md:block">Meu Perfil</span>
                 </Button>
               </Link>
               <Link to="/dashboard">
                 <Button
                   variant={"secondary"}
-                  className="w-12 h-12 sm:w-auto sm:h-auto [&_svg]:size-5"
+                  className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
                 >
                   <Bell />
-                  <span className="hidden sm:block">Notificações</span>
+                  <span className="hidden md:block">Notificações</span>
                 </Button>
               </Link>
             </>
