@@ -10,8 +10,7 @@ interface AuthLayoutProps {}
 
 const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   const { pathname } = useLocation();
-  const session = useAuth();
-
+  const { session } = useAuth();
   return (
     <>
       <FloatingPartnerBubbles />

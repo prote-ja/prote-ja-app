@@ -7,9 +7,12 @@ import { Database } from "@/types/database.types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import TotemConnectionComponent from "./TotemConnectionComponent";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import HorizontalDivider from "@/components/HorizontalDivider";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "react-toastify";
+import { updateUser } from "@/db/users";
 
 interface DashboardProps {}
 
@@ -185,10 +188,45 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
     useState<ViewType>("personal");
   const [currentTotemView, setCurrentTotemView] =
     useState<ViewType>("personal");
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllWearables();
   }, []);
+
+  useEffect(() => {
+    const checkFirstLogin = async () => {
+      if (!user) {
+        return;
+      }
+      if (user.first_login) {
+        try {
+          const response = await updateUser(user.id, { first_login: false });
+
+          if (response.error) {
+            throw new Error(response.error.message);
+          }
+
+          console.log("return from edit", response.data[0]);
+
+          console.log("user before set", user);
+
+          setUser(response.data[0]);
+
+          navigate("/first-login", {
+            replace: true,
+          });
+        } catch (error) {
+          console.error(error);
+
+          toast.error("Erro ao atualizar status de primeiro login");
+        }
+      }
+    };
+
+    checkFirstLogin();
+  }, [user]);
 
   return (
     <div className="relative w-full flex flex-col min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
