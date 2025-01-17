@@ -235,7 +235,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   }, []);
 
   return (
-    <div className="relative w-full flex flex-col justify-between min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-12rem)] md:my-0 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
+    <div className="relative w-full flex flex-col justify-between min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
       {/* Top Section */}
       <ElementTitleHeader
         className="pb-2"
