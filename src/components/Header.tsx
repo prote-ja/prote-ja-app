@@ -10,6 +10,7 @@ import {
   Menu,
   LogOut,
   Info,
+  GraduationCap,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
@@ -168,6 +169,11 @@ const Header: FunctionComponent<HeaderProps> = () => {
                   </Link>
 
                   <DropdownMenuSeparator />
+                  <Link to="/first-login">
+                    <DropdownMenuItem>
+                      <GraduationCap /> Tutorial
+                    </DropdownMenuItem>
+                  </Link>
                   <Link to="/about">
                     <DropdownMenuItem>
                       <Info /> Sobre
