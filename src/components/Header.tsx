@@ -2,7 +2,15 @@ import { FunctionComponent, useEffect, useState } from "react";
 import ProtejaLogo from "@/assets/proteja_logo.svg";
 import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "./ui/button";
-import { Bell, User, ChevronLeft, Download, Menu, LogOut } from "lucide-react";
+import {
+  Bell,
+  User,
+  ChevronLeft,
+  Download,
+  Menu,
+  LogOut,
+  Info,
+} from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -106,7 +114,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
         </div>
 
         {/* Right Section */}
-        <div className="gap-2 flex items-center ml-auto">
+        <div className="gap-2 sm:gap-3 flex items-center ml-auto">
           {install ? (
             <Button
               variant={"secondary"}
@@ -114,7 +122,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
               onClick={install}
             >
               <Download />
-              <span className="hidden md:block">Instalar</span>
+              <span className="hidden md:block">Download</span>
             </Button>
           ) : null}
           {session ? (
@@ -138,7 +146,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
                     <span className="hidden md:block">Menu</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="mx-4 text-md">
                   <DropdownMenuLabel>
                     Olá {getFirstName(user?.name)}
                   </DropdownMenuLabel>
@@ -156,6 +164,13 @@ const Header: FunctionComponent<HeaderProps> = () => {
                         alt=""
                       />
                       ProteJÁ+
+                    </DropdownMenuItem>
+                  </Link>
+
+                  <DropdownMenuSeparator />
+                  <Link to="/about">
+                    <DropdownMenuItem>
+                      <Info /> Sobre
                     </DropdownMenuItem>
                   </Link>
 
