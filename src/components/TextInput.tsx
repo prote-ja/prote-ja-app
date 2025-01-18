@@ -14,6 +14,11 @@ interface TextInputProps {
   errorMessage?: string;
   onSave?: () => void;
   valid?: boolean;
+  type?: React.HTMLInputTypeAttribute;
+  name?: string;
+  maxLength?: number;
+  required?: boolean;
+  minLength?: number;
 }
 
 const TextInput: FunctionComponent<TextInputProps> = ({
@@ -24,16 +29,23 @@ const TextInput: FunctionComponent<TextInputProps> = ({
   errorMessage,
   onSave,
   valid,
+  type = "text",
+  name,
+  maxLength,
+  required,
+  minLength,
 }) => {
   const [editing, setEditing] = useState(false);
 
   return (
     <div className="relative flex">
-      <Tooltip open={!valid && !editing}>
-        <TooltipTrigger>
+      <Tooltip open={valid === false && !editing && value.length > 0}>
+        <TooltipTrigger type="button">
           <Input
             value={value}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => {
+              onChange(e.target.value);
+            }}
             placeholder={placeholder}
             className={cn("w-52", className)}
             onFocus={() => {
@@ -42,6 +54,11 @@ const TextInput: FunctionComponent<TextInputProps> = ({
             onBlur={() => {
               setEditing(false);
             }}
+            type={type}
+            name={name}
+            maxLength={maxLength}
+            required={required}
+            minLength={minLength}
           />
         </TooltipTrigger>
         <TooltipContent>

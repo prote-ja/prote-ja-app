@@ -6,15 +6,14 @@ interface WearableRefreshRateProps {}
 const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
   const percentageToRefreshRate = (percentage: number) => {
     // Boundary cases
-    if (percentage <= 0) return 60; // Longa Bateria
-    if (percentage >= 100) return 1; // Performance
+    // if (percentage <= 0) return 60; // Longa Bateria
+    // if (percentage >= 100) return 3; // Performance
 
     const maxSeconds = 60; // Longa Bateria
+    const halfStep = 25; // Halve every 25%
 
-    // Exponential decay formula for smooth transition
-    const factor = 2; // Adjust this factor to control the curve steepness
-
-    const calculatedSeconds = maxSeconds / Math.pow(factor, percentage / 25);
+    // Calculate the refresh rate by halving for each 25%
+    const calculatedSeconds = maxSeconds / Math.pow(2, percentage / halfStep);
     return Math.floor(calculatedSeconds);
   };
 

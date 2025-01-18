@@ -14,38 +14,70 @@ export type Database = {
           created_at: string
           fall_detection: Database["public"]["Enums"]["alert_types"][]
           half_battery: Database["public"]["Enums"]["alert_types"][]
+          id: string
           low_battery: Database["public"]["Enums"]["alert_types"][]
           low_battery_percentage: number
           out_of_bounds: Database["public"]["Enums"]["alert_types"][]
           updated_at: string
-          user: string
         }
         Insert: {
           created_at?: string
-          fall_detection: Database["public"]["Enums"]["alert_types"][]
-          half_battery: Database["public"]["Enums"]["alert_types"][]
-          low_battery: Database["public"]["Enums"]["alert_types"][]
+          fall_detection?: Database["public"]["Enums"]["alert_types"][]
+          half_battery?: Database["public"]["Enums"]["alert_types"][]
+          id: string
+          low_battery?: Database["public"]["Enums"]["alert_types"][]
           low_battery_percentage?: number
-          out_of_bounds: Database["public"]["Enums"]["alert_types"][]
+          out_of_bounds?: Database["public"]["Enums"]["alert_types"][]
           updated_at?: string
-          user: string
         }
         Update: {
           created_at?: string
           fall_detection?: Database["public"]["Enums"]["alert_types"][]
           half_battery?: Database["public"]["Enums"]["alert_types"][]
+          id?: string
           low_battery?: Database["public"]["Enums"]["alert_types"][]
           low_battery_percentage?: number
           out_of_bounds?: Database["public"]["Enums"]["alert_types"][]
           updated_at?: string
-          user?: string
         }
         Relationships: [
           {
-            foreignKeyName: "alert_settings_user_fkey"
-            columns: ["user"]
+            foreignKeyName: "alert_settings_id_fkey"
+            columns: ["id"]
             isOneToOne: true
-            referencedRelation: "user_role"
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      devices: {
+        Row: {
+          hash: string
+          hash_alg: Database["public"]["Enums"]["hashing_algorithms"]
+          id: string
+          owner: string | null
+          type: Database["public"]["Enums"]["device_types"]
+        }
+        Insert: {
+          hash: string
+          hash_alg?: Database["public"]["Enums"]["hashing_algorithms"]
+          id: string
+          owner?: string | null
+          type: Database["public"]["Enums"]["device_types"]
+        }
+        Update: {
+          hash?: string
+          hash_alg?: Database["public"]["Enums"]["hashing_algorithms"]
+          id?: string
+          owner?: string | null
+          type?: Database["public"]["Enums"]["device_types"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -74,10 +106,17 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "totems_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "totems_mac_fkey"
+            columns: ["mac"]
             isOneToOne: true
-            referencedRelation: "user_role"
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "totems_mac_fkey"
+            columns: ["mac"]
+            isOneToOne: true
+            referencedRelation: "devices_view"
             referencedColumns: ["id"]
           },
           {
@@ -89,29 +128,50 @@ export type Database = {
           },
         ]
       }
-      tracked_wearables: {
+      tracked_devices: {
         Row: {
           created_at: string
+          device: string
           id: number
-          permission: Database["public"]["Enums"]["tracker_permition"]
+          permission: number
           user: string
-          wearable: string
         }
         Insert: {
           created_at?: string
+          device: string
           id?: number
-          permission: Database["public"]["Enums"]["tracker_permition"]
+          permission: number
           user: string
-          wearable: string
         }
         Update: {
           created_at?: string
+          device?: string
           id?: number
-          permission?: Database["public"]["Enums"]["tracker_permition"]
+          permission?: number
           user?: string
-          wearable?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracked_wearables_permission_fkey"
+            columns: ["permission"]
+            isOneToOne: false
+            referencedRelation: "tracking_permissions"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "tracked_wearables_user_fkey"
             columns: ["user"]
@@ -119,11 +179,40 @@ export type Database = {
             referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
+        ]
+      }
+      tracking_permissions: {
+        Row: {
+          created_at: string
+          device: string
+          id: number
+          permission: Database["public"]["Enums"]["tracker_permition"]
+        }
+        Insert: {
+          created_at?: string
+          device: string
+          id?: number
+          permission?: Database["public"]["Enums"]["tracker_permition"]
+        }
+        Update: {
+          created_at?: string
+          device?: string
+          id?: number
+          permission?: Database["public"]["Enums"]["tracker_permition"]
+        }
+        Relationships: [
           {
-            foreignKeyName: "tracked_wearables_wearable_fkey"
-            columns: ["wearable"]
+            foreignKeyName: "tracking_permissions_device_fkey"
+            columns: ["device"]
             isOneToOne: false
-            referencedRelation: "wearables"
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracking_permissions_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
             referencedColumns: ["id"]
           },
         ]
@@ -259,7 +348,7 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           created_at?: string
-          id: string
+          id?: string
           mac: string
           name?: string | null
           out_of_bounds_delay?: number
@@ -280,10 +369,17 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "wearables_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "wearables_mac_fkey"
+            columns: ["mac"]
             isOneToOne: true
-            referencedRelation: "user_role"
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearables_mac_fkey"
+            columns: ["mac"]
+            isOneToOne: true
+            referencedRelation: "devices_view"
             referencedColumns: ["id"]
           },
           {
@@ -297,7 +393,32 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      devices_view: {
+        Row: {
+          id: string | null
+          owner: string | null
+          type: Database["public"]["Enums"]["device_types"] | null
+        }
+        Insert: {
+          id?: string | null
+          owner?: string | null
+          type?: Database["public"]["Enums"]["device_types"] | null
+        }
+        Update: {
+          id?: string | null
+          owner?: string | null
+          type?: Database["public"]["Enums"]["device_types"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       [_ in never]: never
@@ -309,6 +430,8 @@ export type Database = {
         | "email"
         | "push_notification"
         | "in_app"
+      device_types: "wearable" | "totem"
+      hashing_algorithms: "argon2"
       profile_type: "user" | "wearable" | "totem"
       tracker_permition: "editor" | "viewer" | "pending" | "blocked"
       wearable_status: "active" | "inactive" | "out_of_range"
