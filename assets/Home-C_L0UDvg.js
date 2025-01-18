@@ -1,0 +1,1 @@
+import{u as s,j as t,N as e}from"./index-BKdQJPbY.js";import"./react-DDCWQfk_.js";import"./react-dom-DxV6jaKz.js";const i=()=>{const{session:r}=s();return r?t.jsx(e,{to:"/dashboard",replace:!0}):t.jsx(e,{to:"/login",replace:!0})};export{i as default};
