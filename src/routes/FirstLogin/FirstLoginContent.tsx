@@ -60,10 +60,10 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
       </div>
 
       {/* Title */}
-      <div className="mt-14">
+      <div className="mt-14 flex flex-col">
         {showTitleOrnament && <hr className="border-white" />}
         <h1
-          className="text-3xl font-bold text-center p-4 title-animation"
+          className="text-3xl font-bold text-center p-4 title-animation mx-auto"
           key={`tutorial-step-${currentStep}`}
         >
           {title}
@@ -89,7 +89,7 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-0 w-full flex h-44 flex-col justify-between">
+      <div className="absolute bottom-0 w-full flex h-44 flex-col-reverse">
         {/* Progress */}
         <div>
           <div className="flex justify-center items-center h-12">
@@ -108,9 +108,8 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
               ))}
             </div>
           </div>
+          {footer}
         </div>
-
-        {footer}
       </div>
     </div>
   );

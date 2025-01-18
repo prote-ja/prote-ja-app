@@ -126,9 +126,11 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
           "Cadastre o Totem e associe as Pulseiras. Cada usuário deverá fornecer suas informações pessoais, que serão utilizadas para gerar dicas personalizadas.",
         footerOverride: (
           <div className="flex justify-center flex-col gap-3">
-            <Link to="/add-totem?first_setup=true" className="mx-auto">
+            <Link
+              to="/dashboard/add-totem?to=/dashboard/add-wearable"
+              className="mx-auto"
+            >
               <Button
-                onClick={() => console.log("Next")}
                 variant={"default"}
                 className="mx-auto bg-white text-primary"
               >
@@ -137,9 +139,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
             </Link>
 
             <Link to="/dashboard" className="mx-auto">
-              <Button onClick={() => console.log("Next")} variant={"outline"}>
-                Agora não
-              </Button>
+              <Button variant={"outline"}>Agora não</Button>
             </Link>
           </div>
         ),
