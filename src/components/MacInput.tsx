@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { FunctionComponent, useState } from "react";
 import InformationContainer from "@/components/InformationContainer";
 
 import { CircleHelp } from "lucide-react";
 import TextInput from "./TextInput";
+import { checkValidMac } from "@/lib/helpers";
 
-const MacInput: React.FC = () => {
-  const [macAddress, setMacAddress] = useState("00:00:00:00:00:00");
+interface MacInputProps {
+  name: string;
+}
 
-  const isValidMac = (mac: string): boolean => {
-    const macRegex = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
-    return macRegex.test(mac);
-  };
+const MacInput: FunctionComponent<MacInputProps> = ({ name }) => {
+  const [macAddress, setMacAddress] = useState("");
 
   const handleMacChange = (value: string) => {
     const cleaned = value.replace(/[^0-9A-Fa-f]/g, "");
@@ -21,7 +21,7 @@ const MacInput: React.FC = () => {
     setMacAddress(formatted || "");
   };
   const handleSaveMacClick = () => {
-    if (isValidMac(macAddress)) {
+    if (checkValidMac(macAddress)) {
       alert("saved");
     }
   };
@@ -37,12 +37,14 @@ const MacInput: React.FC = () => {
       tooltip="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX cada conjunto de caracteres XX pode ser composto por números ou letras (0-9, a-f)."
       value={
         <TextInput
-          valid={isValidMac(macAddress)}
+          valid={checkValidMac(macAddress)}
           value={macAddress}
           onChange={handleMacChange}
           onSave={handleSaveMacClick}
-          placeholder="Digite o endereço MAC"
+          placeholder="00:00:00:00:00:00"
           errorMessage="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX"
+          name={name}
+          required
         />
       }
     />

@@ -45,10 +45,10 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
         }
       />
       {/* Campo MAC */}
-      <MacInput />
+      <MacInput name="mac" />
 
       {/* Campo Senha */}
-      <HardwarePassword />
+      <HardwarePassword name="password" />
     </div>
   );
 };

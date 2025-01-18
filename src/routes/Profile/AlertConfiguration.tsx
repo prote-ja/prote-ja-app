@@ -24,7 +24,7 @@ const AlertConfiguration: FunctionComponent<AlertConfigurationProps> = ({
   };
 
   return (
-    <BlurredContainer title={title} titleBackground>
+    <BlurredContainer title={title} titleBackground border>
       {children}
       <div className="p-4 grid gap-4 grid-cols-2">
         <AlertCheckbox
