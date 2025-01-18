@@ -1,0 +1,1 @@
+import{j as s,i as m}from"./index-BgdKhM3a.js";const t=({className:r,disableMarginOffset:a})=>s.jsx("div",{className:m(a?"":"-mx-2 md:-mx-4 lg:-mx-6"),children:s.jsx("hr",{className:m("mt-4",r)})});export{t as H};
