@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { setOwner } from "@/db/devices";
 import { checkValidMac } from "@/lib/helpers";
 import { RotatingLines } from "react-loader-spinner";
+import { useAuth } from "@/hooks/useAuth";
 
 interface AddWearableProps {}
 
@@ -19,6 +20,7 @@ const AddWearable: FunctionComponent<AddWearableProps> = () => {
   const navigate = useNavigate();
   const toNavigate = searchParams.get("to");
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,9 +42,14 @@ const AddWearable: FunctionComponent<AddWearableProps> = () => {
       return;
     }
 
+    if (!user) {
+      toast.error("Usuário não encontrado");
+      return;
+    }
+
     try {
       setLoading(true);
-      const response = await setOwner(mac, password);
+      const response = await setOwner(mac, password, user.id);
 
       console.log(response);
 
