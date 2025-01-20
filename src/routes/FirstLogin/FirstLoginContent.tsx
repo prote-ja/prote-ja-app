@@ -92,13 +92,13 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
       <div className="absolute bottom-0 w-full flex h-44 flex-col-reverse">
         {/* Progress */}
         <div>
-          <div className="flex justify-center items-center h-12">
+          <div className="flex justify-center items-center h-12 ">
             <div className="flex items-center gap-2">
               {[...Array(totalSteps)].map((_, index) => (
                 <div
                   key={index}
                   className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-100",
+                    "w-2 h-2  md:mt-44 rounded-full transition-all duration-100 ",
                     currentStep === index + 1
                       ? "bg-white"
                       : "bg-white/30 hover:bg-white/60 hover:cursor-pointer"

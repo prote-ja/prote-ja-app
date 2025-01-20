@@ -125,9 +125,9 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
         description:
           "Cadastre o Totem e associe as Pulseiras. Cada usuário deverá fornecer suas informações pessoais, que serão utilizadas para gerar dicas personalizadas.",
         footerOverride: (
-          <div className="flex justify-center flex-col gap-3">
+          <div className="flex justify-center flex-col gap-3 ">
             <Link
-              to="/dashboard/add-totem?to=/dashboard/add-wearable"
+              to="/dashboard/add-totem?to=/dashboard/add-wearable?to=/dashboard/edit-wearable"
               className="mx-auto"
             >
               <Button
@@ -139,14 +139,16 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
             </Link>
 
             <Link to="/dashboard" className="mx-auto">
-              <Button variant={"outline"}>Agora não</Button>
+              <Button variant={"outline"} className="text-white/50">
+                Agora não
+              </Button>
             </Link>
           </div>
         ),
         disableSkip: true,
         children: (
           <div
-            className="flex flex-col items-center py-4 animated-container"
+            className="flex flex-col items-center py-4 animated-container "
             key={`tutorial-children-${step}`}
           >
             <CirclePlus size={150} />
@@ -162,24 +164,29 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
   const ActiveContent = useMemo(() => Content[step - 1], [step]);
 
   return (
-    <FirstLoginContent
-      totalSteps={Content.length}
-      currentStep={step}
-      title={ActiveContent.title}
-      showLogo={ActiveContent.showLogo}
-      description={ActiveContent.description}
-      onSkip={ActiveContent.disableSkip ? undefined : handleSkip}
-      showTitleOrnament={ActiveContent.showTitleOrnaments}
-      footer={
-        ActiveContent.footerOverride ? (
+    <div className="flex flex-col h-screen">
+      <div className="flex-1 overflow-y-auto p-4">
+        <FirstLoginContent
+          totalSteps={Content.length}
+          currentStep={step}
+          title={ActiveContent.title}
+          showLogo={ActiveContent.showLogo}
+          description={ActiveContent.description}
+          onSkip={ActiveContent.disableSkip ? undefined : handleSkip}
+          showTitleOrnament={ActiveContent.showTitleOrnaments}
+        >
+          {ActiveContent.children}
+        </FirstLoginContent>
+      </div>
+
+      <div className="sticky bottom-0 p-4 shadow-md z-10">
+        {ActiveContent.footerOverride ? (
           ActiveContent.footerOverride
         ) : (
           <TutorialFooter handleNext={handleNext} handleBack={handleBack} />
-        )
-      }
-    >
-      {ActiveContent.children}
-    </FirstLoginContent>
+        )}
+      </div>
+    </div>
   );
 };
 

@@ -65,9 +65,9 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
   const params = useParams<{ id: string }>();
   console.log(params);
   return (
-    <div className="flex flex-col space-y-6 items-center">
+    <div className="space-y-4 w-full py-4 flex flex-col items-center">
       {/* Wearable Profile */}
-      <div className="w-[600px]">
+      <div className="w-full">
         {wearables.map((wearable, index) => (
           <div key={`wearable-${index}`} className="flex justify-center mb-4">
             <WearableConnectionComponent
@@ -84,9 +84,9 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
       </div>
 
       {/* Alert */}
-      <div className="w-[600px]">
+      <div className="w-full">
         <AlertComponent
-          variant="sucess"
+          variant="warning"
           iconTitle={AlertTriangle}
           title="Queda Detectada"
           description="1 hora atrás"
@@ -97,12 +97,12 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
       </div>
 
       {/* Table */}
-      <div className="w-[600px]">
+      <div className="w-full">
         <TableComponent title="Histórico de Pings" data={pingData} />
       </div>
 
       {/* Battery level */}
-      <div className="w-[600px]">
+      <div className="w-full">
         <LineChartComponent
           title="Status da Bateria"
           chartData={chartData}

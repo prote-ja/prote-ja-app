@@ -271,7 +271,11 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         <ScrollArea scrollHideDelay={500} className="h-full">
           <div className="grid gap-2 sm:gap-3 grid-cols-1 p-1 sm:grid-cols-1 md:grid-cols-2">
             {wearables.map((wearable, index) => (
-              <div key={`wearable-${index}`} className="flex justify-center">
+              <Link
+                key={`wearable-${index}`}
+                className="flex justify-center"
+                to={`/dashboard/wearable/wearable-${index}`}
+              >
                 <WearableConnectionComponent
                   name={wearable.name}
                   wearableStatus={wearable.wearableStatus}
@@ -280,7 +284,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
                   lastPingTime={wearable.lastPingTime}
                   pedometer={wearable.pedometer}
                 />
-              </div>
+              </Link>
             ))}
           </div>
           <ScrollBar />
@@ -292,6 +296,9 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
               <div
                 key={`wearableShared-${index}`}
                 className="flex justify-center"
+                onClick={() =>
+                  navigate(`/dashboard/wearable/wearableShared-${index}`)
+                }
               >
                 <WearableConnectionComponent
                   name={wearable.name}

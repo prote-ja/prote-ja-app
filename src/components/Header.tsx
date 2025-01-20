@@ -11,6 +11,7 @@ import {
   LogOut,
   Info,
   GraduationCap,
+  Heart,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { useAuth } from "@/hooks/useAuth";
@@ -159,11 +160,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
                   </Link>
                   <Link to="/dashboard/subscribe">
                     <DropdownMenuItem>
-                      <img
+                      {/* <img
                         src={ProtejaLogo}
                         className="h-[1.15rem] px-[0.025rem] invert"
                         alt=""
-                      />
+                      /> */}
+                      <Heart />
                       ProteJÁ+
                     </DropdownMenuItem>
                   </Link>

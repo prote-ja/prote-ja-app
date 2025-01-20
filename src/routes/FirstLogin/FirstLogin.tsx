@@ -9,7 +9,7 @@ const FirstLogin: FunctionComponent<FirstLoginProps> = () => {
   return (
     <>
       <AnimatedBackground />
-      <BorderWrapper>
+      <BorderWrapper className="overflow-x-hidden">
         <TutorialHandler />
       </BorderWrapper>
     </>

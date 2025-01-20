@@ -8,7 +8,7 @@ interface AlertPageProps {}
 const AlertPage: FunctionComponent<AlertPageProps> = () => {
   return (
     <div className="space-y-4 w-full py-4">
-      <div className="flex-col justify-items-center space-y-4 px-2 ">
+      <div className="flex-col space-y-4 px-2 ">
         <ElementTitleHeader
           title="Alertas"
           description="Aqui você pode ver todos os alertas do sistema."
@@ -29,7 +29,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="30 min atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/dashboard/wearable/wearable-0"
           iconButton={AlertCircle}
         />
         <AlertComponent
@@ -38,7 +38,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="1 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/dashboard/wearable/wearable-0"
           iconButton={AlertCircle}
         />
         <AlertComponent

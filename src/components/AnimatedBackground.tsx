@@ -12,7 +12,9 @@ const AnimatedBackground: FunctionComponent<AnimatedBackgroundProps> = ({
     <div
       className={cn(
         "fixed top-0 left-0 w-full h-full -z-1",
-        isBlack ? "bg-black" : "bg-gradient-to-b from-[#7357FF] to-[#4b33be]"
+        isBlack
+          ? "bg-gradient-to-b from-[#000000] to-[#000000]"
+          : "bg-gradient-to-b from-[#7357FF] to-[#4b33be]"
       )}
     ></div>
   );

@@ -79,7 +79,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
             )}
           </div>
 
-          <form
+          <div
             className={cn(
               "text-lg flex items-center",
               isEditing ? "rounded-md gap-2 z-[20] w-full sm:max-w-xs" : "gap-4"
@@ -131,7 +131,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
                   <Settings />
                 </Button>
               ))}
-          </form>
+          </div>
         </div>
       </BlurredContainer>
     </>
