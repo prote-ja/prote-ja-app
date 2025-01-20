@@ -31,6 +31,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
 
   const handleEdit = () => {
     setIsEditing(true);
+    setEditedValue(value ?? "");
   };
 
   const handleSave = () => {
