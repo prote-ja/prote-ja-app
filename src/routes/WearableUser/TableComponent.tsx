@@ -7,7 +7,7 @@ interface TableComponentProps {
   title: string;
   description?: string;
   caption?: string;
-  data: { time: string; location: string }[]; // Ajuste nos dados
+  data: { time: string; location: string }[];
 }
 
 const TableComponent: React.FC<TableComponentProps> = ({
@@ -22,18 +22,13 @@ const TableComponent: React.FC<TableComponentProps> = ({
         {caption && <p className="text-sm text-muted">{caption}</p>}
         <div className="space-y-4">
           {" "}
-          {/* Espaçamento entre os containers */}
           {data.map((ping, index) => (
             <BlurredContainer
-              className="flex justify-between items-center px-4 py-2" // Layout flex para separar os valores
+              className="flex justify-between items-center px-4 py-2"
               key={`containerValues-${index}`}
             >
               <span className="text-white font-semibold">{ping.time}</span>{" "}
-              {/* Alinhado à esquerda */}
-              <span className="text-white font-semibold">
-                {ping.location}
-              </span>{" "}
-              {/* Alinhado à direita */}
+              <span className="text-white font-semibold">{ping.location}</span>{" "}
             </BlurredContainer>
           ))}
         </div>

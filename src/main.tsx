@@ -41,6 +41,7 @@ const WearableUser = React.lazy(
 );
 
 const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
+const BuyPremium = React.lazy(() => import("./routes/BuyPremium/BuyPremium"));
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -117,6 +118,14 @@ createRoot(document.getElementById("root")!).render(
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <OutOfRange />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="subscribe"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <BuyPremium />
                           </Suspense>
                         }
                       />

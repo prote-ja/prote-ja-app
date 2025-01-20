@@ -29,7 +29,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="30 min atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/dashboard/wearable/wearable-0"
           iconButton={AlertCircle}
         />
         <AlertComponent
@@ -38,7 +38,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="1 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/dashboard/wearable/wearable-0"
           iconButton={AlertCircle}
         />
         <AlertComponent

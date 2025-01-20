@@ -5,6 +5,9 @@ import PartnerCard from "@/components/PartnerCard";
 import { useAuth } from "@/hooks/useAuth";
 import { FunctionComponent } from "react";
 import { Outlet, useLocation } from "react-router";
+import BioparkLogo from "@/assets/biopark.png";
+import UtfprLogo from "@/assets/utfpr.png";
+import SapatilhasLogo from "@/assets/sapatilhas.png";
 
 interface AuthLayoutProps {}
 
@@ -34,18 +37,18 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <PartnerCard
                   name="UTFPR"
-                  logo="/placeholder.svg?height=40&width=80"
+                  logo={UtfprLogo}
                   description="Universidade Tecnológica Federal do Paraná"
                 />
                 <PartnerCard
                   name="Biopark Educação"
-                  logo="/placeholder.svg?height=40&width=80"
+                  logo={BioparkLogo}
                   description=""
                 />
                 <PartnerCard
-                  name="Mãe do Reinaldo"
-                  logo="/placeholder.svg?height=40&width=80"
-                  description="Reinaldo's mom administration TM."
+                  name="Use Sapatilhas"
+                  logo={SapatilhasLogo}
+                  description=""
                 />
               </div>
             </div>
