@@ -7,6 +7,7 @@ import { getUser } from "@/db/users";
 export interface AuthContextInterface {
   session: Session | null;
   user: Database["public"]["Tables"]["users"]["Row"] | null;
+  loading: boolean;
   setUser: React.Dispatch<
     React.SetStateAction<Database["public"]["Tables"]["users"]["Row"] | null>
   >;
@@ -15,6 +16,7 @@ export interface AuthContextInterface {
 export const AuthContext = createContext<AuthContextInterface>({
   session: null,
   user: null,
+  loading: false,
   setUser: () => {},
 });
 
@@ -25,11 +27,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<
     Database["public"]["Tables"]["users"]["Row"] | null
   >(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+    setLoading(true);
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setSession(session);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
 
     const {
       data: { subscription },
@@ -42,13 +51,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (session) {
-      getUser(session.user.id).then(({ data, error }) => {
-        if (error) {
-          console.error(error);
-          return;
-        }
-        setUser(data.at(0) ?? null);
-      });
+      setLoading(true);
+      getUser(session.user.id)
+        .then(({ data, error }) => {
+          if (error) {
+            console.error(error);
+            return;
+          }
+          setUser(data.at(0) ?? null);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }, [session]);
 
@@ -57,6 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         session,
         user,
+        loading,
         setUser,
       }}
     >

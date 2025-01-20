@@ -35,19 +35,18 @@ const MacInput: FunctionComponent<MacInputProps> = ({ name }) => {
         </div>
       }
       tooltip="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX cada conjunto de caracteres XX pode ser composto por números ou letras (0-9, a-f)."
-      value={
-        <TextInput
-          valid={checkValidMac(macAddress)}
-          value={macAddress}
-          onChange={handleMacChange}
-          onSave={handleSaveMacClick}
-          placeholder="00:00:00:00:00:00"
-          errorMessage="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX"
-          name={name}
-          required
-        />
-      }
-    />
+    >
+      <TextInput
+        valid={checkValidMac(macAddress)}
+        value={macAddress}
+        onChange={handleMacChange}
+        onSave={handleSaveMacClick}
+        placeholder="00:00:00:00:00:00"
+        errorMessage="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX"
+        name={name}
+        required
+      />
+    </InformationContainer>
   );
 };
 

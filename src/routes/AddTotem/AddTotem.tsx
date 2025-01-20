@@ -32,18 +32,15 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
       </div>
 
       {/* Campo Nome */}
-      <InformationContainer
-        name="Nome"
-        value={
-          <TextInput
-            value={totemName}
-            placeholder="Nome do Totem"
-            onChange={handleTotemNameChange}
-            errorMessage={"Número de telefone inválido."}
-            valid={true}
-          />
-        }
-      />
+      <InformationContainer name="Nome">
+        <TextInput
+          value={totemName}
+          placeholder="Nome do Totem"
+          onChange={handleTotemNameChange}
+          errorMessage={"Número de telefone inválido."}
+          valid={true}
+        />
+      </InformationContainer>
       {/* Campo MAC */}
       <MacInput name="mac" />
 

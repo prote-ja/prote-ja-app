@@ -41,33 +41,28 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
       </div>
 
       {/* Campo Nome */}
-      <InformationContainer
-        name="Usuário"
-        value={
-          <DefaultInput
-            inputState={userName}
-            placeholder="Nome"
-            onSave={handleSaveName}
-          />
-        }
-      />
+      <InformationContainer name="Usuário">
+        <DefaultInput
+          inputState={userName}
+          placeholder="Nome"
+          onSave={handleSaveName}
+        />
+      </InformationContainer>
 
       {/* Campo Data de Nascimento */}
       <BirthdayInput />
 
       {/* Campo Upload */}
-      <InformationContainer
-        name="Foto de Perfil"
-        value={
-          <Button
-            variant="secondary"
-            className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
-            onClick={() => document.getElementById("upload-avatar")?.click()}
-          >
-            Upload <Upload className="stroke-white w-5 h-5" />
-          </Button>
-        }
-      />
+      <InformationContainer name="Foto de Perfil">
+        <Button
+          variant="secondary"
+          className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
+          onClick={() => document.getElementById("upload-avatar")?.click()}
+        >
+          Upload <Upload className="stroke-white w-5 h-5" />
+        </Button>
+      </InformationContainer>
+
       <input
         id="upload-avatar"
         type="file"

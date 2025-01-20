@@ -12,6 +12,7 @@ interface BlurredContainerProps {
   clickable?: boolean;
   onClick?: () => void;
   cornerType?: "rounded" | "square" | "auto-md";
+  style?: React.CSSProperties;
 }
 
 const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
@@ -25,6 +26,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
   clickable,
   onClick,
   cornerType,
+  style,
 }) => {
   const calculateCornerType = (): string => {
     switch (cornerType) {
@@ -58,6 +60,7 @@ const BlurredContainer: FunctionComponent<BlurredContainerProps> = ({
         calculateCornerType(),
         className
       )}
+      style={style}
       onClick={onClick}
     >
       {title && (

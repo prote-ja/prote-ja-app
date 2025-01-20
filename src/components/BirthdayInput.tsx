@@ -60,41 +60,40 @@ const BirthdayInput: React.FC = () => {
             <span>Data de Nascimento</span>
           </div>
         }
-        value={
-          editingBirthday ? (
-            <div className="flex flex-col sm:flex-row items-center gap-1.5">
-              <Input
-                value={birthday}
-                onChange={(e) => handleBirthdayChange(e.target.value)}
-                placeholder="DD/MM/YYYY"
-                className="w-64 sm:w-64"
-              />
-              <Button
-                variant="secondary"
-                onClick={handleSaveBirthdayClick}
-                className="w-full sm:w-auto"
-                disabled={!isValidBirthday(birthday)}
-              >
-                Salvar
-              </Button>
-              {!isValidBirthday(birthday) && (
-                <span className="text-red-500 text-sm mt-2">
-                  A data precisa estar no formato DD/MM/YYYY
-                </span>
-              )}
-            </div>
-          ) : (
+      >
+        {editingBirthday ? (
+          <div className="flex flex-col sm:flex-row items-center gap-1.5">
+            <Input
+              value={birthday}
+              onChange={(e) => handleBirthdayChange(e.target.value)}
+              placeholder="DD/MM/YYYY"
+              className="w-64 sm:w-64"
+            />
             <Button
               variant="secondary"
-              onClick={handleEditBirthdayClick}
-              className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
-              title={birthday}
+              onClick={handleSaveBirthdayClick}
+              className="w-full sm:w-auto"
+              disabled={!isValidBirthday(birthday)}
             >
-              {birthday}
+              Salvar
             </Button>
-          )
-        }
-      />
+            {!isValidBirthday(birthday) && (
+              <span className="text-red-500 text-sm mt-2">
+                A data precisa estar no formato DD/MM/YYYY
+              </span>
+            )}
+          </div>
+        ) : (
+          <Button
+            variant="secondary"
+            onClick={handleEditBirthdayClick}
+            className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
+            title={birthday}
+          >
+            {birthday}
+          </Button>
+        )}
+      </InformationContainer>
     </div>
   );
 };

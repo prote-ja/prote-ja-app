@@ -56,7 +56,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
   };
 
   return (
-    <div className="border-b flex items-center sticky top-0 z-10 backdrop-blur md:shadow">
+    <div className="border-b flex items-center sticky top-0 z-[1] backdrop-blur md:shadow">
       <div className="p-2 justify-between flex items-center h-16 md:px-4 lg:px-10 w-full mx-auto">
         {/* Left Section */}
         <div

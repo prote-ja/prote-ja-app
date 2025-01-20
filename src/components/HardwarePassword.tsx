@@ -29,19 +29,18 @@ const HardwarePassword: FunctionComponent<HardwarePasswordProps> = ({
         </div>
       }
       tooltip="A senha precisa conter exatamente 6 caracteres alfanuméricos (letras e números)."
-      value={
-        <TextInput
-          value={password}
-          onChange={handlePasswordChange}
-          onSave={handleSavePasswordClick}
-          placeholder="Digite sua Senha"
-          name={name}
-          maxLength={6}
-          minLength={6}
-          required
-        />
-      }
-    />
+    >
+      <TextInput
+        value={password}
+        onChange={handlePasswordChange}
+        onSave={handleSavePasswordClick}
+        placeholder="Digite sua Senha"
+        name={name}
+        maxLength={6}
+        minLength={6}
+        required
+      />
+    </InformationContainer>
   );
 };
 
