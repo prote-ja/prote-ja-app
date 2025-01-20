@@ -72,16 +72,22 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
               <>{name}</>
             )}
           </div>
-          <div
+
+          <form
             className={cn(
               "text-lg flex items-center",
               isEditing ? "rounded-md gap-2 z-[20]" : "gap-4"
             )}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSave();
+            }}
           >
             {isEditing ? (
               <Input
                 value={editedValue}
                 onChange={(e) => setEditedValue(e.target.value)}
+                autoFocus
               />
             ) : (
               <>
@@ -97,6 +103,8 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
                   size={"icon"}
                   variant={"positive"}
                   disabled={isLoading}
+                  key={"accept-button"}
+                  type="submit"
                 >
                   {isLoading ? (
                     <RotatingLines strokeColor="white" />
@@ -110,11 +118,13 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
                   className="[&_svg]:size-5"
                   size={"icon"}
                   variant={"secondary"}
+                  key={"edit-button"}
+                  type="button"
                 >
                   <Settings />
                 </Button>
               ))}
-          </div>
+          </form>
         </div>
       </BlurredContainer>
     </>
