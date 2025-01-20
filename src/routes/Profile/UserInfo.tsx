@@ -3,31 +3,52 @@ import { Button } from "@/components/ui/button";
 import { updateUser } from "@/db/users";
 import { useAuth } from "@/hooks/useAuth";
 import { KeyRound } from "lucide-react";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useMemo } from "react";
 import { toast } from "react-toastify";
 
 interface UserInfoProps {}
 
 const UserInfo: FunctionComponent<UserInfoProps> = () => {
-  const { user, setUser, loading } = useAuth();
+  const { session, user, setUser, loading } = useAuth();
 
-  if (loading) {
-    return (
-      <div>
-        <p>Carregando...</p>
-      </div>
-    );
-  }
+  const name = useMemo(() => {
+    if (loading) {
+      return "Carregando...";
+    }
+    if (!user) {
+      return "";
+    }
 
-  if (!user) {
-    return (
-      <div>
-        <p>Usuário não encontrado</p>
-      </div>
-    );
-  }
+    return user.name;
+  }, [user]);
+
+  const email = useMemo(() => {
+    if (loading) {
+      return "Carregando...";
+    }
+    if (!session) {
+      return "";
+    }
+
+    return session.user.email;
+  }, [user]);
+
+  const phone = useMemo(() => {
+    if (loading) {
+      return "Carregando...";
+    }
+    if (!user) {
+      return "";
+    }
+
+    return user.phone ?? "Não informado";
+  }, [user]);
 
   const handleNameChange = async (v: string) => {
+    if (!user) {
+      toast.error("Usuário não encontrado.");
+      return;
+    }
     try {
       const newUser = await updateUser(user.id, { name: v });
 
@@ -51,19 +72,19 @@ const UserInfo: FunctionComponent<UserInfoProps> = () => {
     <div className="space-y-2 md:mx-0">
       <InformationContainer
         name="Nome"
-        value={user.name}
+        value={name}
         onEdit={handleNameChange}
       />
       <InformationContainer
         name="Email"
-        value="joao@hotmail.com"
+        value={email}
         onEdit={async () => {
           alert("Editando email");
         }}
       />
       <InformationContainer
         name="Telefone"
-        value="(24)9 9983-1283"
+        value={phone}
         onEdit={async () => {
           alert("Editando telefone");
         }}

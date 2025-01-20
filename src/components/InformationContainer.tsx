@@ -58,7 +58,12 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
         />
       )}
       <BlurredContainer border className="relative">
-        <div className="flex justify-between items-center text-white py-2 px-3 ">
+        <div
+          className={cn(
+            "flex justify-between items-center gap-2 text-white py-2 px-3",
+            isEditing ? "flex-col items-start sm:flex-row sm:items-center" : ""
+          )}
+        >
           <div className="text-lg font-medium">
             {tooltip ? (
               <Tooltip>
@@ -76,7 +81,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
           <form
             className={cn(
               "text-lg flex items-center",
-              isEditing ? "rounded-md gap-2 z-[20]" : "gap-4"
+              isEditing ? "rounded-md gap-2 z-[20] w-full sm:max-w-xs" : "gap-4"
             )}
             onSubmit={(e) => {
               e.preventDefault();
@@ -88,6 +93,7 @@ const InformationContainer: FunctionComponent<InformationContainerProps> = ({
                 value={editedValue}
                 onChange={(e) => setEditedValue(e.target.value)}
                 autoFocus
+                className="w-full"
               />
             ) : (
               <>

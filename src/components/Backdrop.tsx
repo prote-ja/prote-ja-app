@@ -14,20 +14,14 @@ interface BackdropProps {
   open: boolean;
   onClose: () => void;
   confirm?: boolean;
-  zIndex?: number;
 }
 
-const Backdrop: FunctionComponent<BackdropProps> = ({
-  onClose,
-  confirm,
-  zIndex = 10,
-}) => {
+const Backdrop: FunctionComponent<BackdropProps> = ({ onClose, confirm }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   return (
     <>
       <div
-        className="fixed top-0 left-0 bg-black/50 w-full h-full fade-in transition-all duration-200"
-        style={{ zIndex: zIndex }}
+        className="fixed top-0 left-0 bg-black/50 w-full h-full z-[10] fade-in-quick"
         onClick={() => {
           if (confirm) {
             console.log("confirm");
