@@ -35,3 +35,11 @@ export function checkValidMac(mac: string): boolean {
 export function getFirstName(name?: string) {
   return name?.split(" ")[0];
 }
+
+export function getInitials(name?: string) {
+  return name
+    ?.toUpperCase()
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
+}
