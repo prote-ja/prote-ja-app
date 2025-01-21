@@ -5,9 +5,11 @@ export async function setOwner(
   password: string,
   owner: string | null
 ) {
+  const loweredMac = mac.toLowerCase();
+
   const response = await supabase.functions.invoke("set-device-owner", {
     body: {
-      mac,
+      mac: loweredMac,
       password,
       owner,
     },
