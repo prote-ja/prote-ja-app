@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import { getAllWearables } from "@/db/wearables";
+import { getMyWearables } from "@/db/wearables";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { Database } from "@/types/database.types";
 import { TriangleAlert, PhoneCall } from "lucide-react";
@@ -51,7 +51,7 @@ interface OutOfRangeProps {}
 
 const OutOfRange: FunctionComponent<OutOfRangeProps> = () => {
   useEffect(() => {
-    getAllWearables();
+    getMyWearables();
   }, []);
   return (
     <div className="relative w-full max-w-screen-xl flex flex-col h-[calc(100dvh-4rem)] mx-auto text-white ">

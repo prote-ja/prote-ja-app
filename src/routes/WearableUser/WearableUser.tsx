@@ -5,7 +5,6 @@ import LineChartComponent from "./LineChartComponents";
 import AlertComponent from "@/components/AlertComponent";
 import { AlertCircle, AlertTriangle } from "lucide-react";
 import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
-import { getAllWearables } from "@/db/wearables";
 import TableComponent from "./TableComponent";
 import { useParams } from "react-router";
 type WearablesType = {
@@ -60,7 +59,7 @@ interface WearableUserProps {}
 
 const WearableUser: FunctionComponent<WearableUserProps> = () => {
   useEffect(() => {
-    getAllWearables();
+    getMyWearables();
   }, []);
   const params = useParams<{ id: string }>();
   console.log(params);

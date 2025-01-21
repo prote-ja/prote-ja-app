@@ -5,21 +5,17 @@ import { FunctionComponent } from "react";
 import TotemIcon from "@/assets/totem_icon.png";
 
 interface TotemConnectionComponentProps {
-  totemStatus: Database["public"]["Enums"]["wearable_status"];
-  lastPingTime: Date;
-  batteryLevel: number;
-  connections: number; // number of connections to the totem in the last 10 minutes
-  name: string;
+  totem: Database["public"]["Views"]["totems_view"]["Row"];
 }
 
 const TotemConnectionComponent: FunctionComponent<
   TotemConnectionComponentProps
-> = ({ totemStatus, lastPingTime, batteryLevel, connections, name }) => {
-  const isConnected = totemStatus === "active";
+> = ({ totem }) => {
+  const isConnected = totem.data ?? false;
 
   return (
     <BlurredContainer
-      title={name}
+      title={totem.name ?? "Sem nome"}
       titleBackground
       border
       className="h-full w-40 relative"
@@ -38,9 +34,9 @@ const TotemConnectionComponent: FunctionComponent<
             <p className="font-medium text-white">
               {isConnected ? "Conectado" : "Desconectado"}
             </p>
-            {lastPingTime && (
+            {totem.timestamp && (
               <p className="text-sm text-muted">
-                Ping: {lastPingTime.toLocaleTimeString()}
+                Ping: {new Date(totem.timestamp).toLocaleTimeString()}
               </p>
             )}
           </div>
@@ -51,12 +47,13 @@ const TotemConnectionComponent: FunctionComponent<
           {/* Linked devices */}
           <div className="flex items-center gap-1">
             <Link size={18} />
-            {connections}
+            {/*TODO implement linked devices*/}
+            {2}
           </div>
 
           <div className="flex items-center gap-1">
             <BatteryFull />
-            <p className="text-white font-medium">{batteryLevel}%</p>
+            <p className="text-white font-medium">{}%</p>
           </div>
         </div>
       </div>

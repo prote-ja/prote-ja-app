@@ -50,6 +50,59 @@ export type Database = {
           },
         ]
       }
+      alerts: {
+        Row: {
+          created_at: string
+          data: Json | null
+          device: string
+          id: number
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json | null
+          device: string
+          id?: number
+          type: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json | null
+          device?: string
+          id?: number
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "alerts_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "alerts_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "alerts_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "alerts_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       devices: {
         Row: {
           hash: string
@@ -82,48 +135,96 @@ export type Database = {
           },
         ]
       }
+      pings: {
+        Row: {
+          data: Json | null
+          id: string
+          timestamp: string
+        }
+        Insert: {
+          data?: Json | null
+          id: string
+          timestamp: string
+        }
+        Update: {
+          data?: Json | null
+          id?: string
+          timestamp?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       totems: {
         Row: {
           created_at: string
           id: string
-          mac: string
-          name: string | null
-          owner: string | null
+          name: string
         }
         Insert: {
           created_at?: string
           id: string
-          mac: string
-          name?: string | null
-          owner?: string | null
+          name?: string
         }
         Update: {
           created_at?: string
           id?: string
-          mac?: string
-          name?: string | null
-          owner?: string | null
+          name?: string
         }
         Relationships: [
           {
-            foreignKeyName: "totems_mac_fkey"
-            columns: ["mac"]
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
             isOneToOne: true
             referencedRelation: "devices"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "totems_mac_fkey"
-            columns: ["mac"]
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
             isOneToOne: true
             referencedRelation: "devices_view"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "totems_owner_fkey"
-            columns: ["owner"]
-            isOneToOne: false
-            referencedRelation: "user_role"
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
         ]
@@ -133,21 +234,18 @@ export type Database = {
           created_at: string
           device: string
           id: number
-          permission: number
           user: string
         }
         Insert: {
           created_at?: string
           device: string
           id?: number
-          permission: number
           user: string
         }
         Update: {
           created_at?: string
           device?: string
           id?: number
-          permission?: number
           user?: string
         }
         Relationships: [
@@ -166,17 +264,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tracked_wearables_permission_fkey"
-            columns: ["permission"]
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
             isOneToOne: false
-            referencedRelation: "tracking_permissions"
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tracked_wearables_user_fkey"
+            foreignKeyName: "tracked_devices_user_fkey"
             columns: ["user"]
             isOneToOne: false
-            referencedRelation: "user_role"
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -213,6 +318,27 @@ export type Database = {
             columns: ["device"]
             isOneToOne: false
             referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracking_permissions_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "tracking_permissions_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracking_permissions_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "tracked_devices"
             referencedColumns: ["id"]
           },
         ]
@@ -257,78 +383,12 @@ export type Database = {
           name?: string
           phone?: string | null
         }
-        Relationships: []
-      }
-      wearable_alerts: {
-        Row: {
-          created_at: string
-          data: string | null
-          id: number
-          type: string
-          wearable: string
-        }
-        Insert: {
-          created_at?: string
-          data?: string | null
-          id?: number
-          type: string
-          wearable: string
-        }
-        Update: {
-          created_at?: string
-          data?: string | null
-          id?: number
-          type?: string
-          wearable?: string
-        }
         Relationships: [
           {
-            foreignKeyName: "wearable_alerts_wearable_fkey"
-            columns: ["wearable"]
-            isOneToOne: false
-            referencedRelation: "wearables"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      wearable_pings: {
-        Row: {
-          battery: number
-          created_at: string
-          id: number
-          pedometer: number
-          totem: string
-          wearable: string
-        }
-        Insert: {
-          battery?: number
-          created_at?: string
-          id?: number
-          pedometer?: number
-          totem: string
-          wearable: string
-        }
-        Update: {
-          battery?: number
-          created_at?: string
-          id?: number
-          pedometer?: number
-          totem?: string
-          wearable?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "wearable_pings_totem_fkey"
-            columns: ["totem"]
-            isOneToOne: false
-            referencedRelation: "totems"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "wearable_pings_wearable_fkey"
-            columns: ["wearable"]
-            isOneToOne: false
-            referencedRelation: "wearables"
+            foreignKeyName: "users_id_fkey1"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "user_role"
             referencedColumns: ["id"]
           },
         ]
@@ -338,55 +398,56 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           id: string
-          mac: string
-          name: string | null
+          name: string
           out_of_bounds_delay: number
-          owner: string | null
           refresh_delay: number
-          status: Database["public"]["Enums"]["wearable_status"] | null
+          status: Database["public"]["Enums"]["wearable_status"]
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
-          id?: string
-          mac: string
-          name?: string | null
+          id: string
+          name?: string
           out_of_bounds_delay?: number
-          owner?: string | null
           refresh_delay?: number
-          status?: Database["public"]["Enums"]["wearable_status"] | null
+          status?: Database["public"]["Enums"]["wearable_status"]
         }
         Update: {
           avatar_url?: string | null
           created_at?: string
           id?: string
-          mac?: string
-          name?: string | null
+          name?: string
           out_of_bounds_delay?: number
-          owner?: string | null
           refresh_delay?: number
-          status?: Database["public"]["Enums"]["wearable_status"] | null
+          status?: Database["public"]["Enums"]["wearable_status"]
         }
         Relationships: [
           {
-            foreignKeyName: "wearables_mac_fkey"
-            columns: ["mac"]
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
             isOneToOne: true
             referencedRelation: "devices"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "wearables_mac_fkey"
-            columns: ["mac"]
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
             isOneToOne: true
             referencedRelation: "devices_view"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "wearables_owner_fkey"
-            columns: ["owner"]
-            isOneToOne: false
-            referencedRelation: "user_role"
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
         ]
@@ -419,9 +480,226 @@ export type Database = {
           },
         ]
       }
+      hot_pings: {
+        Row: {
+          data: Json | null
+          id: string | null
+          timestamp: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      last_pings: {
+        Row: {
+          data: Json | null
+          id: string | null
+          timestamp: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "wearable_pings_id_fkey"
+            columns: ["id"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      permissions_view: {
+        Row: {
+          device: string | null
+          permission: Database["public"]["Enums"]["tracker_permition"] | null
+          user: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracked_devices_user_fkey"
+            columns: ["user"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stale_devices: {
+        Row: {
+          hash: string | null
+          hash_alg: Database["public"]["Enums"]["hashing_algorithms"] | null
+          id: string | null
+          owner: string | null
+          type: Database["public"]["Enums"]["device_types"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      totems_view: {
+        Row: {
+          created_at: string | null
+          data: Json | null
+          id: string | null
+          name: string | null
+          owner: string | null
+          timestamp: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "totems_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wearables_view: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          data: Json | null
+          id: string | null
+          name: string | null
+          out_of_bounds_delay: number | null
+          owner: string | null
+          refresh_delay: number | null
+          status: Database["public"]["Enums"]["wearable_status"] | null
+          timestamp: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "devices_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "permissions_view"
+            referencedColumns: ["device"]
+          },
+          {
+            foreignKeyName: "wearables_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      can_edit_wearable_or_totem: {
+        Args: {
+          device_id: string
+        }
+        Returns: boolean
+      }
+      can_view_wearable_or_totem: {
+        Args: {
+          device_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       alert_types:
@@ -431,7 +709,7 @@ export type Database = {
         | "push_notification"
         | "in_app"
       device_types: "wearable" | "totem"
-      hashing_algorithms: "argon2"
+      hashing_algorithms: "argon2" | "bcrypt"
       profile_type: "user" | "wearable" | "totem"
       tracker_permition: "editor" | "viewer" | "pending" | "blocked"
       wearable_status: "active" | "inactive" | "out_of_range"

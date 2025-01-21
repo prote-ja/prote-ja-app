@@ -5,30 +5,18 @@ import { FunctionComponent } from "react";
 import WearableIcon from "@/assets/wearable_icon.png";
 
 interface WearableConnectionComponentProps {
-  wearableStatus: Database["public"]["Enums"]["wearable_status"];
-  lastPingTime?: Date;
-  batteryLevel?: number;
-  pedometer?: number;
-  avatarUrl?: string;
-  name: string;
+  wearable: Database["public"]["Views"]["wearables_view"]["Row"];
 }
 
 const WearableConnectionComponent: FunctionComponent<
   WearableConnectionComponentProps
-> = ({
-  wearableStatus,
-  lastPingTime,
-  batteryLevel,
-  pedometer,
-  avatarUrl,
-  name,
-}) => {
-  const isConnected = wearableStatus === "active";
+> = ({ wearable }) => {
+  const isConnected = wearable.status === "active";
 
   return (
     <>
       <BlurredContainer
-        title={name}
+        title={wearable.name ?? "Sem nome"}
         titleBackground
         border
         className="w-full"
@@ -39,16 +27,24 @@ const WearableConnectionComponent: FunctionComponent<
         postIcon={
           <div className="flex items-center gap-1">
             <BatteryFull className="text-white" />
-            <p className="text-white font-medium">{batteryLevel}%</p>
+            {/* <p className="text-white font-medium">{batteryLevel}%</p> */}
           </div>
         }
       >
         <div className="flex p-2 sm:p-4 md:p-2 gap-2 sm:gap-4 md:gap-2">
-          <img
-            src={avatarUrl}
-            className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
-            alt={name + " avatar"}
-          />
+          {wearable.avatar_url ? (
+            <img
+              src={wearable.avatar_url}
+              className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
+              alt={name + " avatar"}
+            />
+          ) : (
+            <div className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md backdrop-blur bg-white aspect-square">
+              <div className="flex justify-center items-center h-full text-white">
+                <p className="text-2xl font-bold">?</p>
+              </div>
+            </div>
+          )}
 
           <BlurredContainer className="w-full">
             <div className="flex w-full h-full justify-between items-center px-2">
@@ -62,16 +58,17 @@ const WearableConnectionComponent: FunctionComponent<
                   <p className="font-medium text-white">
                     {isConnected ? "Conectado" : "Desconectado"}
                   </p>
-                  {lastPingTime && (
+                  {wearable.timestamp && (
                     <p className="text-sm text-muted">
-                      Ultimo ping: {lastPingTime.toLocaleTimeString()}
+                      Ultimo ping:{" "}
+                      {new Date(wearable.timestamp).toLocaleTimeString()}
                     </p>
                   )}
                 </div>
               </div>
               <div className="flex items-center gap-1 text-white">
                 <Footprints />
-                <p className=" font-medium">{pedometer}</p>
+                {/* <p className=" font-medium">{pedometer}</p> */}
               </div>
             </div>
           </BlurredContainer>

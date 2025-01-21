@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import { getAllWearables } from "@/db/wearables";
+import { getMyWearables } from "@/db/wearables";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { Database } from "@/types/database.types";
 import { TriangleAlert, PhoneCall } from "lucide-react";
@@ -51,7 +51,7 @@ interface FallDetectedProps {}
 
 const FallDetected: FunctionComponent<FallDetectedProps> = () => {
   useEffect(() => {
-    getAllWearables();
+    getMyWearables();
   }, []);
   const navigate = useNavigate();
 
