@@ -19,7 +19,7 @@ interface InformationContainerProps {
 }
 
 /**
- * This component is deprecated and should not be used.
+ * This component is deprecated and should not be used. You should use FieldContainer instead.
  * @deprecated
  */
 const InformationContainer: FunctionComponent<InformationContainerProps> = ({
