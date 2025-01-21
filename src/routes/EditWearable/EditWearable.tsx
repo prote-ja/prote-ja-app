@@ -1,69 +1,91 @@
 import { FunctionComponent, useState } from "react";
-import { Button } from "@/components/ui/button";
-import InformationContainer from "@/components/InformationContainer";
 import { CircleUserRound, Upload } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import BirthdayInput from "@/components/BirthdayInput";
-import DefaultInput from "@/components/DefaultInput";
 import { AutosizeTextarea } from "@/components/AutosizeInput";
 import InformationContainerVertical from "@/components/InformationContainerVertical";
-import Avatar from "@/db/upload_avatar";
+import { useParams } from "react-router";
+import { useWearable } from "@/hooks/useWearable";
+import FieldContainer from "@/components/FieldContainer/FieldContainer";
+import FieldContainerInputText from "@/components/FieldContainer/FieldContainerInputText";
+import { RotatingLines } from "react-loader-spinner";
+import { Input } from "@/components/ui/input";
 
 interface EditWearableProps {}
 
 const EditWearable: FunctionComponent<EditWearableProps> = () => {
-  const [userName, setUserName] = useState("Nome");
+  const { id } = useParams();
 
-  const handleSaveName = (newName: string) => {
-    setUserName(newName);
-  };
+  const { wearable, loading } = useWearable(id);
+  const [uploadingProfilePicture, setUploadingProfilePicture] = useState(false);
 
-  const [avatarPath, setAvatarPath] = useState<string | null>(null);
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
 
-  const handleUpload = (
-    _: React.ChangeEvent<HTMLInputElement>,
-    filePath: string
-  ) => {
-    setAvatarPath(filePath);
-    console.log("Arquivo enviado para o caminho:", filePath);
-  };
+  if (!wearable) {
+    return <div className="text-white">Pulseira não encontrado</div>;
+  }
+
+  const handleNameChange = async (v: string) => {};
+
+  const handleUploadPfp = async () => {};
 
   return (
     <div className="space-y-4">
       {/* Imagem do usuário */}
       <div className="flex flex-col items-center justify-center">
-        <ElementTitleHeader className="pb-2 text-white" title={userName} />
-        {avatarPath ? (
-          <Avatar url={avatarPath} size={160} onUpload={handleUpload} />
+        <ElementTitleHeader
+          className="pb-2 text-white"
+          title={wearable.name ?? "Sem nome"}
+        />
+        {wearable.avatar_url ? (
+          <img
+            src={wearable.avatar_url}
+            alt="Avatar"
+            className="avatar image w-32 h-32 rounded-full"
+          />
         ) : (
-          <CircleUserRound className="w-64 h-auto stroke-white stroke-1" />
+          <CircleUserRound className="w-32 stroke-white stroke-1" />
         )}
       </div>
 
-      {/* Campo Nome */}
-      <InformationContainer name="Usuário">
-        <DefaultInput
-          inputState={userName}
-          placeholder="Nome"
-          onSave={handleSaveName}
+      <FieldContainer title="Nome">
+        <FieldContainerInputText
+          value={wearable.name ?? "Sem Nome"}
+          onConfirm={handleNameChange}
         />
-      </InformationContainer>
+      </FieldContainer>
 
-      {/* Campo Data de Nascimento */}
-      <BirthdayInput />
+      <FieldContainer title="Data de Nascimento">
+        <FieldContainerInputText
+          value={wearable.name ?? "Sem Nome"}
+          onConfirm={handleNameChange}
+        />
+      </FieldContainer>
 
-      {/* Campo Upload */}
-      <InformationContainer name="Foto de Perfil">
-        <Button
-          variant="secondary"
-          className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
-          onClick={() => document.getElementById("upload-avatar")?.click()}
+      <FieldContainer title="Foto de Perfil">
+        {/* <Button
+          variant={"secondary"}
+          size={"sm"}
+          onClick={handleUploadPfp}
+          disabled={uploadingProfilePicture}
+          type="file"
         >
-          Upload <Upload className="stroke-white w-5 h-5" />
-        </Button>
-      </InformationContainer>
+          {uploadingProfilePicture ? (
+            <>
+              Enviando <RotatingLines strokeColor="white" />
+            </>
+          ) : (
+            <>
+              Alterar senha
+              <Upload />
+            </>
+          )}
+        </Button> */}
+        <Input id="picture" type="file" />
+      </FieldContainer>
 
-      <input
+      {/* <input
         id="upload-avatar"
         type="file"
         accept="image/*"
@@ -73,7 +95,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
             handleUpload(e, URL.createObjectURL(e.target.files[0]));
           }
         }}
-      />
+      /> */}
 
       {/* Informações Adicionais */}
       <InformationContainerVertical

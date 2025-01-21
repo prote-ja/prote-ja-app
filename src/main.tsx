@@ -106,7 +106,7 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                       <Route
-                        path="edit-wearable"
+                        path="edit-wearable/:id"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <EditWearable />

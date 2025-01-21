@@ -1,7 +1,6 @@
 import FieldContainer from "@/components/FieldContainer/FieldContainer";
 import FieldContainerInputPhone from "@/components/FieldContainer/FieldContainerInputPhone";
 import FieldContainerInputText from "@/components/FieldContainer/FieldContainerInputText";
-import InformationContainer from "@/components/InformationContainer";
 import { Button } from "@/components/ui/button";
 import { sendPasswordResetEmail } from "@/db/auth";
 import { updateUser } from "@/db/users";
