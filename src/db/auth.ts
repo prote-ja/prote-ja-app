@@ -72,3 +72,8 @@ export async function signOut() {
   const res = await supabase.auth.signOut();
   return res;
 }
+
+export async function sendPasswordResetEmail(email: string) {
+  const res = await supabase.auth.resetPasswordForEmail(email);
+  return res;
+}

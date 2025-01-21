@@ -18,6 +18,10 @@ interface InformationContainerProps {
   children?: React.ReactNode;
 }
 
+/**
+ * This component is deprecated and should not be used.
+ * @deprecated
+ */
 const InformationContainer: FunctionComponent<InformationContainerProps> = ({
   onEdit,
   name,
