@@ -644,10 +644,12 @@ export type Database = {
       wearables_view: {
         Row: {
           avatar_url: string | null
+          birthday: string | null
           created_at: string | null
           data: Json | null
           id: string | null
           name: string | null
+          other_info: string | null
           out_of_bounds_delay: number | null
           owner: string | null
           refresh_delay: number | null
