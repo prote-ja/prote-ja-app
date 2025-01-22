@@ -34,12 +34,12 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
   const { wearable, loading } = useWearable(id);
   const [uploadingProfilePicture, setUploadingProfilePicture] = useState(false);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
 
   const [wearableLocalCopy, setWearableLocalCopy] = useState<
     Database["public"]["Views"]["wearables_view"]["Row"] | undefined
   >(undefined);
 
-  // DD/MM/YYYY
   const [birthdayString, setBirthdayString] = useState<string | undefined>(
     undefined
   );
@@ -53,6 +53,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         ? new Date(wearable.birthday).toLocaleDateString("pt-BR")
         : undefined
     );
+    setProfilePicture(localStorage.getItem("profilePicture") || null);
   }, [wearable]);
 
   if (loading) {
@@ -78,18 +79,45 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     fileRef.current?.click();
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {};
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadingProfilePicture(true);
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        setProfilePicture(result);
+        localStorage.setItem("profilePicture", result);
+        setUploadingProfilePicture(false);
+        toast.success("Foto de perfil carregada com sucesso!");
+      };
+      reader.onerror = () => {
+        setUploadingProfilePicture(false);
+        toast.error("Erro ao carregar foto de perfil.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSave = async () => {
+    toast.success(
+      "Dados salvos localmente. Adicione o upload ao servidor aqui."
+    );
+  };
 
   return (
     <div className="space-y-3">
-      {/* Imagem do usuário */}
       <div className="flex flex-col items-center justify-center">
         <ElementTitleHeader
           className="text-white"
           title={wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"}
         />
         <Avatar className="h-36 w-36 mt-6 mb-3">
-          <AvatarImage src={wearableLocalCopy?.avatar_url ?? undefined} />
+          <AvatarImage
+            src={profilePicture || undefined}
+            className="object-cover"
+          />
           <AvatarFallback className="text-white text-7xl font-semibold bg-white/10 border-4 border-white">
             {getInitials(
               wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"
@@ -170,25 +198,12 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         </Button>
       </FieldContainer>
 
-      {/* <input
-        id="upload-avatar"
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          if (e.target.files) {
-            handleUpload(e, URL.createObjectURL(e.target.files[0]));
-          }
-        }}
-      /> */}
-
-      {/* Informações Adicionais */}
       <FieldContainer title="Informações Adicionais">
         <FieldContainerInputTextArea placeholder="Informações sobre dificuldades físicas." />
       </FieldContainer>
 
       <div className="flex justify-end pt-4">
-        <Button className="bg-white text-primary">
+        <Button className="bg-white text-primary" onClick={handleSave}>
           Salvar <Save />
         </Button>
       </div>
