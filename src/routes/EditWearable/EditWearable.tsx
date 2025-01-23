@@ -98,7 +98,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     fileRef.current?.click();
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setPfpFile(file);
     if (file) {
@@ -106,7 +106,6 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
       reader.onload = () => {
         const result = reader.result as string;
         setProfilePicture(result);
-        toast.success("Foto de perfil carregada com sucesso!");
       };
       reader.onerror = () => {
         toast.error("Erro ao carregar foto de perfil.");
@@ -162,13 +161,23 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         }
       }
       try {
-        const { error } = await updateWearable(wearableLocalCopy.id, {
+        const updatedData: Partial<
+          Database["public"]["Tables"]["wearables"]["Row"]
+        > = {
           name: wearableLocalCopy.name,
           birthday: new Date(birthdayString).toISOString(),
           other_info: wearableLocalCopy.other_info,
-          avatar_url: avatarPath,
           refresh_delay: refreshDelay,
-        });
+        };
+
+        if (avatarPath) {
+          updatedData.avatar_url = avatarPath;
+        }
+
+        const { error } = await updateWearable(
+          wearableLocalCopy.id,
+          updatedData
+        );
 
         if (error) {
           throw error;
