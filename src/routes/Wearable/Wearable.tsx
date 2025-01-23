@@ -1,5 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
-import { Database } from "@/types/database.types";
+import { FunctionComponent } from "react";
 import { ChartConfig } from "@/components/ui/chart";
 import LineChartComponent from "./LineChartComponents";
 import AlertComponent from "@/components/AlertComponent";
@@ -7,30 +6,13 @@ import { AlertCircle, AlertTriangle } from "lucide-react";
 import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
 import TableComponent from "./TableComponent";
 import { useParams } from "react-router";
-type WearablesType = {
-  name: string;
-  wearableStatus: Database["public"]["Enums"]["wearable_status"];
-  avatarUrl: string;
-  batteryLevel: number;
-  lastPingTime: Date;
-  pedometer: number;
-};
+import { useWearable } from "@/hooks/useWearable";
+
 const pingData = [
   { time: "13:40", location: "Totem da sala" },
   { time: "14:10", location: "Totem do corredor" },
   { time: "15:30", location: "Totem do jardim" },
   // Adicione mais pings aqui
-];
-const wearables: WearablesType[] = [
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "inactive",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
 ];
 
 const chartData = [
@@ -58,27 +40,28 @@ const chartConfig = {
 interface WearableUserProps {}
 
 const WearableUser: FunctionComponent<WearableUserProps> = () => {
-  useEffect(() => {
-    getMyWearables();
-  }, []);
+  const { id } = useParams();
+  const { wearable, loading } = useWearable(id);
+
   const params = useParams<{ id: string }>();
   console.log(params);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (!wearable) {
+    return <div>Pulseira não encontrada</div>;
+  }
+
   return (
     <div className="space-y-4 w-full py-4 flex flex-col items-center">
       {/* Wearable Profile */}
       <div className="w-full">
-        {wearables.map((wearable, index) => (
-          <div key={`wearable-${index}`} className="flex justify-center mb-4">
-            <WearableConnectionComponent
-              name={wearable.name}
-              wearableStatus={wearable.wearableStatus}
-              avatarUrl={wearable.avatarUrl}
-              batteryLevel={wearable.batteryLevel}
-              lastPingTime={wearable.lastPingTime}
-              pedometer={wearable.pedometer}
-            />
-          </div>
-        ))}
+        <div className="flex justify-center mb-4">
+          <WearableConnectionComponent wearable={wearable} />
+        </div>
+
         <hr className="w-full" />
       </div>
 

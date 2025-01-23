@@ -2,7 +2,6 @@ import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import WearableConnectionComponent from "./WearableConnectionComponent";
 import { Button } from "@/components/ui/button";
 import { Link as LinkIcon, Plus, SatelliteDish } from "lucide-react";
-import { Database } from "@/types/database.types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import TotemConnectionComponent from "./TotemConnectionComponent";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
@@ -133,13 +132,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             ) : (
               <>
                 {myWearables.map((wearable, index) => (
-                  <Link
-                    key={`wearable-${index}`}
-                    className="flex justify-center"
-                    to={`/dashboard/wearable/wearable-${index}`}
-                  >
-                    <WearableConnectionComponent wearable={wearable} />
-                  </Link>
+                  <WearableConnectionComponent
+                    wearable={wearable}
+                    key={`persona-wearable-${index}`}
+                  />
                 ))}
               </>
             )}
@@ -163,13 +159,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             ) : (
               <>
                 {sharedWearables.map((wearable, index) => (
-                  <Link
+                  <WearableConnectionComponent
+                    wearable={wearable}
                     key={`wearableShared-${index}`}
-                    className="flex justify-center"
-                    to={`/dashboard/wearable/wearable-${index}`}
-                  >
-                    <WearableConnectionComponent wearable={wearable} />
-                  </Link>
+                  />
                 ))}
               </>
             )}

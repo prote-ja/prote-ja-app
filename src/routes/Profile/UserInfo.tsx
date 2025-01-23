@@ -128,7 +128,7 @@ const UserInfo: FunctionComponent<UserInfoProps> = () => {
         <FieldContainerInputText
           value={email}
           onConfirm={async (v) => {
-            alert("Salvando email");
+            alert("Salvando email" + v);
           }}
         />
       </FieldContainer>

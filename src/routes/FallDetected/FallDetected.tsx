@@ -1,59 +1,25 @@
-import { FunctionComponent, useEffect } from "react";
-import { getMyWearables } from "@/db/wearables";
+import { FunctionComponent } from "react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import { Database } from "@/types/database.types";
 import { TriangleAlert, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router";
+import { useParams } from "react-router";
 import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
-import TotemConnectionComponent from "../Dashboard/TotemConnectionComponent";
 import AnimatedBackground from "@/components/AnimatedBackground";
-type WearablesType = {
-  name: string;
-  wearableStatus: Database["public"]["Enums"]["wearable_status"];
-  avatarUrl: string;
-  batteryLevel: number;
-  lastPingTime: Date;
-  pedometer: number;
-};
-
-const wearables: WearablesType[] = [
-  {
-    name: "Joana Santa Maria",
-    wearableStatus: "inactive",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1644551012443-00cfd90f9640?q=80&w=255&auto=format&fit=crop&ixlib=rb-4.0.3",
-    batteryLevel: 40,
-    lastPingTime: new Date(),
-    pedometer: 23827,
-  },
-];
-
-type TotemType = {
-  name: string;
-  totemStatus: Database["public"]["Enums"]["wearable_status"];
-  lastPingTime: Date;
-  batteryLevel: number;
-  connections: number;
-};
-
-const totems: TotemType[] = [
-  {
-    name: "Sala",
-    totemStatus: "active",
-    lastPingTime: new Date(),
-    batteryLevel: 40,
-    connections: 10,
-  },
-];
+import { useWearable } from "@/hooks/useWearable";
 
 interface FallDetectedProps {}
 
 const FallDetected: FunctionComponent<FallDetectedProps> = () => {
-  useEffect(() => {
-    getMyWearables();
-  }, []);
-  const navigate = useNavigate();
+  const { id } = useParams();
+  const { wearable, loading } = useWearable(id);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (!wearable) {
+    return <div>Pulseira não encontrada</div>;
+  }
 
   return (
     <div className="space-y-4 z-10  ">
@@ -69,40 +35,21 @@ const FallDetected: FunctionComponent<FallDetectedProps> = () => {
           />
         </div>
         <div className="w-full z-10">
-          {wearables.map((wearable, index) => (
-            <div
-              key={`wearable-${index}`}
-              className="flex justify-start"
-              onClick={() => navigate(`/dashboard/wearable/wearable-${index}`)}
-            >
-              <WearableConnectionComponent
-                name={wearable.name}
-                wearableStatus={wearable.wearableStatus}
-                avatarUrl={wearable.avatarUrl}
-                batteryLevel={wearable.batteryLevel}
-                lastPingTime={wearable.lastPingTime}
-                pedometer={wearable.pedometer}
-              />
-            </div>
-          ))}
+          <WearableConnectionComponent wearable={wearable} />
         </div>
         <ElementTitleHeader
           className="text-white z-10 mt-6 text-left"
           title="Localização estimada"
-          description={`O totem a seguir recebeu o sinal de queda do usuário ${wearables[0].name}`}
+          description={`O totem a seguir recebeu o sinal de queda do usuário ${wearable.name}`}
         />
         <div className="h-44 flex gap-3 pb-4 px-2 mt-6">
-          {totems.map((totem, index) => (
+          {/* {totems.map((totem, index) => (
             <div key={`totem-${index}`} className="justify-center">
               <TotemConnectionComponent
-                name={totem.name}
-                totemStatus={totem.totemStatus}
-                lastPingTime={totem.lastPingTime}
-                batteryLevel={totem.batteryLevel}
-                connections={totem.connections}
+                totem={totem}
               />
             </div>
-          ))}
+          ))} */}
         </div>
         <hr className=" z-10 " />
         <ElementTitleHeader

@@ -5,6 +5,7 @@ import { FunctionComponent } from "react";
 import WearableIcon from "@/assets/wearable_icon.png";
 import { getImageUrl } from "@/db/storage";
 import { getInitials } from "@/lib/helpers";
+import { Link } from "react-router";
 
 interface WearableConnectionComponentProps {
   wearable: Database["public"]["Views"]["wearables_view"]["Row"];
@@ -16,7 +17,7 @@ const WearableConnectionComponent: FunctionComponent<
   const isConnected = wearable.status === "active";
 
   return (
-    <>
+    <Link to={`/dashboard/wearable/${wearable.id}`}>
       <BlurredContainer
         title={wearable.name ?? "Sem nome"}
         titleBackground
@@ -80,7 +81,7 @@ const WearableConnectionComponent: FunctionComponent<
           </BlurredContainer>
         </div>
       </BlurredContainer>
-    </>
+    </Link>
   );
 };
 
