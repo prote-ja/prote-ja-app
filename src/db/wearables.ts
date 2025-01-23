@@ -11,15 +11,11 @@ export async function getAllWearablesView() {
 }
 
 export async function getWearableById(id: string) {
-  console.log("id", id);
-
   const res = await supabase
     .from("wearables_view")
     .select()
     .eq("id", id)
     .single();
-
-  console.log("res", res);
 
   return res;
 }

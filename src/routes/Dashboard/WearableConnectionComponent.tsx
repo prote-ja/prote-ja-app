@@ -3,6 +3,8 @@ import { Database } from "@/types/database.types";
 import { BatteryFull, Footprints, Wifi, WifiOff } from "lucide-react";
 import { FunctionComponent } from "react";
 import WearableIcon from "@/assets/wearable_icon.png";
+import { getImageUrl } from "@/db/storage";
+import { getInitials } from "@/lib/helpers";
 
 interface WearableConnectionComponentProps {
   wearable: Database["public"]["Views"]["wearables_view"]["Row"];
@@ -34,14 +36,18 @@ const WearableConnectionComponent: FunctionComponent<
         <div className="flex p-2 sm:p-4 md:p-2 gap-2 sm:gap-4 md:gap-2">
           {wearable.avatar_url ? (
             <img
-              src={wearable.avatar_url}
+              src={getImageUrl(wearable.avatar_url).data.publicUrl}
               className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md object-cover backdrop-blur bg-white aspect-square"
               alt={name + " avatar"}
             />
           ) : (
-            <div className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md backdrop-blur bg-white aspect-square">
+            <div className="w-[4.5rem] h-[4.5rem] sm:w-20 sm:h-20 rounded-md border-2 aspect-square">
               <div className="flex justify-center items-center h-full text-white">
-                <p className="text-2xl font-bold">?</p>
+                <p className="text-3xl font-semibold ">
+                  {getInitials(
+                    wearable.name ? wearable.name : "Sem nome"
+                  )?.slice(0, 2)}
+                </p>
               </div>
             </div>
           )}

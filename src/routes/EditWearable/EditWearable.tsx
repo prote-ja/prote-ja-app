@@ -47,6 +47,10 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     undefined
   );
 
+  const [refreshDelay, setRefreshDelay] = useState<number | undefined>(
+    undefined
+  );
+
   const [pfpFile, setPfpFile] = useState<File | undefined>();
 
   const navigate = useNavigate();
@@ -64,6 +68,10 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     if (wearable.avatar_url) {
       setProfilePicture(getImageUrl(wearable.avatar_url).data.publicUrl);
       console.log(getImageUrl(wearable.avatar_url));
+    }
+
+    if (wearable.refresh_delay) {
+      setRefreshDelay(wearable.refresh_delay);
     }
   }, [wearable]);
 
@@ -129,6 +137,11 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
       return;
     }
 
+    if (!refreshDelay) {
+      toast.error("Taxa de atualização inválida.");
+      return;
+    }
+
     setIsLoading(true);
 
     let avatarPath: string | null = null;
@@ -154,6 +167,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
           birthday: new Date(birthdayString).toISOString(),
           other_info: wearableLocalCopy.other_info,
           avatar_url: avatarPath,
+          refresh_delay: refreshDelay,
         });
 
         if (error) {
@@ -286,7 +300,12 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
       <BlurredContainer title="Taxa de atualização" titleBackground border>
         <div className="p-4 text-white">
-          <WearableRefreshRate />
+          <WearableRefreshRate
+            defaultValue={wearableLocalCopy?.refresh_delay || undefined}
+            onChangeComplete={(v) => {
+              setRefreshDelay(v);
+            }}
+          />
         </div>
       </BlurredContainer>
 

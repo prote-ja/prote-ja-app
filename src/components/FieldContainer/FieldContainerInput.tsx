@@ -31,8 +31,6 @@ const FieldContainerInput: FunctionComponent<FieldContainerInputProps> = ({
 
   const [editedValue, setEditedValue] = useState<string>(value ?? "");
 
-  console.log(value);
-
   useEffect(() => {
     setEditedValue(value ?? "");
   }, [value]);
