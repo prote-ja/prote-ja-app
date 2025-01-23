@@ -1,19 +1,25 @@
-export async function uploadAvatar(image: File) {
-  // try {
-  //   const file = image;
-  //   const fileExt = file.name.split(".").pop();
-  //   const fileName = `${Math.random()}.${fileExt}`;
-  //   const filePath = `avatars/${fileName}`;
-  //   const { error: uploadError } = await supabase.storage
-  //     .from("avatars")
-  //     .upload(filePath, file);
-  //   if (uploadError) {
-  //     throw uploadError;
-  //   }
-  //   onUpload(event, filePath);
-  // } catch (error: any) {
-  //   alert(error.message);
-  // } finally {
-  //   setUploading(false);
-  // }
+import { supabase } from "@/client";
+import { resizeImageWithAspect } from "@/lib/helpers";
+
+export async function uploadAvatar(id: string, image: File) {
+  const resizedImage = await resizeImageWithAspect(image, 300);
+
+  const fileExtention = resizedImage.name.split(".").pop();
+  if (!fileExtention) {
+    throw new Error("Invalid file extention");
+  }
+
+  const path = `${id}/avatar.${fileExtention}`;
+
+  const res = await supabase.storage
+    .from("avatars")
+    .upload(path, resizedImage, {
+      cacheControl: "3600",
+      upsert: true,
+    });
+  return res;
+}
+
+export function getImageUrl(imgPath: string) {
+  return supabase.storage.from("avatars").getPublicUrl(imgPath);
 }

@@ -28,6 +28,7 @@ import { Database } from "@/types/database.types";
 import { updateWearable } from "@/db/wearables";
 import BlurredContainer from "@/components/BlurredContainer";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
+import { getImageUrl, uploadAvatar } from "@/db/storage";
 
 interface EditWearableProps {}
 
@@ -46,6 +47,8 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     undefined
   );
 
+  const [pfpFile, setPfpFile] = useState<File | undefined>();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +60,11 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         ? new Date(wearable.birthday).toLocaleDateString("pt-BR")
         : undefined
     );
+
+    if (wearable.avatar_url) {
+      setProfilePicture(getImageUrl(wearable.avatar_url).data.publicUrl);
+      console.log(getImageUrl(wearable.avatar_url));
+    }
   }, [wearable]);
 
   if (loading) {
@@ -84,6 +92,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    setPfpFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -100,6 +109,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
   const handleRemovePfp = () => {
     setProfilePicture(null);
+    setPfpFile(undefined);
     toast.info("Foto de perfil removida.");
   };
 
@@ -121,23 +131,45 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
     setIsLoading(true);
 
+    let avatarPath: string | null = null;
+
     try {
-      const { error } = await updateWearable(wearableLocalCopy.id, {
-        name: wearableLocalCopy.name,
-        birthday: new Date(birthdayString).toISOString(),
-        other_info: wearableLocalCopy.other_info,
-      });
+      if (pfpFile) {
+        const { data, error } = await uploadAvatar(
+          wearableLocalCopy.id,
+          pfpFile
+        );
 
-      if (error) {
-        throw error;
+        if (error) {
+          throw error;
+        }
+
+        if (data) {
+          avatarPath = data.path;
+        }
       }
+      try {
+        const { error } = await updateWearable(wearableLocalCopy.id, {
+          name: wearableLocalCopy.name,
+          birthday: new Date(birthdayString).toISOString(),
+          other_info: wearableLocalCopy.other_info,
+          avatar_url: avatarPath,
+        });
 
-      toast.success("Dados salvos com sucesso.");
+        if (error) {
+          throw error;
+        }
 
-      navigate(`/wearables/${wearableLocalCopy.id}`);
+        toast.success("Dados salvos com sucesso.");
+
+        navigate(`/wearables/${wearableLocalCopy.id}`);
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao salvar dados.");
+      }
     } catch (error) {
       console.error(error);
-      toast.error("Erro ao salvar dados.");
+      toast.error("Erro ao salvar foto de perfil.");
     }
 
     setIsLoading(false);

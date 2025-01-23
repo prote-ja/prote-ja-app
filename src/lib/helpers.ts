@@ -91,3 +91,92 @@ export function formatToDate(text: string): string {
 
   return chars.join("");
 }
+
+export async function resizeImage(image: File, width: number, height: number) {
+  return new Promise<File>((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const img = new Image();
+    img.src = URL.createObjectURL(image);
+
+    img.onload = () => {
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx?.drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          // Ensure the output type is always JPEG
+          const jpegBlob = new Blob([blob], { type: "image/jpeg" });
+          const file = new File(
+            [jpegBlob],
+            `${image.name.split(".").slice(0, -1).join(".")}.jpeg`,
+            {
+              type: "image/jpeg",
+            }
+          );
+          resolve(file);
+        } else {
+          reject(new Error("Failed to create a blob from the canvas."));
+        }
+      }, "image/jpeg");
+    };
+
+    img.onerror = () => {
+      reject(new Error("Failed to load the image."));
+    };
+  });
+}
+
+export async function resizeImageWithAspect(image: File, size: number) {
+  return new Promise<File>((resolve, reject) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const img = new Image();
+    img.src = URL.createObjectURL(image);
+
+    img.onload = () => {
+      // Calculate the aspect ratio
+      const aspectRatio = img.width / img.height;
+
+      let width, height;
+      if (img.width > img.height) {
+        // Landscape image: scale width to "size"
+        width = size;
+        height = size / aspectRatio;
+      } else {
+        // Portrait or square image: scale height to "size"
+        height = size;
+        width = size * aspectRatio;
+      }
+
+      canvas.width = Math.round(width);
+      canvas.height = Math.round(height);
+
+      ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const jpegBlob = new Blob([blob], { type: "image/jpeg" });
+          const file = new File(
+            [jpegBlob],
+            `${image.name.split(".").slice(0, -1).join(".")}.jpeg`,
+            {
+              type: "image/jpeg",
+            }
+          );
+          resolve(file);
+        } else {
+          reject(new Error("Failed to create a blob from the canvas."));
+        }
+      }, "image/jpeg");
+    };
+
+    img.onerror = () => {
+      reject(new Error("Failed to load the image."));
+    };
+  });
+}
