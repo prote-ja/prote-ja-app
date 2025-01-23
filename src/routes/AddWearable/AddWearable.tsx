@@ -73,7 +73,7 @@ const AddWearable: FunctionComponent<AddWearableProps> = () => {
       }
 
       toast.success("Pulseira adicionada com sucesso");
-      navigate(toNavigate || "/dashboard");
+      navigate(toNavigate || `/dashboard/edit-wearable/${mac}`);
     } catch (error: any) {
       console.error(error);
       toast.error("Erro ao adicionar pulseira, tente novamente mais tarde");

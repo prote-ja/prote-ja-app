@@ -1,20 +1,41 @@
 import { FunctionComponent } from "react";
 import MarkedSlider from "./MarkedSlider";
 
-interface WearableRefreshRateProps {}
+interface WearableRefreshRateProps {
+  className?: string;
+  onChangeComplete?: (value: number) => void;
+  defaultValue?: number;
+}
 
-const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
-  const percentageToRefreshRate = (percentage: number) => {
+const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = ({
+  className,
+  onChangeComplete,
+  defaultValue,
+}) => {
+  const percentageToRefreshRate = (percentage: number): number => {
+    const maxSeconds = 60; // Maximum refresh interval (Longa Bateria)
+    const halfStep = 25; // Percentage at which the refresh rate halves
+
     // Boundary cases
-    // if (percentage <= 0) return 60; // Longa Bateria
-    // if (percentage >= 100) return 3; // Performance
+    if (percentage <= 0) return maxSeconds; // Longa Bateria
+    if (percentage >= 100) return 3; // Performance
 
-    const maxSeconds = 60; // Longa Bateria
-    const halfStep = 25; // Halve every 25%
-
-    // Calculate the refresh rate by halving for each 25%
+    // Calculate the refresh rate
     const calculatedSeconds = maxSeconds / Math.pow(2, percentage / halfStep);
-    return Math.floor(calculatedSeconds);
+    return Math.round(calculatedSeconds);
+  };
+
+  const refreshRateToPercentage = (refreshRate: number): number => {
+    const maxSeconds = 60; // Maximum refresh interval (Longa Bateria)
+    const halfStep = 25; // Percentage at which the refresh rate halves
+
+    // Ensure refreshRate is within valid boundaries
+    if (refreshRate <= 3) return 100; // Performance
+    if (refreshRate >= maxSeconds) return 0; // Longa Bateria
+
+    // Calculate the percentage
+    const calculatedPercentage = Math.log2(maxSeconds / refreshRate) * halfStep;
+    return Math.round(calculatedPercentage);
   };
 
   const tooltipParser = (percentage: number) => {
@@ -22,7 +43,7 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
   };
 
   const handleOnChangeComplete = (value: number) => {
-    console.log("Refresh rate changed: ", percentageToRefreshRate(value));
+    if (onChangeComplete) onChangeComplete(percentageToRefreshRate(value));
   };
 
   return (
@@ -55,6 +76,8 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
       clamped
       step={2}
       onChangeComplete={handleOnChangeComplete}
+      className={className}
+      defaultValue={refreshRateToPercentage(defaultValue ?? 30)}
     />
   );
 };

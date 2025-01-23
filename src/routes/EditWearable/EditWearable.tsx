@@ -1,90 +1,331 @@
-import { FunctionComponent, useState } from "react";
-import { Button } from "@/components/ui/button";
-import InformationContainer from "@/components/InformationContainer";
-import { CircleUserRound, Upload } from "lucide-react";
+import {
+  ChangeEvent,
+  FunctionComponent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { Save, Trash, Upload } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import BirthdayInput from "@/components/BirthdayInput";
-import DefaultInput from "@/components/DefaultInput";
-import { AutosizeTextarea } from "@/components/AutosizeInput";
-import InformationContainerVertical from "@/components/InformationContainerVertical";
-import Avatar from "@/db/upload_avatar";
+import { useNavigate, useParams } from "react-router";
+import { useWearable } from "@/hooks/useWearable";
+import FieldContainer from "@/components/FieldContainer/FieldContainer";
+import { RotatingLines } from "react-loader-spinner";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials, formatToDate } from "@/lib/helpers";
+import FieldContainerInput from "@/components/FieldContainer/FieldContainerInput";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { toast } from "react-toastify";
+import HorizontalDivider from "@/components/HorizontalDivider";
+import { TooltipArrow } from "@radix-ui/react-tooltip";
+import FieldContainerInputTextArea from "@/components/FieldContainer/FieldContainerInputTextArea";
+import { Database } from "@/types/database.types";
+import { updateWearable } from "@/db/wearables";
+import BlurredContainer from "@/components/BlurredContainer";
+import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
+import { getImageUrl, uploadAvatar } from "@/db/storage";
 
 interface EditWearableProps {}
 
 const EditWearable: FunctionComponent<EditWearableProps> = () => {
-  const [userName, setUserName] = useState("Nome");
+  const { id } = useParams();
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleSaveName = (newName: string) => {
-    setUserName(newName);
+  const [isLoading, setIsLoading] = useState(false);
+  const { wearable, loading } = useWearable(id);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [wearableLocalCopy, setWearableLocalCopy] = useState<
+    Database["public"]["Views"]["wearables_view"]["Row"] | undefined
+  >(undefined);
+
+  const [birthdayString, setBirthdayString] = useState<string | undefined>(
+    undefined
+  );
+
+  const [refreshDelay, setRefreshDelay] = useState<number | undefined>(
+    undefined
+  );
+
+  const [pfpFile, setPfpFile] = useState<File | undefined>();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!wearable) return;
+
+    setWearableLocalCopy(wearable);
+    setBirthdayString(
+      wearable.birthday
+        ? new Date(wearable.birthday).toLocaleDateString("pt-BR")
+        : undefined
+    );
+
+    if (wearable.avatar_url) {
+      setProfilePicture(getImageUrl(wearable.avatar_url).data.publicUrl);
+      console.log(getImageUrl(wearable.avatar_url));
+    }
+
+    if (wearable.refresh_delay) {
+      setRefreshDelay(wearable.refresh_delay);
+    }
+  }, [wearable]);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+
+  if (!wearable) {
+    return <div className="text-white">Pulseira não encontrado</div>;
+  }
+
+  const handleNameChange = async (v: string) => {
+    setWearableLocalCopy((prev) => {
+      if (!prev) return prev;
+
+      return {
+        ...prev,
+        name: v,
+      };
+    });
   };
 
-  const [avatarPath, setAvatarPath] = useState<string | null>(null);
+  const handleUploadPfp = () => {
+    fileRef.current?.click();
+  };
 
-  const handleUpload = (
-    _: React.ChangeEvent<HTMLInputElement>,
-    filePath: string
-  ) => {
-    setAvatarPath(filePath);
-    console.log("Arquivo enviado para o caminho:", filePath);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setPfpFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        setProfilePicture(result);
+        toast.success("Foto de perfil carregada com sucesso!");
+      };
+      reader.onerror = () => {
+        toast.error("Erro ao carregar foto de perfil.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemovePfp = () => {
+    setProfilePicture(null);
+    setPfpFile(undefined);
+    toast.info("Foto de perfil removida.");
+  };
+
+  const handleSave = async () => {
+    if (!wearableLocalCopy) return;
+    if (!birthdayString) {
+      toast.error("Data de nascimento inválida.");
+      return;
+    }
+    if (!wearableLocalCopy.name) {
+      toast.error("Nome inválido.");
+      return;
+    }
+
+    if (!wearableLocalCopy.id) {
+      toast.error("ID inválido.");
+      return;
+    }
+
+    if (!refreshDelay) {
+      toast.error("Taxa de atualização inválida.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    let avatarPath: string | null = null;
+
+    try {
+      if (pfpFile) {
+        const { data, error } = await uploadAvatar(
+          wearableLocalCopy.id,
+          pfpFile
+        );
+
+        if (error) {
+          throw error;
+        }
+
+        if (data) {
+          avatarPath = data.path;
+        }
+      }
+      try {
+        const { error } = await updateWearable(wearableLocalCopy.id, {
+          name: wearableLocalCopy.name,
+          birthday: new Date(birthdayString).toISOString(),
+          other_info: wearableLocalCopy.other_info,
+          avatar_url: avatarPath,
+          refresh_delay: refreshDelay,
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        toast.success("Dados salvos com sucesso.");
+
+        navigate(`/dashboard/wearable/${wearableLocalCopy.id}`);
+      } catch (error) {
+        console.error(error);
+        toast.error("Erro ao salvar dados.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao salvar foto de perfil.");
+    }
+
+    setIsLoading(false);
   };
 
   return (
-    <div className="space-y-4">
-      {/* Imagem do usuário */}
+    <div className="space-y-3 text-white">
       <div className="flex flex-col items-center justify-center">
-        <ElementTitleHeader className="pb-2 text-white" title={userName} />
-        {avatarPath ? (
-          <Avatar url={avatarPath} size={160} onUpload={handleUpload} />
-        ) : (
-          <CircleUserRound className="w-64 h-auto stroke-white stroke-1" />
-        )}
+        <ElementTitleHeader
+          className="text-white"
+          title={wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"}
+        />
+        <Avatar className="h-36 w-36 mt-6 mb-3 border-2 border-white shadow-md">
+          <AvatarImage
+            src={profilePicture || undefined}
+            className="object-cover "
+          />
+          <AvatarFallback className="text-white text-7xl font-semibold bg-white/10">
+            {getInitials(
+              wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"
+            )?.slice(0, 2)}
+          </AvatarFallback>
+        </Avatar>
+        <Tooltip>
+          <TooltipTrigger
+            onClick={() => {
+              navigator.clipboard.writeText(wearableLocalCopy?.id ?? "");
+              toast.success(
+                "Endereço MAC copiado para a área de transferência"
+              );
+            }}
+          >
+            <div className="flex items-center justify-center border rounded-md px-2 text-white ">
+              {wearableLocalCopy?.id}
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">
+            <p>Endereço MAC</p>
+            <TooltipArrow className="stroke-white fill-white" />
+          </TooltipContent>
+        </Tooltip>
       </div>
 
-      {/* Campo Nome */}
-      <InformationContainer name="Usuário">
-        <DefaultInput
-          inputState={userName}
-          placeholder="Nome"
-          onSave={handleSaveName}
+      <HorizontalDivider className="my-7" />
+
+      <FieldContainer title="Nome">
+        <FieldContainerInput
+          value={wearableLocalCopy?.name ?? "Sem Nome"}
+          onChange={(e) => handleNameChange(e.target.value)}
+          type="text"
+          placeholder="Fulano da Silva"
         />
-      </InformationContainer>
+      </FieldContainer>
 
-      {/* Campo Data de Nascimento */}
-      <BirthdayInput />
+      <FieldContainer title="Data de Nascimento">
+        <FieldContainerInput
+          value={birthdayString}
+          placeholder="Dia/Mês/Ano"
+          onChange={(e) => {
+            const parsedDate = formatToDate(e.target.value);
 
-      {/* Campo Upload */}
-      <InformationContainer name="Foto de Perfil">
-        <Button
-          variant="secondary"
-          className="w-32 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap"
-          onClick={() => document.getElementById("upload-avatar")?.click()}
-        >
-          Upload <Upload className="stroke-white w-5 h-5" />
-        </Button>
-      </InformationContainer>
+            setBirthdayString(parsedDate);
+          }}
+          type="text"
+          inputMode="numeric"
+          pattern="\d*"
+          maxLength={10}
+        />
+      </FieldContainer>
 
-      <input
-        id="upload-avatar"
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          if (e.target.files) {
-            handleUpload(e, URL.createObjectURL(e.target.files[0]));
-          }
-        }}
+      <FieldContainer title="Foto de Perfil">
+        <input
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+          ref={fileRef}
+        />
+        {!profilePicture ? (
+          <Button variant={"secondary"} size={"sm"} onClick={handleUploadPfp}>
+            Enviar Foto
+            <Upload />
+          </Button>
+        ) : (
+          <Button variant={"secondary"} size={"sm"} onClick={handleRemovePfp}>
+            Remover Foto
+            <Trash />
+          </Button>
+        )}
+      </FieldContainer>
+
+      <FieldContainer title="Informações Adicionais">
+        <FieldContainerInputTextArea
+          placeholder="Informações sobre dificuldades físicas."
+          value={wearableLocalCopy?.other_info ?? ""}
+          onChange={(e) => {
+            setWearableLocalCopy((prev) => {
+              if (!prev) return prev;
+
+              return {
+                ...prev,
+                other_info: e.target.value,
+              };
+            });
+          }}
+        />
+      </FieldContainer>
+
+      <HorizontalDivider className="sm:-mx-2 mt-8" />
+      <ElementTitleHeader
+        title="Configuração da pulseira"
+        description="Defina as configurações da pulseira."
       />
 
-      {/* Informações Adicionais */}
-      <InformationContainerVertical
-        name="Informações Adicionais"
-        value={
-          <AutosizeTextarea
-            placeholder="Digite informações adicionais sobre o usuário"
-            className="w-full"
+      <BlurredContainer title="Taxa de atualização" titleBackground border>
+        <div className="p-4 text-white">
+          <WearableRefreshRate
+            defaultValue={wearableLocalCopy?.refresh_delay || undefined}
+            onChangeComplete={(v) => {
+              setRefreshDelay(v);
+            }}
           />
-        }
-      />
+        </div>
+      </BlurredContainer>
+
+      <div className="flex justify-end pt-4">
+        <Button
+          className="bg-white text-primary"
+          onClick={handleSave}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              Atualizando <RotatingLines strokeColor="#4b33be" />
+            </>
+          ) : (
+            <>
+              Salvar <Save />
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 };

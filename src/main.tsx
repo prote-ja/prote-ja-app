@@ -36,9 +36,7 @@ const OutOfRange = React.lazy(() => import("./routes/OutOfRange/OutOfRange"));
 const FallDetected = React.lazy(
   () => import("./routes/FallDetected/FallDetected")
 );
-const WearableUser = React.lazy(
-  () => import("./routes/WearableUser/WearableUser")
-);
+const WearableUser = React.lazy(() => import("./routes/Wearable/Wearable"));
 
 const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
 const BuyPremium = React.lazy(() => import("./routes/BuyPremium/BuyPremium"));
@@ -106,7 +104,7 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                       <Route
-                        path="edit-wearable"
+                        path="edit-wearable/:id"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <EditWearable />
@@ -114,7 +112,7 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                       <Route
-                        path="out-of-range"
+                        path="out-of-range/:id"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <OutOfRange />
@@ -130,7 +128,7 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                       <Route
-                        path="fall-detected"
+                        path="fall-detected/:id"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <FallDetected />

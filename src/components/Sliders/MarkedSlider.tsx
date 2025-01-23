@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo, useState } from "react";
+import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
 import Slider from "rc-slider";
 import DefaultMark from "./DefaultMark";
 import { SemanticName } from "rc-slider/lib/interface";
@@ -21,11 +21,12 @@ interface MarkedSliderProps {
    * Useful for when marks do not start at min and end at max
    */
   clamped?: boolean;
-
   showTrack?: boolean;
 
   className?: string;
   style?: Partial<Record<SemanticName, React.CSSProperties>>;
+
+  defaultValue?: number;
 }
 
 const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
@@ -40,6 +41,7 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
   showTrack,
   className,
   style,
+  defaultValue,
 }) => {
   const [value, setValue] = useState(0);
 
@@ -70,6 +72,10 @@ const MarkedSlider: FunctionComponent<MarkedSliderProps> = ({
 
     return returnRecord;
   }, [value]);
+
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, [defaultValue]);
 
   const calculatePercentage = (v: number) => {
     const range = max - min;
