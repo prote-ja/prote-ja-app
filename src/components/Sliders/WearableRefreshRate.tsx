@@ -1,9 +1,13 @@
 import { FunctionComponent } from "react";
 import MarkedSlider from "./MarkedSlider";
 
-interface WearableRefreshRateProps {}
+interface WearableRefreshRateProps {
+  className?: string;
+}
 
-const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
+const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = ({
+  className,
+}) => {
   const percentageToRefreshRate = (percentage: number) => {
     // Boundary cases
     // if (percentage <= 0) return 60; // Longa Bateria
@@ -55,6 +59,7 @@ const WearableRefreshRate: FunctionComponent<WearableRefreshRateProps> = () => {
       clamped
       step={2}
       onChangeComplete={handleOnChangeComplete}
+      className={className}
     />
   );
 };

@@ -5,16 +5,15 @@ import {
   useRef,
   useState,
 } from "react";
-import { Save, Upload } from "lucide-react";
+import { Save, Trash, Upload } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useWearable } from "@/hooks/useWearable";
 import FieldContainer from "@/components/FieldContainer/FieldContainer";
 import { RotatingLines } from "react-loader-spinner";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials, formatToDate } from "@/lib/helpers";
-import { Database } from "@/types/database.types";
 import FieldContainerInput from "@/components/FieldContainer/FieldContainerInput";
 import {
   Tooltip,
@@ -25,6 +24,10 @@ import { toast } from "react-toastify";
 import HorizontalDivider from "@/components/HorizontalDivider";
 import { TooltipArrow } from "@radix-ui/react-tooltip";
 import FieldContainerInputTextArea from "@/components/FieldContainer/FieldContainerInputTextArea";
+import { Database } from "@/types/database.types";
+import { updateWearable } from "@/db/wearables";
+import BlurredContainer from "@/components/BlurredContainer";
+import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 
 interface EditWearableProps {}
 
@@ -32,10 +35,9 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
   const { id } = useParams();
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
   const { wearable, loading } = useWearable(id);
-  const [uploadingProfilePicture, setUploadingProfilePicture] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
-
   const [wearableLocalCopy, setWearableLocalCopy] = useState<
     Database["public"]["Views"]["wearables_view"]["Row"] | undefined
   >(undefined);
@@ -43,6 +45,8 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
   const [birthdayString, setBirthdayString] = useState<string | undefined>(
     undefined
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!wearable) return;
@@ -53,7 +57,6 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         ? new Date(wearable.birthday).toLocaleDateString("pt-BR")
         : undefined
     );
-    setProfilePicture(localStorage.getItem("profilePicture") || null);
   }, [wearable]);
 
   if (loading) {
@@ -82,43 +85,77 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setUploadingProfilePicture(true);
-
       const reader = new FileReader();
       reader.onload = () => {
         const result = reader.result as string;
         setProfilePicture(result);
-        localStorage.setItem("profilePicture", result);
-        setUploadingProfilePicture(false);
         toast.success("Foto de perfil carregada com sucesso!");
       };
       reader.onerror = () => {
-        setUploadingProfilePicture(false);
         toast.error("Erro ao carregar foto de perfil.");
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const handleRemovePfp = () => {
+    setProfilePicture(null);
+    toast.info("Foto de perfil removida.");
+  };
+
   const handleSave = async () => {
-    toast.success(
-      "Dados salvos localmente. Adicione o upload ao servidor aqui."
-    );
+    if (!wearableLocalCopy) return;
+    if (!birthdayString) {
+      toast.error("Data de nascimento inválida.");
+      return;
+    }
+    if (!wearableLocalCopy.name) {
+      toast.error("Nome inválido.");
+      return;
+    }
+
+    if (!wearableLocalCopy.id) {
+      toast.error("ID inválido.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await updateWearable(wearableLocalCopy.id, {
+        name: wearableLocalCopy.name,
+        birthday: new Date(birthdayString).toISOString(),
+        other_info: wearableLocalCopy.other_info,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast.success("Dados salvos com sucesso.");
+
+      navigate(`/wearables/${wearableLocalCopy.id}`);
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao salvar dados.");
+    }
+
+    setIsLoading(false);
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 text-white">
       <div className="flex flex-col items-center justify-center">
         <ElementTitleHeader
           className="text-white"
           title={wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"}
         />
-        <Avatar className="h-36 w-36 mt-6 mb-3">
+        <Avatar className="h-36 w-36 mt-6 mb-3 border-2 border-white shadow-md">
           <AvatarImage
             src={profilePicture || undefined}
-            className="object-cover"
+            className="object-cover "
           />
-          <AvatarFallback className="text-white text-7xl font-semibold bg-white/10 border-4 border-white">
+          <AvatarFallback className="text-white text-7xl font-semibold bg-white/10">
             {getInitials(
               wearableLocalCopy?.name ? wearableLocalCopy?.name : "Sem nome"
             )?.slice(0, 2)}
@@ -179,32 +216,63 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
           onChange={handleFileChange}
           ref={fileRef}
         />
-        <Button
-          variant={"secondary"}
-          size={"sm"}
-          onClick={handleUploadPfp}
-          disabled={uploadingProfilePicture}
-        >
-          {uploadingProfilePicture ? (
-            <>
-              Enviando <RotatingLines strokeColor="white" />
-            </>
-          ) : (
-            <>
-              Enviar Foto
-              <Upload />
-            </>
-          )}
-        </Button>
+        {!profilePicture ? (
+          <Button variant={"secondary"} size={"sm"} onClick={handleUploadPfp}>
+            Enviar Foto
+            <Upload />
+          </Button>
+        ) : (
+          <Button variant={"secondary"} size={"sm"} onClick={handleRemovePfp}>
+            Remover Foto
+            <Trash />
+          </Button>
+        )}
       </FieldContainer>
 
       <FieldContainer title="Informações Adicionais">
-        <FieldContainerInputTextArea placeholder="Informações sobre dificuldades físicas." />
+        <FieldContainerInputTextArea
+          placeholder="Informações sobre dificuldades físicas."
+          value={wearableLocalCopy?.other_info ?? ""}
+          onChange={(e) => {
+            setWearableLocalCopy((prev) => {
+              if (!prev) return prev;
+
+              return {
+                ...prev,
+                other_info: e.target.value,
+              };
+            });
+          }}
+        />
       </FieldContainer>
 
+      <HorizontalDivider className="sm:-mx-2 mt-8" />
+      <ElementTitleHeader
+        title="Configuração da pulseira"
+        description="Defina as configurações da pulseira."
+      />
+
+      <BlurredContainer title="Taxa de atualização" titleBackground border>
+        <div className="p-4 text-white">
+          <WearableRefreshRate />
+        </div>
+      </BlurredContainer>
+
       <div className="flex justify-end pt-4">
-        <Button className="bg-white text-primary" onClick={handleSave}>
-          Salvar <Save />
+        <Button
+          className="bg-white text-primary"
+          onClick={handleSave}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              Atualizando <RotatingLines strokeColor="#4b33be" />
+            </>
+          ) : (
+            <>
+              Salvar <Save />
+            </>
+          )}
         </Button>
       </div>
     </div>

@@ -23,3 +23,12 @@ export async function getWearableById(id: string) {
 
   return res;
 }
+
+export async function updateWearable(
+  id: string,
+  wearable: Partial<Database["public"]["Tables"]["wearables"]["Row"]>
+) {
+  const res = await supabase.from("wearables").update(wearable).eq("id", id);
+
+  return res;
+}
