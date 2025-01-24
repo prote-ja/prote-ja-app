@@ -1,9 +1,8 @@
-import { FunctionComponent, useState } from "react";
-import InformationContainer from "@/components/InformationContainer";
+import { ChangeEvent, FunctionComponent, useState } from "react";
 
 import { CircleHelp } from "lucide-react";
-import TextInput from "./TextInput";
-import { checkValidMac } from "@/lib/helpers";
+import FieldContainer from "./FieldContainer/FieldContainer";
+import FieldContainerInput from "./FieldContainer/FieldContainerInput";
 
 interface MacInputProps {
   name: string;
@@ -12,7 +11,8 @@ interface MacInputProps {
 const MacInput: FunctionComponent<MacInputProps> = ({ name }) => {
   const [macAddress, setMacAddress] = useState("");
 
-  const handleMacChange = (value: string) => {
+  const handleMacChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
     const cleaned = value.replace(/[^0-9A-Fa-f]/g, "");
     const formatted = cleaned
       .match(/.{1,2}/g)
@@ -20,15 +20,10 @@ const MacInput: FunctionComponent<MacInputProps> = ({ name }) => {
       .substring(0, 17);
     setMacAddress(formatted || "");
   };
-  const handleSaveMacClick = () => {
-    if (checkValidMac(macAddress)) {
-      alert("saved");
-    }
-  };
 
   return (
-    <InformationContainer
-      name={
+    <FieldContainer
+      title={
         <div className="flex items-center gap-1">
           MAC
           <CircleHelp size={14} className="mb-4" />
@@ -36,17 +31,16 @@ const MacInput: FunctionComponent<MacInputProps> = ({ name }) => {
       }
       tooltip="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX cada conjunto de caracteres XX pode ser composto por números ou letras (0-9, a-f)."
     >
-      <TextInput
-        valid={checkValidMac(macAddress)}
+      <FieldContainerInput
         value={macAddress}
         onChange={handleMacChange}
-        onSave={handleSaveMacClick}
+        type="text"
         placeholder="00:00:00:00:00:00"
-        errorMessage="O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX"
         name={name}
         required
+        closedSize="sm"
       />
-    </InformationContainer>
+    </FieldContainer>
   );
 };
 

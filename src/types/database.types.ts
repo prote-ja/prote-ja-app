@@ -562,6 +562,7 @@ export type Database = {
       }
       permissions_view: {
         Row: {
+          created_at: string | null
           device: string | null
           permission: Database["public"]["Enums"]["tracker_permition"] | null
           user: string | null

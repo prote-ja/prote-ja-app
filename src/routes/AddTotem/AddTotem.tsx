@@ -1,6 +1,6 @@
 import { FormEvent, FunctionComponent, useState } from "react";
 import InformationContainer from "@/components/InformationContainer";
-import { SatelliteDish } from "lucide-react";
+import { CircleHelp, SatelliteDish } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
 import HardwarePassword from "@/components/HardwarePassword";
@@ -13,14 +13,12 @@ import { setOwner } from "@/db/devices";
 import { checkValidMac } from "@/lib/helpers";
 import { RotatingLines } from "react-loader-spinner";
 import { useAuth } from "@/hooks/useAuth";
+import FieldContainer from "@/components/FieldContainer/FieldContainer";
+import FieldContainerInput from "@/components/FieldContainer/FieldContainerInput";
 
 interface AddTotemProps {}
 
 const AddTotem: FunctionComponent<AddTotemProps> = () => {
-  const [totemName, setTotemName] = useState("");
-  const handleTotemNameChange = (value: string) => {
-    setTotemName(value);
-  };
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const toNavigate = searchParams.get("to");
@@ -49,14 +47,6 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
 
     if (!user) {
       toast.error("Usuário não encontrado");
-      return;
-    }
-    if (!totemName) {
-      toast.error("Preencha o nome do Totem");
-      return;
-    }
-    if (totemName.length < 4) {
-      toast.error("O nome do Totem deve ter no mínimo 4 caracteres");
       return;
     }
 
@@ -95,7 +85,7 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className="space-y-4 max-w-lg mx-auto py-4">
+      <div className="space-y-4 mx-auto">
         {/* Imagem do Totem */}
 
         <div className="flex flex-col items-center">
@@ -112,22 +102,29 @@ const AddTotem: FunctionComponent<AddTotemProps> = () => {
           <img src={Totem300} alt="Totem" className="w-64 h-auto" />
         </div>
 
-        {/* Campo Nome */}
-        <InformationContainer name="Nome">
-          <TextInput
-            value={totemName}
-            placeholder="Nome do Totem"
-            onChange={handleTotemNameChange}
-            errorMessage={"Número de telefone inválido."}
-            valid={true}
-            minLength={4}
-          />
-        </InformationContainer>
         {/* Campo MAC */}
         <MacInput name="mac" />
 
-        {/* Campo Senha */}
-        <HardwarePassword name="password" />
+        <FieldContainer
+          title={
+            <div className="flex items-center gap-1">
+              Senha
+              <CircleHelp size={14} className="mb-4" />
+            </div>
+          }
+          tooltip="A senha precisa conter exatamente 6 caracteres alfanuméricos (letras e números)."
+        >
+          <FieldContainerInput
+            type="text"
+            placeholder="Digite sua Senha"
+            name="password"
+            required
+            maxLength={6}
+            minLength={6}
+            closedSize="sm"
+          />
+        </FieldContainer>
+
         <div className="flex flex-row-reverse w-full">
           <Button
             className="bg-white text-primary"

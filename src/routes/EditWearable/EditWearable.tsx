@@ -29,6 +29,7 @@ import { updateWearable } from "@/db/wearables";
 import BlurredContainer from "@/components/BlurredContainer";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import { getImageUrl, uploadAvatar } from "@/db/storage";
+import SharedDeviceUsersList from "@/components/SharedDeviceUsersList";
 
 interface EditWearableProps {}
 
@@ -67,7 +68,6 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
     if (wearable.avatar_url) {
       setProfilePicture(getImageUrl(wearable.avatar_url).data.publicUrl);
-      console.log(getImageUrl(wearable.avatar_url));
     }
 
     if (wearable.refresh_delay) {
@@ -301,7 +301,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         />
       </FieldContainer>
 
-      <HorizontalDivider className="sm:-mx-2 mt-8" />
+      <HorizontalDivider className="mt-8" />
       <ElementTitleHeader
         title="Configuração da pulseira"
         description="Defina as configurações da pulseira."
@@ -317,6 +317,14 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
           />
         </div>
       </BlurredContainer>
+
+      <HorizontalDivider className="mt-8" />
+      <ElementTitleHeader
+        title="Compartilhamento"
+        description="Aqui estão as pessoas com quem você compartilhou esta pulseira."
+      />
+
+      <SharedDeviceUsersList id={wearable.id} />
 
       <div className="flex justify-end pt-4">
         <Button
