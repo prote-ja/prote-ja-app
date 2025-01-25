@@ -20,7 +20,7 @@ export async function getUser(id: string) {
     .from("users")
     .select("*")
     .match({ id })
-    .returns<Database["public"]["Tables"]["users"]["Row"][]>();
+    .single();
 
   return response;
 }

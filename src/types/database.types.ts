@@ -334,6 +334,7 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string
+          fcm_token: string | null
           first_login: boolean
           id: string
           name: string
@@ -342,6 +343,7 @@ export type Database = {
         Insert: {
           avatar_url?: string | null
           created_at?: string
+          fcm_token?: string | null
           first_login?: boolean
           id: string
           name: string
@@ -350,6 +352,7 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           created_at?: string
+          fcm_token?: string | null
           first_login?: boolean
           id?: string
           name?: string
