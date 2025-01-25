@@ -1,0 +1,6 @@
+import{c as i,r as l,j as e,M as d}from"./index-DGag4-Ak.js";import{F as p}from"./Backdrop-DkL4Hmyt.js";import{F as m}from"./FieldContainerInput-BwJn8fM6.js";/**
+ * @license lucide-react v0.468.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const u=i("CircleHelp",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["path",{d:"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3",key:"1u773s"}],["path",{d:"M12 17h.01",key:"p32p05"}]]),M=({name:s})=>{const[a,t]=l.useState(""),o=r=>{var c;const n=(c=r.target.value.replace(/[^0-9A-Fa-f]/g,"").match(/.{1,2}/g))==null?void 0:c.join(":").substring(0,17);t(n||"")};return e.jsx(p,{title:e.jsxs("div",{className:"flex items-center gap-1",children:["MAC",e.jsx(u,{size:14,className:"mb-4"})]}),tooltip:"O endereço MAC precisa ter o formato XX:XX:XX:XX:XX:XX cada conjunto de caracteres XX pode ser composto por números ou letras (0-9, a-f).",children:e.jsx(m,{value:a,onChange:o,type:"text",placeholder:"00:00:00:00:00:00",name:s,required:!0,closedSize:"sm"})})};async function g(s,a,t){const o=s.toLowerCase();return await d.functions.invoke("set-device-owner",{body:{mac:o,password:a,owner:t}})}export{u as C,M,g as s};
