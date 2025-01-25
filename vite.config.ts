@@ -45,6 +45,10 @@ export default defineConfig({
         name: "ProteJÁ",
         description: "Aplicativo ProteJÁ",
       },
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
     }),
   ],
 
