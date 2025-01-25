@@ -54,6 +54,7 @@ export const DevicesProvider: FunctionComponent<{
 
     try {
       const { data, error } = await getAllTotemsView();
+
       if (error) {
         throw error;
       }

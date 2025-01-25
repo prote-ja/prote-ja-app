@@ -5,6 +5,7 @@ export async function getAllWearablesView() {
   const res = await supabase
     .from("wearables_view")
     .select()
+    .order("name", { ascending: true })
     .returns<Database["public"]["Views"]["wearables_view"]["Row"][]>();
 
   return res;

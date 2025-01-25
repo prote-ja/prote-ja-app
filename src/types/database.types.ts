@@ -91,13 +91,6 @@ export type Database = {
             foreignKeyName: "alerts_device_fkey"
             columns: ["device"]
             isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "alerts_device_fkey"
-            columns: ["device"]
-            isOneToOne: false
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -170,13 +163,6 @@ export type Database = {
             foreignKeyName: "wearable_pings_id_fkey"
             columns: ["id"]
             isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "wearable_pings_id_fkey"
-            columns: ["id"]
-            isOneToOne: false
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -212,13 +198,6 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "devices_view"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "totems_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
           },
           {
             foreignKeyName: "totems_id_fkey"
@@ -262,13 +241,6 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "devices_view"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "tracked_devices_device_fkey"
-            columns: ["device"]
-            isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
           },
           {
             foreignKeyName: "tracked_devices_device_fkey"
@@ -324,14 +296,14 @@ export type Database = {
             foreignKeyName: "tracking_permissions_device_fkey"
             columns: ["device"]
             isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tracking_permissions_device_fkey"
-            columns: ["device"]
-            isOneToOne: false
-            referencedRelation: "stale_devices"
+            foreignKeyName: "tracking_permissions_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "permissions_view"
             referencedColumns: ["id"]
           },
           {
@@ -446,13 +418,6 @@ export type Database = {
             foreignKeyName: "wearables_id_fkey"
             columns: ["id"]
             isOneToOne: true
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "wearables_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -511,13 +476,6 @@ export type Database = {
             foreignKeyName: "wearable_pings_id_fkey"
             columns: ["id"]
             isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "wearable_pings_id_fkey"
-            columns: ["id"]
-            isOneToOne: false
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -548,13 +506,6 @@ export type Database = {
             foreignKeyName: "wearable_pings_id_fkey"
             columns: ["id"]
             isOneToOne: false
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "wearable_pings_id_fkey"
-            columns: ["id"]
-            isOneToOne: false
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -562,11 +513,34 @@ export type Database = {
       }
       permissions_view: {
         Row: {
+          created_at: string | null
           device: string | null
+          id: number | null
           permission: Database["public"]["Enums"]["tracker_permition"] | null
           user: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "devices_view"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracked_devices_device_fkey"
+            columns: ["device"]
+            isOneToOne: false
+            referencedRelation: "stale_devices"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "tracked_devices_user_fkey"
             columns: ["user"]
@@ -629,13 +603,6 @@ export type Database = {
             foreignKeyName: "totems_id_fkey"
             columns: ["id"]
             isOneToOne: true
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
-          },
-          {
-            foreignKeyName: "totems_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
             referencedRelation: "stale_devices"
             referencedColumns: ["id"]
           },
@@ -677,13 +644,6 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "devices_view"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "wearables_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "permissions_view"
-            referencedColumns: ["device"]
           },
           {
             foreignKeyName: "wearables_id_fkey"

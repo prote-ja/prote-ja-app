@@ -29,6 +29,7 @@ import { updateWearable } from "@/db/wearables";
 import BlurredContainer from "@/components/BlurredContainer";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import { getImageUrl, uploadAvatar } from "@/db/storage";
+import SharedDeviceUsersList from "@/components/SharedDevice/SharedDeviceUsersList";
 
 interface EditWearableProps {}
 
@@ -67,7 +68,6 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
     if (wearable.avatar_url) {
       setProfilePicture(getImageUrl(wearable.avatar_url).data.publicUrl);
-      console.log(getImageUrl(wearable.avatar_url));
     }
 
     if (wearable.refresh_delay) {
@@ -98,7 +98,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
     fileRef.current?.click();
   };
 
-  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setPfpFile(file);
     if (file) {
@@ -106,7 +106,6 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
       reader.onload = () => {
         const result = reader.result as string;
         setProfilePicture(result);
-        toast.success("Foto de perfil carregada com sucesso!");
       };
       reader.onerror = () => {
         toast.error("Erro ao carregar foto de perfil.");
@@ -162,13 +161,23 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         }
       }
       try {
-        const { error } = await updateWearable(wearableLocalCopy.id, {
+        const updatedData: Partial<
+          Database["public"]["Tables"]["wearables"]["Row"]
+        > = {
           name: wearableLocalCopy.name,
           birthday: new Date(birthdayString).toISOString(),
           other_info: wearableLocalCopy.other_info,
-          avatar_url: avatarPath,
           refresh_delay: refreshDelay,
-        });
+        };
+
+        if (avatarPath) {
+          updatedData.avatar_url = avatarPath;
+        }
+
+        const { error } = await updateWearable(
+          wearableLocalCopy.id,
+          updatedData
+        );
 
         if (error) {
           throw error;
@@ -292,14 +301,14 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         />
       </FieldContainer>
 
-      <HorizontalDivider className="sm:-mx-2 mt-8" />
+      <HorizontalDivider className="mt-8" />
       <ElementTitleHeader
         title="Configuração da pulseira"
         description="Defina as configurações da pulseira."
       />
 
       <BlurredContainer title="Taxa de atualização" titleBackground border>
-        <div className="p-4 text-white">
+        <div className="px-6 py-4 text-white">
           <WearableRefreshRate
             defaultValue={wearableLocalCopy?.refresh_delay || undefined}
             onChangeComplete={(v) => {
@@ -309,7 +318,15 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
         </div>
       </BlurredContainer>
 
-      <div className="flex justify-end pt-4">
+      <HorizontalDivider className="mt-8" />
+      <ElementTitleHeader
+        title="Compartilhamento"
+        description="Aqui estão as pessoas com quem você compartilhou esta pulseira."
+      />
+
+      <SharedDeviceUsersList id={wearable.id} />
+
+      <div className="flex justify-end pt-2">
         <Button
           className="bg-white text-primary"
           onClick={handleSave}

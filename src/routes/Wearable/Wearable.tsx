@@ -2,11 +2,21 @@ import { FunctionComponent } from "react";
 import { ChartConfig } from "@/components/ui/chart";
 import LineChartComponent from "./LineChartComponents";
 import AlertComponent from "@/components/AlertComponent";
-import { AlertCircle, AlertTriangle } from "lucide-react";
-import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
+import {
+  AlertCircle,
+  AlertTriangle,
+  Footprints,
+  Settings,
+  Share2,
+  Wifi,
+  WifiOff,
+} from "lucide-react";
 import TableComponent from "./TableComponent";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useWearable } from "@/hooks/useWearable";
+import WearableAvatar from "@/components/WearableAvatar";
+import HorizontalDivider from "@/components/HorizontalDivider";
+import { Button } from "@/components/ui/button";
 
 const pingData = [
   { time: "13:40", location: "Totem da sala" },
@@ -43,8 +53,7 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
   const { id } = useParams();
   const { wearable, loading } = useWearable(id);
 
-  const params = useParams<{ id: string }>();
-  console.log(params);
+  const isConnected = wearable?.status === "active";
 
   if (loading) {
     return <div>Carregando...</div>;
@@ -55,14 +64,65 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
   }
 
   return (
-    <div className="space-y-4 w-full py-4 flex flex-col items-center">
+    <div className="space-y-4 w-full flex flex-col items-center text-white">
       {/* Wearable Profile */}
       <div className="w-full">
-        <div className="flex justify-center mb-4">
-          <WearableConnectionComponent wearable={wearable} />
+        <div className="flex justify-center gap-2 md:gap-4 place-items-center">
+          <WearableAvatar
+            avatarUrl={wearable.avatar_url}
+            name={wearable.name}
+          />
+          <div className="w-full space-y-2">
+            <div className="flex justify-between items-center">
+              <h1 className="text-xl line-clamp-2">{wearable.name}</h1>
+              <div className="flex gap-1">
+                <Link to={`/dashboard/share/${wearable.id}`}>
+                  <Button
+                    variant={"ghost"}
+                    className="w-10 h-10 md:w-auto md:h-auto [&_svg]:size-5"
+                  >
+                    <Share2 />
+                    <span className="hidden md:block">Compartilhar</span>
+                  </Button>
+                </Link>
+                <Link to={`/dashboard/edit-wearable/${wearable.id}`}>
+                  <Button
+                    variant={"ghost"}
+                    className="w-10 h-10 md:w-auto md:h-auto [&_svg]:size-5"
+                  >
+                    <Settings />
+                    <span className="hidden md:block">Editar</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                {isConnected ? (
+                  <Wifi className="w-8 h-8 text-positive" />
+                ) : (
+                  <WifiOff className="w-8 h-8 text-destructive" />
+                )}
+                <div>
+                  <p className="font-medium text-white">
+                    {isConnected ? "Conectado" : "Desconectado"}
+                  </p>
+                  {wearable.timestamp && (
+                    <p className="text-sm text-muted">
+                      Ultimo ping:{" "}
+                      {new Date(wearable.timestamp).toLocaleTimeString()}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-1 text-white">
+                <Footprints />
+                2300
+              </div>
+            </div>
+          </div>
         </div>
-
-        <hr className="w-full" />
+        <HorizontalDivider className="mt-4" />
       </div>
 
       {/* Alert */}

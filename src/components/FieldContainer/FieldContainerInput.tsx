@@ -17,6 +17,7 @@ export interface FieldContainerInputProps
   value?: string;
   onConfirm?: (newValue: string) => Promise<void>;
   placeholder?: string;
+  closedSize?: "xs" | "sm" | "md" | "lg";
 }
 
 const FieldContainerInput: FunctionComponent<FieldContainerInputProps> = ({
@@ -24,6 +25,7 @@ const FieldContainerInput: FunctionComponent<FieldContainerInputProps> = ({
   onConfirm,
   onChange,
   placeholder,
+  closedSize,
 
   ...props
 }) => {
@@ -48,6 +50,21 @@ const FieldContainerInput: FunctionComponent<FieldContainerInputProps> = ({
     onChange && onChange(e);
   };
 
+  const getClosedSize = () => {
+    switch (closedSize) {
+      case "xs":
+        return "";
+      case "sm":
+        return "w-56";
+      case "md":
+        return "w-72";
+      case "lg":
+        return "w-96";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       {isEditing && (
@@ -60,6 +77,7 @@ const FieldContainerInput: FunctionComponent<FieldContainerInputProps> = ({
       <div
         className={cn(
           "text-lg flex items-center relative",
+          getClosedSize(),
           isEditing ? "rounded-md gap-2 z-[20] w-full sm:max-w-xs" : "gap-4"
         )}
         onSubmit={(e) => {

@@ -1,9 +1,8 @@
 import { FormEvent, FunctionComponent, useState } from "react";
 
-import { Link } from "lucide-react";
+import { CircleHelp, Link } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
-import HardwarePassword from "@/components/HardwarePassword";
 import Wristband300 from "@/assets/wristband_300.png";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useSearchParams } from "react-router";
@@ -12,6 +11,8 @@ import { setOwner } from "@/db/devices";
 import { checkValidMac } from "@/lib/helpers";
 import { RotatingLines } from "react-loader-spinner";
 import { useAuth } from "@/hooks/useAuth";
+import FieldContainer from "@/components/FieldContainer/FieldContainer";
+import FieldContainerInput from "@/components/FieldContainer/FieldContainerInput";
 
 interface AddWearableProps {}
 
@@ -100,11 +101,27 @@ const AddWearable: FunctionComponent<AddWearableProps> = () => {
           <img src={Wristband300} alt="Pulseira" className="w-64 h-auto" />
         </div>
 
-        {/* Campo MAC */}
         <MacInput name="mac" />
 
-        {/* Campo Senha */}
-        <HardwarePassword name="password" />
+        <FieldContainer
+          title={
+            <div className="flex items-center gap-1">
+              Senha
+              <CircleHelp size={14} className="mb-4" />
+            </div>
+          }
+          tooltip="A senha precisa conter exatamente 6 caracteres alfanuméricos (letras e números)."
+        >
+          <FieldContainerInput
+            type="text"
+            placeholder="Digite sua Senha"
+            name="password"
+            required
+            maxLength={6}
+            minLength={6}
+            closedSize="sm"
+          />
+        </FieldContainer>
         <div className="flex flex-row-reverse w-full">
           <Button
             className="bg-white text-primary"
