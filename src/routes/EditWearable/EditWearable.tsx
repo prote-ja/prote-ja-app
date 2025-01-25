@@ -29,7 +29,7 @@ import { updateWearable } from "@/db/wearables";
 import BlurredContainer from "@/components/BlurredContainer";
 import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import { getImageUrl, uploadAvatar } from "@/db/storage";
-import SharedDeviceUsersList from "@/components/SharedDeviceUsersList";
+import SharedDeviceUsersList from "@/components/SharedDevice/SharedDeviceUsersList";
 
 interface EditWearableProps {}
 
@@ -308,7 +308,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
       />
 
       <BlurredContainer title="Taxa de atualização" titleBackground border>
-        <div className="p-4 text-white">
+        <div className="px-6 py-4 text-white">
           <WearableRefreshRate
             defaultValue={wearableLocalCopy?.refresh_delay || undefined}
             onChangeComplete={(v) => {
@@ -326,7 +326,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
       <SharedDeviceUsersList id={wearable.id} />
 
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end pt-2">
         <Button
           className="bg-white text-primary"
           onClick={handleSave}

@@ -3,7 +3,6 @@ import { FormEvent, FunctionComponent, useState } from "react";
 import { CircleHelp, Link } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
-import HardwarePassword from "@/components/HardwarePassword";
 import Wristband300 from "@/assets/wristband_300.png";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useSearchParams } from "react-router";

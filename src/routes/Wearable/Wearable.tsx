@@ -5,15 +5,12 @@ import AlertComponent from "@/components/AlertComponent";
 import {
   AlertCircle,
   AlertTriangle,
-  Edit,
   Footprints,
   Settings,
-  Share,
   Share2,
   Wifi,
   WifiOff,
 } from "lucide-react";
-import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
 import TableComponent from "./TableComponent";
 import { Link, useParams } from "react-router";
 import { useWearable } from "@/hooks/useWearable";

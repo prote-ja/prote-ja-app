@@ -1,10 +1,11 @@
 import { getDevicePermissionsView } from "@/db/trackingAndPermissions";
 import { Database } from "@/types/database.types";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 interface UsePermissionsViewReturn {
   permissions: Database["public"]["Views"]["permissions_view"]["Row"][];
   loading: boolean;
+  forceUpdate: () => void;
 }
 
 export function usePermissionsView(
@@ -14,10 +15,15 @@ export function usePermissionsView(
     Database["public"]["Views"]["permissions_view"]["Row"][]
   >([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refreshKey, setRefreshKey] = useState<number>(0);
+
+  const forceUpdate = useCallback(() => {
+    setRefreshKey((prevKey) => prevKey + 1);
+    console.log("forceUpdate");
+  }, []);
 
   useEffect(() => {
     if (!id) return;
-
     const fetchWearable = async () => {
       setLoading(true);
       try {
@@ -38,7 +44,7 @@ export function usePermissionsView(
     };
 
     fetchWearable();
-  }, [id]);
+  }, [id, refreshKey]);
 
-  return { permissions, loading };
+  return { permissions, loading, forceUpdate };
 }

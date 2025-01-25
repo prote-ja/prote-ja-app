@@ -1,11 +1,8 @@
 import { FormEvent, FunctionComponent, useState } from "react";
-import InformationContainer from "@/components/InformationContainer";
 import { CircleHelp, SatelliteDish } from "lucide-react";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import MacInput from "@/components/MacInput";
-import HardwarePassword from "@/components/HardwarePassword";
 import Totem300 from "@/assets/totem_300.png";
-import TextInput from "@/components/TextInput";
 import { Button } from "@/components/ui/button";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
