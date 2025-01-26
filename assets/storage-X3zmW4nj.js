@@ -1,0 +1,1 @@
+import{M as r,ag as n}from"./index-BTf0msvj.js";async function p(a,o){const t=await n(o,300),e=t.name.split(".").pop();if(!e)throw new Error("Invalid file extention");const s=`${a}/avatar.${e}`;return await r.storage.from("avatars").upload(s,t,{cacheControl:"3600",upsert:!0})}function u(a){return r.storage.from("avatars").getPublicUrl(a)}export{u as g,p as u};
