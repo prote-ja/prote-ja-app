@@ -14,6 +14,7 @@ import { updateUser } from "@/db/users";
 import { useDevices } from "@/hooks/useDevices";
 import BlurredContainer from "@/components/BlurredContainer";
 import { RotatingLines } from "react-loader-spinner";
+import NotificationPromptDialog from "@/components/NotificationPromptDialog";
 
 interface DashboardProps {}
 
@@ -78,6 +79,9 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
 
   return (
     <div className="relative w-full flex flex-col min-h-[38rem] h-[calc(100dvh-4.2rem)] md:h-[calc(100dvh-11rem)] md:-my-1 -my-6 text-white pt-3 sm:pt-5 md:pt-0">
+      {/* <WarningBanner className="-mx-1 -mt-1 mb-1" /> */}
+      <NotificationPromptDialog />
+
       {/* Top Section */}
       <ElementTitleHeader
         className="pb-2"

@@ -139,7 +139,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
                 </Button>
               </Link>
               <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
                   <Button
                     variant={"secondary"}
                     className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
