@@ -4,7 +4,6 @@ import { supabase } from "@/client";
 import { Database } from "@/types/database.types";
 import { getUser } from "@/db/users";
 import { updateUserFcmToken } from "@/lib/notifications";
-import { toast } from "react-toastify";
 
 export interface AuthContextInterface {
   session: Session | null;
@@ -63,8 +62,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setUser(data ?? null);
 
           if (data) {
-            updateUserFcmToken(data.id).then(() => {
-              toast.success("Token atualizado com sucesso!");
+            updateUserFcmToken(data).catch((error) => {
+              console.error(error);
             });
           }
         })

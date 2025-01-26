@@ -1,5 +1,6 @@
 import { updateUser } from "@/db/users";
 import { messaging } from "@/firebase";
+import { Database } from "@/types/database.types";
 import { getToken } from "firebase/messaging";
 
 export async function getMessagingToken() {
@@ -11,17 +12,17 @@ export async function getMessagingToken() {
   });
 }
 
-export async function updateUserFcmToken(id: string) {
-  await requestPermission();
-
+export async function updateUserFcmToken(
+  data: Database["public"]["Tables"]["users"]["Row"]
+) {
   const fcmToken = await getMessagingToken();
-  const response = await updateUser(id, { fcm_token: fcmToken });
+
+  if (data.fcm_token === fcmToken) {
+    return;
+  }
+
+  const response = await updateUser(data.id, { fcm_token: fcmToken });
+  console.log("updateUserFcmToken", response);
 
   return response;
-}
-export async function requestPermission() {
-  const permission = await Notification.requestPermission();
-  if (permission === "granted") {
-    console.log("Notification permission granted.");
-  }
 }
