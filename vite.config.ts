@@ -25,18 +25,19 @@ export default defineConfig({
             src: "icon192_maskable.png",
             sizes: "192x192",
             type: "image/png",
+            purpose: "maskable any", // Added "any" to ensure compatibility
           },
           {
-            purpose: "maskable",
-            sizes: "512x512",
             src: "icon512_maskable.png",
+            sizes: "512x512",
             type: "image/png",
+            purpose: "maskable",
           },
           {
-            purpose: "any",
-            sizes: "512x512",
             src: "icon512_rounded.png",
+            sizes: "512x512",
             type: "image/png",
+            purpose: "any",
           },
         ],
         orientation: "portrait",
@@ -46,11 +47,11 @@ export default defineConfig({
         description: "Aplicativo ProteJÁ",
       },
       injectRegister: "script",
-      devOptions: {
-        enabled: true,
-        type: "module",
-        navigateFallback: "index.html",
-      },
+      // devOptions: {
+      //   enabled: true,
+      //   type: "module",
+      //   navigateFallback: "index.html",
+      // },
     }),
   ],
 
