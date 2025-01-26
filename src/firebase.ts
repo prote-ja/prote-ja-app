@@ -6,7 +6,7 @@ import { getMessaging } from "firebase/messaging";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAXpWOQnAVfru7c-aUth_ythwosDhXJiRo",
   authDomain: "prote-ja.firebaseapp.com",
   projectId: "prote-ja",
