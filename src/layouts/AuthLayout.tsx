@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { FunctionComponent } from "react";
 import { Outlet, useLocation } from "react-router";
 import BioparkLogo from "@/assets/biopark.png";
+import HugoLogo from "@/assets/hugo.png";
 import UtfprLogo from "@/assets/utfpr.png";
 import SapatilhasLogo from "@/assets/sapatilhas.png";
 
@@ -48,6 +49,11 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
                 <PartnerCard
                   name="Use Sapatilhas"
                   logo={SapatilhasLogo}
+                  description=""
+                />
+                <PartnerCard
+                  name="Hugo Transportes"
+                  logo={HugoLogo}
                   description=""
                 />
               </div>
