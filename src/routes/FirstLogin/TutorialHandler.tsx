@@ -4,9 +4,13 @@ import ProtejaLogo from "@/assets/proteja_logo.svg";
 import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "@/components/ui/button";
 import TutorialFooter from "./TutorialFooter";
-import Wristband300 from "@/assets/wristband_300.png";
-import Totem300 from "@/assets/totem_300.png";
-import TotemArea from "@/assets/totem_area.png";
+import TotemArea from "@/assets/totemPulseira.png";
+import PulseiraRegistra from "@/assets/pulseiraRegistra.png";
+import PulseiraEdita from "@/assets/pulseiraEdita.png";
+import PulseiraPerfil from "@/assets/pulseiraPerfil.png";
+import TotemRegistra from "@/assets/totemRegistra.png";
+import TotemEdita from "@/assets/totemEdita.png";
+import DashboardImg from "@/assets/dashboard.png";
 import { CirclePlus } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 
@@ -31,7 +35,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
   );
 
   const handleNext = () => {
-    if (step === 6) {
+    if (step === 10) {
       return;
     }
     navigate(`?step=${step + 1}`);
@@ -45,7 +49,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
   };
 
   const handleSkip = () => {
-    navigate("?step=6");
+    navigate("?step=10");
   };
 
   const Content = useMemo<ContentInterface[]>(
@@ -63,13 +67,13 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
       {
         title: "Sobre o ProteJá",
         description:
-          "Criado para garantir a segurança de grupos de risco, como crianças e idosos, ProteJá funciona detectando eventos críticos, como quedas ou afastamento de uma área segura, e envia alertas em tempo real para os responsáveis.",
+          "Criado para garantir a segurança dos usuários, ProteJá funciona detectando eventos críticos, como quedas ou afastamento de uma área segura, e envia alertas em tempo real para os responsáveis.",
         children: (
           <div
             className="flex flex-col items-center py-4 animated-container"
             key={`tutorial-children-${step}`}
           >
-            <img src={ProtejaLogo} alt="Center Totem" className="h-60" />
+            <img src={ProtejaLogo} alt="Sobre" className="h-60" />
           </div>
         ),
         showTitleOrnaments: true,
@@ -78,13 +82,13 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
       {
         title: "Como Funciona",
         description:
-          "O sistema Proteja usa uma pulseira inteligente e um totem de monitoramento. A pulseira detecta quedas e saídas da área segura, enviando dados ao totem, que alerta o responsável em tempo real em caso de risco.",
+          "O sistema Proteja usa uma Pulseira inteligente e um Totem de monitoramento. A Pulseira detecta quedas e saídas da área segura, enviando dados ao Totem, que alerta o responsável em tempo real em caso de risco.",
         children: (
           <div
             className="flex flex-col items-center py-4 animated-container"
             key={`tutorial-children-${step}`}
           >
-            <img src={TotemArea} alt="Center Totem" className="h-60" />
+            <img src={TotemArea} alt="Funciona" className="h-60" />
           </div>
         ),
         showTitleOrnaments: true,
@@ -93,28 +97,113 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
       {
         title: "Totem",
         description:
-          "O Totem permite que você estabeleça uma área de segurança. Se um usuário ultrapassar os limites dessa área, você receberá um alerta instantâneo.",
+          "O Totem permite que você estabeleça uma área de segurança. Para adicionar um Totem, toque em Registrar.",
         children: (
           <div
             className="flex flex-col items-center py-4 animated-container"
             key={`tutorial-children-${step}`}
           >
-            <img src={Totem300} alt="Center Totem" className="h-60" />
+            <img
+              src={TotemRegistra}
+              alt="Registra Totem"
+              className="md:h-60 w-full h-40"
+            />
           </div>
         ),
         showTitleOrnaments: true,
         showLogo: true,
       },
       {
-        title: "Pulseira",
+        title: "Informações Totem",
         description:
-          "A Pulseira está conectada ao Totem. O usuário que estiver usando a pulseira será monitorado, e, em caso de quedas, você receberá um alerta imediatamente.",
+          "Preencha as informações de MAC e Senha, esses dados são encontrados na parte inferior do Totem e na caixa do produto. Para salvar, clique em Confirmar",
         children: (
           <div
             className="flex flex-col items-center py-4 animated-container"
             key={`tutorial-children-${step}`}
           >
-            <img src={Wristband300} alt="Center Totem" className="h-60" />
+            <img
+              src={TotemEdita}
+              alt="Edita Totem"
+              className="md:h-80 w-full"
+            />
+          </div>
+        ),
+        showTitleOrnaments: true,
+        showLogo: true,
+      },
+
+      {
+        title: "Pulseira",
+        description:
+          "A Pulseira é usada pelo usuário, ela detecta quedas e saídas da área segura. Para adicionar uma Pulseira, toque em Registrar.",
+        children: (
+          <div
+            className="flex flex-col items-center py-4 animated-container"
+            key={`tutorial-children-${step}`}
+          >
+            <img
+              src={PulseiraRegistra}
+              alt="Registra Pulseira"
+              className="md:h-60 w-full h-40"
+            />
+          </div>
+        ),
+        showTitleOrnaments: true,
+        showLogo: true,
+      },
+      {
+        title: "Informações Pulseira",
+        description:
+          "Preencha as informações de MAC e Senha, esses dados são encontrados na caixa do produto. Para salvar, clique em Confirmar.",
+        children: (
+          <div
+            className="flex flex-col items-center py-4 animated-container"
+            key={`tutorial-children-${step}`}
+          >
+            <img
+              src={PulseiraEdita}
+              alt="Edita Pulseira"
+              className="md:h-80 w-full h-40"
+            />
+          </div>
+        ),
+        showTitleOrnaments: true,
+        showLogo: true,
+      },
+      {
+        title: "Perfil do Usuário",
+        description:
+          "Após adiconar a Pulseira, é necessário associar o usuário a ela. Para isso, preencha as informações do usuário e toque em Salvar.",
+        children: (
+          <div
+            className="flex flex-col items-center py-4 animated-container"
+            key={`tutorial-children-${step}`}
+          >
+            <img
+              src={PulseiraPerfil}
+              alt="Usuario"
+              className="md:h-80 w-full h-40"
+            />
+          </div>
+        ),
+        showTitleOrnaments: true,
+        showLogo: true,
+      },
+      {
+        title: "Dashboard",
+        description:
+          "Agora que você cadastrou o Totem e associou a Pulseira, você pode acessar o Dashboard para visualizar os perfis cadastrados e as informações de segurança.",
+        children: (
+          <div
+            className="flex flex-col items-center py-4 animated-container"
+            key={`tutorial-children-${step}`}
+          >
+            <img
+              src={DashboardImg}
+              alt="Dashboard"
+              className="md:h-80 w-full h-40"
+            />
           </div>
         ),
         showTitleOrnaments: true,
