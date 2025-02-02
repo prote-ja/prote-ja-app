@@ -49,14 +49,18 @@ const Header: FunctionComponent<HeaderProps> = () => {
     // Checks the current route root and sets the back link accordingly to the possible main routes
     const currentRouteRoot = location.pathname.split("/")[1];
 
+    if (possibleMainRoutes.includes("/" + currentRouteRoot))
+      setBackLink(currentRouteRoot);
+    else setBackLink("..");
+
     // If the current route is not a possible main route, set the back link to /dashboard
     if (!possibleMainRoutes.includes(location.pathname)) {
-      setBackLink("/dashboard");
       setShowBackButton(true);
     } else if (session && !possibleMainRoutes.includes(location.pathname)) {
-      setBackLink(`/${currentRouteRoot}`);
+      // setBackLink(`/${currentRouteRoot}`);
       setShowBackButton(true);
     } else {
+      setBackLink(`/${currentRouteRoot}`);
       setShowBackButton(false);
     }
 

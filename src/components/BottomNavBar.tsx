@@ -25,7 +25,11 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
 
   const currentRouteRoot: ValidRoutes | undefined = useMemo(() => {
     const routeRoot = location.pathname.split("/")[1];
-    if (navigationItems.map((item) => item.route).includes(routeRoot)) {
+
+    if (
+      location.pathname.split("/").at(2) === undefined &&
+      navigationItems.map((item) => item.route).includes(routeRoot)
+    ) {
       setActiveRoute(routeRoot as ValidRoutes);
       setIsVisible(true); // Set visibility to true when route is valid
       return routeRoot as ValidRoutes;
@@ -67,7 +71,7 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
                   </Button>
                   <div
                     className={cn(
-                      "bg-primary mx-1 h-0.5 transition-all duration-300 transform origin-left",
+                      "bg-primary mx-1 h-0.5 transition-all duration-500 transform origin-left",
                       activeRoute === route ? "scale-x-100" : "scale-x-0"
                     )}
                   />
