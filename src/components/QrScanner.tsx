@@ -103,7 +103,7 @@ const QrScanner: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-6 bg-gray-100 rounded-lg shadow-lg w-full max-w-md">
+    <div className="flex flex-col items-center justify-center gap-4 p-6 bg-background border text-white rounded-lg shadow-lg w-full max-w-md">
       <h1 className="font-semibold text-2xl">Adicionar Dispositivo</h1>
       {!manualMode ? (
         <>
@@ -114,43 +114,41 @@ const QrScanner: React.FC = () => {
           />
 
           {isLoading && (
-            <div className="flex items-center gap-4 text-gray-700">
+            <div className="flex items-center gap-4">
               Abrindo a câmera...
               <RotatingLines
                 ariaLabel="loading-spinner"
-                strokeColor="gray"
+                strokeColor="white"
                 width="24"
               />
             </div>
           )}
 
-          {!isLoading && (
-            <p className="text-center text-gray-700 text-sm">
+          {!isLoading && !scannerRef.current && (
+            <p className="text-center text-sm">
               Para escanear o QR Code, precisamos de acesso à sua câmera.
             </p>
           )}
 
-          <div className="flex flex-col gap-2 w-full">
-            <Button
-              onClick={startScanner}
-              disabled={isLoading}
-              className="w-full"
-            >
-              {isLoading ? (
-                "Abrindo a câmera..."
-              ) : (
-                <>
-                  <QrCode className="mr-2" /> Escanear QR Code
-                </>
-              )}
-            </Button>
+          <div className="flex flex-col gap-3 w-full">
+            {!scannerRef.current && (
+              <Button
+                onClick={startScanner}
+                disabled={isLoading}
+                className="w-full bg-white text-primary"
+              >
+                <QrCode className="mr-2" /> Escanear QR Code
+              </Button>
+            )}
 
             <Button
-              className="w-full bg-gray-200 text-gray-800"
+              className="w-full"
+              variant={"secondary"}
               onClick={() => {
                 setManualMode(true);
                 stopScanner();
               }}
+              disabled={isLoading}
             >
               <Pencil className="mr-2" /> Inserir manualmente
             </Button>
@@ -171,13 +169,14 @@ const QrScanner: React.FC = () => {
             onChange={(e) => setManualPassword(e.target.value)}
           />
           <Button
-            className="w-full bg-green-500 text-white"
+            className="w-full bg-white text-primary"
             onClick={handleManualSubmit}
           >
-            <Check className="mr-2" /> Confirmar
+            <Check /> Confirmar
           </Button>
           <Button
-            className="w-full bg-gray-200 text-gray-800"
+            className="w-full"
+            variant={"secondary"}
             onClick={() => setManualMode(false)}
           >
             Cancelar
