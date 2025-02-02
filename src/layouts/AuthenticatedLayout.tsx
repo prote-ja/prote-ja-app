@@ -4,9 +4,9 @@ import { useAuth } from "@/hooks/useAuth";
 import { FunctionComponent } from "react";
 import { Outlet } from "react-router";
 
-interface RestrictedLayoutProps {}
+interface AuthenticatedLayoutProps {}
 
-const RestrictedLayout: FunctionComponent<RestrictedLayoutProps> = () => {
+const AuthenticatedLayout: FunctionComponent<AuthenticatedLayoutProps> = () => {
   const { session } = useAuth();
   return (
     <>
@@ -23,4 +23,4 @@ const RestrictedLayout: FunctionComponent<RestrictedLayoutProps> = () => {
   );
 };
 
-export default RestrictedLayout;
+export default AuthenticatedLayout;

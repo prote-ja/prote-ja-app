@@ -10,9 +10,11 @@ import HugoLogo from "@/assets/hugo.png";
 import UtfprLogo from "@/assets/utfpr.png";
 import SapatilhasLogo from "@/assets/sapatilhas.png";
 
-interface AuthLayoutProps {}
+interface NotAuthenticatedLayoutProps {}
 
-const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
+const NotAuthenticatedLayout: FunctionComponent<
+  NotAuthenticatedLayoutProps
+> = () => {
   const { pathname } = useLocation();
   const { session } = useAuth();
   return (
@@ -65,4 +67,4 @@ const AuthLayout: FunctionComponent<AuthLayoutProps> = () => {
   );
 };
 
-export default AuthLayout;
+export default NotAuthenticatedLayout;

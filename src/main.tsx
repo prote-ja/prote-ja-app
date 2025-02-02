@@ -10,11 +10,11 @@ import "react-phone-number-input/style.css";
 import "rc-slider/assets/index.css";
 
 import MainLayout from "./layouts/MainLayout";
-import AuthLayout from "./layouts/AuthLayout";
-import CommonLayout from "./layouts/CommonLayout";
+import NotAuthenticatedLayout from "./layouts/NotAuthenticatedLayout";
+import BorderLayout from "./layouts/BorderLayout";
 
 import { AuthProvider } from "./contexts/authContext";
-import RestrictedLayout from "./layouts/RestrictedLayout";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import { TooltipProvider } from "./components/ui/tooltip";
 
 const Home = React.lazy(() => import("./routes/Home"));
@@ -56,8 +56,8 @@ createRoot(document.getElementById("root")!).render(
                   }
                 />
 
-                <Route element={<CommonLayout />}>
-                  <Route element={<RestrictedLayout />}>
+                <Route element={<BorderLayout />}>
+                  <Route element={<AuthenticatedLayout />}>
                     <Route path="dashboard">
                       <Route
                         index
@@ -154,7 +154,7 @@ createRoot(document.getElementById("root")!).render(
                   />
                 </Route>
 
-                <Route element={<AuthLayout />}>
+                <Route element={<NotAuthenticatedLayout />}>
                   <Route
                     path="login"
                     element={
