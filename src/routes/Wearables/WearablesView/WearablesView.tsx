@@ -47,9 +47,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface WearableUserProps {}
+interface WearablesViewProps {}
 
-const WearableUser: FunctionComponent<WearableUserProps> = () => {
+const WearablesView: FunctionComponent<WearablesViewProps> = () => {
   const { id } = useParams();
   const { wearable, loading } = useWearable(id);
 
@@ -155,4 +155,4 @@ const WearableUser: FunctionComponent<WearableUserProps> = () => {
   );
 };
 
-export default WearableUser;
+export default WearablesView;

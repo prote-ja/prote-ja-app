@@ -18,7 +18,6 @@ import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import { TooltipProvider } from "./components/ui/tooltip";
 
 const Home = React.lazy(() => import("./routes/Home"));
-const NotAuthorized = React.lazy(() => import("./routes/NotAuthorized"));
 const Dashboard = React.lazy(() => import("./routes/Dashboard/Dashboard"));
 const Pairing = React.lazy(() => import("./routes/Pairing"));
 const Login = React.lazy(() => import("./routes/Login/Login"));
@@ -26,17 +25,34 @@ const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
 const AddDevice = React.lazy(() => import("./routes/AddDevice/AddDevice"));
-const EditWearable = React.lazy(
-  () => import("./routes/EditWearable/EditWearable")
-);
+
 const OutOfRange = React.lazy(() => import("./routes/OutOfRange/OutOfRange"));
 const FallDetected = React.lazy(
   () => import("./routes/FallDetected/FallDetected")
 );
-const WearableUser = React.lazy(() => import("./routes/Wearable/Wearable"));
 
 const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
 const BuyPremium = React.lazy(() => import("./routes/BuyPremium/BuyPremium"));
+
+// Wearables
+const Wearables = React.lazy(() => import("./routes/Wearables/Wearables"));
+const WearablesView = React.lazy(
+  () => import("./routes/Wearables/WearablesView/WearablesView")
+);
+const WearablesEdit = React.lazy(
+  () => import("./routes/Wearables/WearablesEdit/WearablesEdit")
+);
+
+// Totems
+const Totems = React.lazy(() => import("./routes/Totems/Totems"));
+const TotemsView = React.lazy(
+  () => import("./routes/Totems/TotemsView/TotemsView")
+);
+const TotemsEdit = React.lazy(
+  () => import("./routes/Totems/TotemsEdit/TotemsEdit")
+);
+
+// Constants
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
@@ -69,14 +85,6 @@ createRoot(document.getElementById("root")!).render(
                       />
 
                       <Route
-                        path="profile"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <Profile />
-                          </Suspense>
-                        }
-                      />
-                      <Route
                         path="pairing"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
@@ -85,22 +93,6 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
 
-                      <Route
-                        path="add-device"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <AddDevice />
-                          </Suspense>
-                        }
-                      />
-                      <Route
-                        path="edit-wearable/:id"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <EditWearable />
-                          </Suspense>
-                        }
-                      />
                       <Route
                         path="out-of-range/:id"
                         element={
@@ -125,14 +117,7 @@ createRoot(document.getElementById("root")!).render(
                           </Suspense>
                         }
                       />
-                      <Route
-                        path="wearable/:id"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <WearableUser />
-                          </Suspense>
-                        }
-                      />
+
                       <Route
                         path="alerts"
                         element={
@@ -142,16 +127,82 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                     </Route>
-                  </Route>
 
-                  <Route
-                    path="not-authorized"
-                    element={
-                      <Suspense fallback={<div>Carregando...</div>}>
-                        <NotAuthorized />
-                      </Suspense>
-                    }
-                  />
+                    <Route path="wearables">
+                      <Route
+                        index
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Wearables />
+                          </Suspense>
+                        }
+                      />
+
+                      <Route
+                        path="view/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <WearablesView />
+                          </Suspense>
+                        }
+                      />
+
+                      <Route
+                        path="edit/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <WearablesEdit />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
+                    <Route
+                      path="add-device"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <AddDevice />
+                        </Suspense>
+                      }
+                    />
+
+                    <Route path="totems">
+                      <Route
+                        index
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Totems />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="view/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <TotemsView />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="edit/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <TotemsEdit />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
+
+                    <Route path="profile">
+                      <Route
+                        index
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Profile />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
+                  </Route>
                 </Route>
 
                 <Route element={<NotAuthenticatedLayout />}>
