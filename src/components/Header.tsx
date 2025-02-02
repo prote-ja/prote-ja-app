@@ -174,11 +174,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
                       Olá {getFirstName(user?.name)}
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <Link to="/profile">
-                      <DropdownMenuItem>
-                        <User /> Meu Perfil
-                      </DropdownMenuItem>
-                    </Link>
+
                     <Link to="/subscribe">
                       <DropdownMenuItem>
                         {/* <img
@@ -191,7 +187,6 @@ const Header: FunctionComponent<HeaderProps> = () => {
                       </DropdownMenuItem>
                     </Link>
 
-                    <DropdownMenuSeparator />
                     <Link to="/first-login">
                       <DropdownMenuItem>
                         <GraduationCap /> Tutorial
