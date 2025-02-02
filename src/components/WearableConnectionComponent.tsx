@@ -16,7 +16,7 @@ const WearableConnectionComponent: FunctionComponent<
   const isConnected = wearable.status === "active";
 
   return (
-    <Link to={`/dashboard/wearable/${wearable.id}`}>
+    <Link to={`/wearables/view/${wearable.id}`}>
       <BlurredContainer
         title={wearable.name ?? "Sem nome"}
         titleBackground

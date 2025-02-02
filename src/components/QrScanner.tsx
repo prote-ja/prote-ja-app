@@ -103,14 +103,14 @@ const QrScanner: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-6 bg-background border text-white rounded-lg shadow-lg w-full max-w-md">
+    <div className="flex flex-col items-center justify-center gap-4 p-6 bg-background border text-white rounded-md shadow-lg w-full max-w-md">
       <h1 className="font-semibold text-2xl">Adicionar Dispositivo</h1>
       {!manualMode ? (
         <>
           <div
             ref={containerRef}
             id="qr-scanner"
-            className="w-full rounded-lg overflow-hidden shadow-md"
+            className="w-full rounded-md overflow-hidden shadow-md"
           />
 
           {isLoading && (

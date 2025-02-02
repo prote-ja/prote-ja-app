@@ -4,9 +4,9 @@ import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { TriangleAlert, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
 import { useParams } from "react-router";
 import { useWearable } from "@/hooks/useWearable";
+import WearableConnectionComponent from "@/components/WearableConnectionComponent";
 
 interface OutOfRangeProps {}
 

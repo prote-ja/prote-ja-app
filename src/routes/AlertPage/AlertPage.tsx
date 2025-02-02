@@ -20,7 +20,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="Queda Detectada"
           description="1 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />
         <AlertComponent
@@ -29,7 +29,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="30 min atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/wearable/wearable-0"
+          buttonRedirectUrl="/wearables/view/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />
         <AlertComponent
@@ -38,7 +38,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está acabando"
           description="1 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/wearable/wearable-0"
+          buttonRedirectUrl="/wearables/view/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />
         <AlertComponent
@@ -47,7 +47,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="A bateria está carregando"
           description="2 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />{" "}
         <AlertComponent
@@ -56,7 +56,7 @@ const AlertPage: FunctionComponent<AlertPageProps> = () => {
           title="Dispositivo desconectado"
           description="2 dias atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />
       </div>

@@ -2,9 +2,9 @@ import BorderWrapper from "@/components/BorderWrapper";
 import { FunctionComponent } from "react";
 import { Outlet, useLocation } from "react-router";
 
-interface CommonLayoutProps {}
+interface BorderLayoutProps {}
 
-const CommonLayout: FunctionComponent<CommonLayoutProps> = () => {
+const BorderLayout: FunctionComponent<BorderLayoutProps> = () => {
   const { pathname } = useLocation();
   return (
     <div key={pathname} className="fade-in-container">
@@ -14,4 +14,4 @@ const CommonLayout: FunctionComponent<CommonLayoutProps> = () => {
     </div>
   );
 };
-export default CommonLayout;
+export default BorderLayout;

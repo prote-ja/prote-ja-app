@@ -5,6 +5,7 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { toast } from "react-toastify";
 import { onMessage } from "firebase/messaging";
 import { messaging } from "@/firebase";
+import BottomNavBar from "@/components/BottomNavBar";
 
 interface MainLayoutProps {}
 
@@ -23,6 +24,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
       <Header />
 
       <Outlet />
+      <BottomNavBar />
     </>
   );
 };

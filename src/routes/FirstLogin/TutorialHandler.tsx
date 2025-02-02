@@ -215,10 +215,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
           "Cadastre o Totem e associe as Pulseiras. Cada usuário deverá fornecer suas informações pessoais, que serão utilizadas para gerar dicas personalizadas.",
         footerOverride: (
           <div className="flex justify-center flex-col gap-3 ">
-            <Link
-              to="/dashboard/add-device?to=/dashboard/add-device?to=/dashboard/edit-wearable"
-              className="mx-auto"
-            >
+            <Link to="/device/add" className="mx-auto">
               <Button
                 variant={"default"}
                 className="mx-auto bg-white text-primary"

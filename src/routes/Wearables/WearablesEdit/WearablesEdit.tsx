@@ -31,9 +31,9 @@ import WearableRefreshRate from "@/components/Sliders/WearableRefreshRate";
 import { getImageUrl, uploadAvatar } from "@/db/storage";
 import SharedDeviceUsersList from "@/components/SharedDevice/SharedDeviceUsersList";
 
-interface EditWearableProps {}
+interface WearablesEditProps {}
 
-const EditWearable: FunctionComponent<EditWearableProps> = () => {
+const WearablesEdit: FunctionComponent<WearablesEditProps> = () => {
   const { id } = useParams();
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -185,7 +185,7 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
 
         toast.success("Dados salvos com sucesso.");
 
-        navigate(`/dashboard/wearable/${wearableLocalCopy.id}`);
+        navigate(`/wearables/view/${wearableLocalCopy.id}`);
       } catch (error) {
         console.error(error);
         toast.error("Erro ao salvar dados.");
@@ -347,4 +347,4 @@ const EditWearable: FunctionComponent<EditWearableProps> = () => {
   );
 };
 
-export default EditWearable;
+export default WearablesEdit;

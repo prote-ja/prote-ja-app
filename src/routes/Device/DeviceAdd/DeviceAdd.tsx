@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import QrScanner from "@/components/QrScanner";
 
-interface AddDeviceProps {}
+interface DeviceAddProps {}
 
-const AddDevice: FunctionComponent<AddDeviceProps> = ({}) => {
+const DeviceAdd: FunctionComponent<DeviceAddProps> = ({}) => {
   return (
     <div className="w-full flex justify-center">
       <QrScanner />
@@ -11,4 +11,4 @@ const AddDevice: FunctionComponent<AddDeviceProps> = ({}) => {
   );
 };
 
-export default AddDevice;
+export default DeviceAdd;
