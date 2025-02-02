@@ -185,7 +185,7 @@ const WearablesEdit: FunctionComponent<WearablesEditProps> = () => {
 
         toast.success("Dados salvos com sucesso.");
 
-        navigate(`/dashboard/wearable/${wearableLocalCopy.id}`);
+        navigate(`/wearables/view/${wearableLocalCopy.id}`);
       } catch (error) {
         console.error(error);
         toast.error("Erro ao salvar dados.");

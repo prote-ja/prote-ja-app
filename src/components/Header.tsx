@@ -129,7 +129,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
           ) : null}
           {session ? (
             <>
-              <Link to="/dashboard/alerts">
+              <Link to="/alerts">
                 <Button
                   variant={"secondary"}
                   className="w-12 h-12 md:w-auto md:h-auto [&_svg]:size-5"
@@ -153,12 +153,12 @@ const Header: FunctionComponent<HeaderProps> = () => {
                     Olá {getFirstName(user?.name)}
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <Link to="/dashboard/profile">
+                  <Link to="/profile">
                     <DropdownMenuItem>
                       <User /> Meu Perfil
                     </DropdownMenuItem>
                   </Link>
-                  <Link to="/dashboard/subscribe">
+                  <Link to="/subscribe">
                     <DropdownMenuItem>
                       {/* <img
                         src={ProtejaLogo}

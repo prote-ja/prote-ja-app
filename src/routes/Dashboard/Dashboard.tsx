@@ -93,7 +93,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
           </div>
         }
         endElement={
-          <Link to={"/dashboard/add-device"}>
+          <Link to={"/device/add"}>
             <Button variant={"secondary"} size={"sm"}>
               Registrar <Plus />
             </Button>
@@ -189,7 +189,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             </div>
           }
           endElement={
-            <Link to={"/dashboard/add-device"}>
+            <Link to={"/device/add"}>
               <Button variant={"secondary"} size={"sm"}>
                 Registrar <Plus />
               </Button>

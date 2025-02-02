@@ -76,7 +76,7 @@ const WearablesView: FunctionComponent<WearablesViewProps> = () => {
             <div className="flex justify-between items-center">
               <h1 className="text-xl line-clamp-2">{wearable.name}</h1>
               <div className="flex gap-1">
-                <Link to={`/dashboard/share/${wearable.id}`}>
+                <Link to={`/device/share/${wearable.id}`}>
                   <Button
                     variant={"ghost"}
                     className="w-10 h-10 md:w-auto md:h-auto [&_svg]:size-5"
@@ -85,7 +85,7 @@ const WearablesView: FunctionComponent<WearablesViewProps> = () => {
                     <span className="hidden md:block">Compartilhar</span>
                   </Button>
                 </Link>
-                <Link to={`/dashboard/edit-wearable/${wearable.id}`}>
+                <Link to={`/wearables/edit/${wearable.id}`}>
                   <Button
                     variant={"ghost"}
                     className="w-10 h-10 md:w-auto md:h-auto [&_svg]:size-5"
@@ -133,7 +133,7 @@ const WearablesView: FunctionComponent<WearablesViewProps> = () => {
           title="Queda Detectada"
           description="1 hora atrás"
           buttonLabel="Informações"
-          buttonRedirectUrl="/dashboard/fall-detected"
+          buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
           iconButton={AlertCircle}
         />
       </div>
