@@ -19,14 +19,13 @@ const Totems: FunctionComponent<TotemsProps> = () => {
 
   const sharedTotems = useMemo(() => {
     const filtered = totems.filter((totem) => totem.owner !== user?.id);
-    const repeated = Array.from({ length: 32 }, () => filtered).flat();
-    return repeated;
+    // const repeated = Array.from({ length: 32 }, () => filtered).flat();
+    return filtered;
   }, [totems, user]);
 
   const myTotems = useMemo(() => {
     const filtered = totems.filter((totem) => totem.owner === user?.id);
-    const repeated = Array.from({ length: 32 }, () => filtered).flat();
-    return repeated;
+    return filtered;
   }, [totems, user]);
 
   return (
