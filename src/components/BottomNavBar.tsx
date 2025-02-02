@@ -42,11 +42,11 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
     <>
       <div
         className={cn(
-          "fixed bottom-0 left-0 w-full flex justify-center mb-4",
+          "fixed bottom-0 left-0 w-full flex justify-center mb-0",
           isVisible ? "slide-up" : "slide-down"
         )}
       >
-        <div className="max-w-sm flex gap-4 justify-around bg-white/100 backdrop-blur-sm px-2 pt-2 pb-0.5 rounded-lg shadow-lg text-[#929292] relative">
+        <div className="w-full flex gap-4 justify-around bg-white/20 border-white/50 border-t backdrop-blur-md px-2 py-3 rounded-t-md text-white/60 relative">
           {navigationItems.map(({ route, label, icon: Icon }) => (
             <div key={route} className="relative w-[20%] space-y-1">
               {route === undefined ? (
@@ -62,7 +62,7 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
                     className={cn(
                       "flex-col gap-0 [&_svg]:size-6 font-normal px-3 w-full",
                       currentRouteRoot === route &&
-                        "!text-primary !opacity-100 !bg-transparent"
+                        "!text-white !opacity-100 !bg-transparent"
                     )}
                     disabled={currentRouteRoot === route}
                   >
@@ -71,7 +71,7 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
                   </Button>
                   <div
                     className={cn(
-                      "bg-primary mx-1 h-0.5 transition-all duration-500 transform origin-left",
+                      "bg-white mx-1 h-0.5 transition-all duration-500 transform origin-left",
                       activeRoute === route ? "scale-x-100" : "scale-x-0"
                     )}
                   />
@@ -82,7 +82,10 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
           {/* Center Button */}
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
             <Link to="/device/add">
-              <Button className="rounded-full w-14 h-14 border-white border-4 [&_svg]:size-8">
+              <Button
+                variant={"secondary"}
+                className="rounded-full w-14 h-14 text-primary border-2 [&_svg]:size-8 bg-white shadow-inner"
+              >
                 <Plus />
               </Button>
             </Link>
