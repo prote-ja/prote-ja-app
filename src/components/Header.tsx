@@ -4,7 +4,6 @@ import ProtejaName from "@/assets/proteja_name.svg";
 import { Button } from "./ui/button";
 import {
   Bell,
-  User,
   ChevronLeft,
   Download,
   Menu,

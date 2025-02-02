@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo, useState } from "react";
 import WearableConnectionComponent from "../../components/WearableConnectionComponent";
-import { Link as LinkIcon, Plus } from "lucide-react";
+import { Link as LinkIcon } from "lucide-react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
