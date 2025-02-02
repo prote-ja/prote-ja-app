@@ -28,7 +28,6 @@ import {
 import { getFirstName } from "@/lib/helpers";
 import { signOut } from "@/db/auth";
 import { toast } from "react-toastify";
-import BottomNavBar from "./BottomNavBar";
 
 const possibleMainRoutes = [
   "/",

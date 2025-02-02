@@ -4,7 +4,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { updateUser } from "@/db/users";
 import NotificationPromptDialog from "@/components/NotificationPromptDialog";
-import BottomNavBar from "@/components/BottomNavBar";
 
 interface DashboardProps {}
 
@@ -51,7 +50,6 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
       <div className="mb-16 md:mb-0">
         <h1 className="text-white">Dashboard</h1>
       </div>
-      <BottomNavBar />
     </>
   );
 };

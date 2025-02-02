@@ -5,7 +5,6 @@ import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { useDevices } from "@/hooks/useDevices";
-import BottomNavBar from "@/components/BottomNavBar";
 import TotemConnectionComponent from "./TotemConnectionComponent";
 
 type ViewType = "personal" | "shared";
@@ -89,7 +88,6 @@ const Totems: FunctionComponent<TotemsProps> = () => {
           )}
         </div>
       </div>
-      <BottomNavBar />
     </>
   );
 };

@@ -1,16 +1,13 @@
 import { FunctionComponent, useMemo, useState } from "react";
 import WearableConnectionComponent from "../../components/WearableConnectionComponent";
-import { Button } from "@/components/ui/button";
 import { Link as LinkIcon, Plus } from "lucide-react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import ElementTitleHeader from "@/components/ElementTitleHeader";
-import { Link } from "react-router";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { useDevices } from "@/hooks/useDevices";
 import BlurredContainer from "@/components/BlurredContainer";
 import { RotatingLines } from "react-loader-spinner";
-import BottomNavBar from "@/components/BottomNavBar";
 type ViewType = "personal" | "shared";
 
 interface WearablesProps {}
@@ -39,13 +36,6 @@ const Wearables: FunctionComponent<WearablesProps> = () => {
               {wearables.length}
               <LinkIcon className="w-5 h-5" />
             </div>
-          }
-          endElement={
-            <Link to={"/device/add"}>
-              <Button variant={"secondary"} size={"sm"}>
-                Registrar <Plus />
-              </Button>
-            </Link>
           }
         />
         <Tabs
@@ -122,8 +112,6 @@ const Wearables: FunctionComponent<WearablesProps> = () => {
           </ScrollArea>
         )}
       </div>
-
-      <BottomNavBar />
     </>
   );
 };

@@ -8,14 +8,12 @@ import BatteryAlert from "@/components/Sliders/BatteryAlert";
 import pt_BR from "react-phone-number-input/locale/pt-BR";
 import { Input } from "@/components/ui/input";
 import React from "react";
+import HorizontalDivider from "@/components/HorizontalDivider";
+import UserInfo from "./UserInfo";
 
 const PhoneInputComponent = React.lazy(
   () => import("react-phone-number-input")
 );
-
-import HorizontalDivider from "@/components/HorizontalDivider";
-import UserInfo from "./UserInfo";
-import BottomNavBar from "@/components/BottomNavBar";
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
@@ -104,7 +102,6 @@ const Profile: FunctionComponent<ProfileProps> = () => {
           </Suspense>
         </div>
       </div>
-      <BottomNavBar />
     </>
   );
 };
