@@ -47,11 +47,11 @@ export default defineConfig({
         description: "Aplicativo ProteJÁ",
       },
       injectRegister: "script",
-      // devOptions: {
-      //   enabled: true,
-      //   type: "module",
-      //   navigateFallback: "index.html",
-      // },
+      devOptions: {
+        enabled: true,
+        type: "module",
+        navigateFallback: "index.html",
+      },
     }),
   ],
 
