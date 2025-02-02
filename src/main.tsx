@@ -26,9 +26,10 @@ const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
 const AddTotem = React.lazy(() => import("./routes/AddTotem/AddTotem"));
-const AddWeareable = React.lazy(
+const AddWearable = React.lazy(
   () => import("./routes/AddWearable/AddWearable")
 );
+const AddDevice = React.lazy(() => import("./routes/AddDevice/AddDevice"));
 const EditWearable = React.lazy(
   () => import("./routes/EditWearable/EditWearable")
 );
@@ -99,7 +100,15 @@ createRoot(document.getElementById("root")!).render(
                         path="add-wearable"
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
-                            <AddWeareable />
+                            <AddWearable />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="add-device"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <AddDevice />
                           </Suspense>
                         }
                       />
