@@ -12,7 +12,7 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
   description,
 }) => {
   return (
-    <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+    <div className="bg-white/10 p-6 rounded-md backdrop-blur-sm">
       <img
         src={logo}
         alt={`${name} Logo`}
