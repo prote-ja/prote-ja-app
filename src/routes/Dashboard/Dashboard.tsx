@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
-import WearableConnectionComponent from "./WearableConnectionComponent";
+import WearableConnectionComponent from "../../components/WearableConnectionComponent";
 import { Button } from "@/components/ui/button";
 import { Link as LinkIcon, Plus, SatelliteDish } from "lucide-react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";

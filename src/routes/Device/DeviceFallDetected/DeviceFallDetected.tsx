@@ -3,13 +3,13 @@ import ElementTitleHeader from "@/components/ElementTitleHeader";
 import { TriangleAlert, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useParams } from "react-router";
-import WearableConnectionComponent from "../Dashboard/WearableConnectionComponent";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { useWearable } from "@/hooks/useWearable";
+import WearableConnectionComponent from "@/components/WearableConnectionComponent";
 
-interface FallDetectedProps {}
+interface DeviceFallDetectedProps {}
 
-const FallDetected: FunctionComponent<FallDetectedProps> = () => {
+const DeviceFallDetected: FunctionComponent<DeviceFallDetectedProps> = () => {
   const { id } = useParams();
   const { wearable, loading } = useWearable(id);
 
@@ -71,4 +71,4 @@ const FallDetected: FunctionComponent<FallDetectedProps> = () => {
   );
 };
 
-export default FallDetected;
+export default DeviceFallDetected;

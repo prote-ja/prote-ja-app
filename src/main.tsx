@@ -19,17 +19,10 @@ import { TooltipProvider } from "./components/ui/tooltip";
 
 const Home = React.lazy(() => import("./routes/Home"));
 const Dashboard = React.lazy(() => import("./routes/Dashboard/Dashboard"));
-const Pairing = React.lazy(() => import("./routes/Pairing"));
 const Login = React.lazy(() => import("./routes/Login/Login"));
 const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
-const AddDevice = React.lazy(() => import("./routes/AddDevice/AddDevice"));
-
-const OutOfRange = React.lazy(() => import("./routes/OutOfRange/OutOfRange"));
-const FallDetected = React.lazy(
-  () => import("./routes/FallDetected/FallDetected")
-);
 
 const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
 const BuyPremium = React.lazy(() => import("./routes/BuyPremium/BuyPremium"));
@@ -43,6 +36,17 @@ const WearablesEdit = React.lazy(
   () => import("./routes/Wearables/WearablesEdit/WearablesEdit")
 );
 
+// Device
+const DeviceAdd = React.lazy(
+  () => import("./routes/Device/DeviceAdd/DeviceAdd")
+);
+const DeviceFallDetected = React.lazy(
+  () => import("./routes/Device/DeviceFallDetected/DeviceFallDetected")
+);
+const DeviceOutOfRange = React.lazy(
+  () => import("./routes/Device/DeviceOutOfRange/DeviceOutOfRange")
+);
+
 // Totems
 const Totems = React.lazy(() => import("./routes/Totems/Totems"));
 const TotemsView = React.lazy(
@@ -50,6 +54,9 @@ const TotemsView = React.lazy(
 );
 const TotemsEdit = React.lazy(
   () => import("./routes/Totems/TotemsEdit/TotemsEdit")
+);
+const TotemsPairing = React.lazy(
+  () => import("./routes/Totems/TotemsPairing/TotemsPairing")
 );
 
 // Constants
@@ -83,51 +90,23 @@ createRoot(document.getElementById("root")!).render(
                           </Suspense>
                         }
                       />
-
-                      <Route
-                        path="pairing"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <Pairing />
-                          </Suspense>
-                        }
-                      />
-
-                      <Route
-                        path="out-of-range/:id"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <OutOfRange />
-                          </Suspense>
-                        }
-                      />
-                      <Route
-                        path="subscribe"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <BuyPremium />
-                          </Suspense>
-                        }
-                      />
-                      <Route
-                        path="fall-detected/:id"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <FallDetected />
-                          </Suspense>
-                        }
-                      />
-
-                      <Route
-                        path="alerts"
-                        element={
-                          <Suspense fallback={<div>Carregando...</div>}>
-                            <AlertPage />
-                          </Suspense>
-                        }
-                      />
                     </Route>
-
+                    <Route
+                      path="alerts"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <AlertPage />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="subscribe"
+                      element={
+                        <Suspense fallback={<div>Carregando...</div>}>
+                          <BuyPremium />
+                        </Suspense>
+                      }
+                    />
                     <Route path="wearables">
                       <Route
                         index
@@ -156,14 +135,32 @@ createRoot(document.getElementById("root")!).render(
                         }
                       />
                     </Route>
-                    <Route
-                      path="add-device"
-                      element={
-                        <Suspense fallback={<div>Carregando...</div>}>
-                          <AddDevice />
-                        </Suspense>
-                      }
-                    />
+                    <Route path="device">
+                      <Route
+                        path="add"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <DeviceAdd />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="fall-detected/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <DeviceFallDetected />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="out-of-range/:id"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <DeviceOutOfRange />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
 
                     <Route path="totems">
                       <Route
@@ -187,6 +184,14 @@ createRoot(document.getElementById("root")!).render(
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <TotemsEdit />
+                          </Suspense>
+                        }
+                      />
+                      <Route
+                        path="pairing"
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <TotemsPairing />
                           </Suspense>
                         }
                       />
