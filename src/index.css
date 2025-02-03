@@ -149,27 +149,27 @@
 }
 
 .slide-up {
-  animation: slide-up 0.4s cubic-bezier(0.46, 1.36, 0.58, 1.25) forwards;
+  animation: slide-up 0.3s ease-out forwards;
 }
 
 .slide-down {
-  animation: slide-down 0.4s forwards;
+  animation: slide-down 0.3s ease-in forwards;
 }
 
 @keyframes slide-up {
   from {
-    transform: translateY(200%);
+    transform: translateY(200%) scale(0);
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes slide-down {
   from {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
   to {
-    transform: translateY(200%);
+    transform: translateY(200%) scale(0);
   }
 }

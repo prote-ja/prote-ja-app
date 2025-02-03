@@ -63,8 +63,6 @@ const Header: FunctionComponent<HeaderProps> = () => {
       setBackLink(`/${currentRouteRoot}`);
       setShowBackButton(false);
     }
-
-    console.log("currentRouteRoot", currentRouteRoot);
   }, [location.pathname, session]);
 
   const handleSignOut = async () => {

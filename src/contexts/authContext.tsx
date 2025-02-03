@@ -3,7 +3,11 @@ import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/client";
 import { Database } from "@/types/database.types";
 import { getUser } from "@/db/users";
-import { updateUserFcmToken } from "@/lib/notifications";
+import {
+  updateUserFcmToken,
+  setupTokenRefreshListener,
+  setupMessageListener,
+} from "@/lib/notifications";
 
 export interface AuthContextInterface {
   session: Session | null;
@@ -62,9 +66,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           setUser(data ?? null);
 
           if (data) {
+            // Update FCM token for the user
             updateUserFcmToken(data).catch((error) => {
-              console.error(error);
+              console.error("Error updating FCM token:", error);
             });
+
+            // Set up token refresh listener
+            setupTokenRefreshListener(data.id);
+
+            // Set up message listener
+            setupMessageListener();
           }
         })
         .finally(() => {

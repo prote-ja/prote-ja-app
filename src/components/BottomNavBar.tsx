@@ -42,11 +42,11 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
     <>
       <div
         className={cn(
-          "fixed bottom-0 left-0 w-full flex justify-center mb-0",
+          "fixed bottom-0 md:bottom-4 left-0 w-full flex justify-center mb-0",
           isVisible ? "slide-up" : "slide-down"
         )}
       >
-        <div className="w-full flex gap-4 justify-around bg-white/20 border-white/50 border-t backdrop-blur-md px-2 py-3 rounded-t-md text-white/60 relative">
+        <div className="w-full flex gap-4 md:max-w-md justify-around bg-white/5 border-white/50 border-t-2 md:border backdrop-blur-3xl px-2 py-3 rounded-t-lg md:rounded-lg text-white/60 relative">
           {navigationItems.map(({ route, label, icon: Icon }) => (
             <div key={route} className="relative w-[20%] space-y-1">
               {route === undefined ? (
@@ -84,7 +84,7 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
             <Link to="/device/add">
               <Button
                 variant={"secondary"}
-                className="rounded-full w-14 h-14 text-primary border-2 [&_svg]:size-8 bg-white shadow-inner"
+                className="rounded-full w-16 h-16 text-primary border-2 [&_svg]:size-12 border-white bg-white/100 hover:bg-purple-200 shadow-inner"
               >
                 <Plus />
               </Button>
