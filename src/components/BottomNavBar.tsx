@@ -48,7 +48,10 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
       >
         <div className="w-full flex gap-4 md:max-w-md justify-around bg-white/5 border-white/50 border-t-2 md:border backdrop-blur-3xl px-2 py-3 rounded-t-lg md:rounded-lg text-white/60 relative">
           {navigationItems.map(({ route, label, icon: Icon }) => (
-            <div key={route} className="relative w-[20%] space-y-1">
+            <div
+              key={`${route}-bottom-nav-button`}
+              className="relative w-[20%] space-y-1"
+            >
               {route === undefined ? (
                 <div className="w-[2rem]" />
               ) : (
