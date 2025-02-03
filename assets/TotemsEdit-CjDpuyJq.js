@@ -1,1 +1,0 @@
-import{E as r,j as s}from"./index-LxCMyIfZ.js";import"./react-C7sMpjI8.js";import"./react-dom-ThsgQk-A.js";const d=()=>{const{id:t}=r();return s.jsxs("div",{children:[s.jsx("h1",{children:"Edit"}),t]})};export{d as default};
