@@ -34,6 +34,8 @@ const possibleMainRoutes = [
   "/wearables",
   "/totems",
   "/profile",
+  "/login",
+  "/register",
 ];
 
 interface HeaderProps {}
