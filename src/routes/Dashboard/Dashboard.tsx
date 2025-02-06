@@ -9,10 +9,11 @@ import { useDevices } from "@/hooks/useDevices";
 import { Link as LinkIcon } from "lucide-react";
 import { SatelliteDish, TriangleAlert } from "lucide-react";
 import ImageBattery from "@/assets/img_battery.jpg";
-import { MessagesSquare, Music, Zap, HeartPulse } from "lucide-react";
+import { MessagesSquare, Zap, HeartPulse } from "lucide-react";
 import NotificationPromptDialog from "@/components/NotificationPromptDialog";
 import BatteryChart from "@/components/BatteryLevel";
 import LineChartComponent from "./MultipleChart";
+import NewChaptersCarousel from "./NewCarousel";
 interface DashboardProps {}
 
 const Dashboard: FunctionComponent<DashboardProps> = () => {
@@ -79,6 +80,8 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   return (
     <>
       <NotificationPromptDialog />
+      <NewChaptersCarousel />
+
       <div className="mb-16 md:mb-0">
         <div className="container mx-auto p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -107,13 +110,12 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
               }
               rightBackground="#624DE2"
             />
-
             <BentoItem
               title="Batimento Cardíaco"
               description="Acompanhe o batimento cardíaco dos usuários"
               icon={<HeartPulse className="h-6 w-6 text-[#F96900]" />}
               className="lg:col-span-2 lg:row-span-2 bg-purple-100 text-white"
-              bentoBackground="#624DE2"
+              bentoBackground="#ffffff33"
             >
               <LineChartComponent
                 title="Frequência Cardíaca"
