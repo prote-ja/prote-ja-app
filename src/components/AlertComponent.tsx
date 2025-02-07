@@ -12,6 +12,7 @@ interface AlertComponentProps {
   buttonLabel?: string;
   buttonRedirectUrl?: string;
   iconButton?: LucideIcon;
+  className?: string;
 }
 
 const AlertComponent: FC<AlertComponentProps> = ({
@@ -22,18 +23,19 @@ const AlertComponent: FC<AlertComponentProps> = ({
   buttonLabel,
   buttonRedirectUrl,
   iconButton: IconButton,
+  className,
 }) => {
   return (
     <Alert
       variant={variant}
-      className="flex justify-between items-center text-white py-2 px-4 gap-4"
+      className={`flex justify-between items-center text-white py-2 px-4 gap-4 ${className}`} // Aplicando a classe customizada
     >
       <div className="flex items-center gap-4">
         {IconTitle && (
           <IconTitle className="h-7 w-7 flex-shrink-0 stroke-white" />
         )}
         <div>
-          <AlertTitle className="text-lg  font-semibold">{title}</AlertTitle>
+          <AlertTitle className="text-lg font-semibold">{title}</AlertTitle>
           <AlertDescription className="text-sm">{description}</AlertDescription>
         </div>
       </div>
@@ -41,11 +43,11 @@ const AlertComponent: FC<AlertComponentProps> = ({
         <Link to={buttonRedirectUrl}>
           <Button
             variant="outline"
-            className={` text-white border-white hover:bg-black/10  flex items`}
+            className="text-white border-white hover:bg-black/10 flex items"
           >
             {buttonLabel}
             {IconButton && (
-              <IconButton className={`h-5 w-5 flex-shrink-0 stroke-white `} />
+              <IconButton className="h-5 w-5 flex-shrink-0 stroke-white" />
             )}
           </Button>
         </Link>

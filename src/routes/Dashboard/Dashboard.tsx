@@ -8,6 +8,8 @@ import NotificationPromptDialog from "@/components/NotificationPromptDialog";
 import NewCarousel from "./NewCarousel";
 import AdvancedFunc from "./AdvencedFun";
 import Greeting from "./Greetings";
+import AlertComponent from "@/components/AlertComponent";
+import { AlertCircle, AlertTriangle } from "lucide-react";
 interface DashboardProps {}
 
 const Dashboard: FunctionComponent<DashboardProps> = () => {
@@ -50,8 +52,22 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   return (
     <>
       <NotificationPromptDialog />
-      <div className="mb-16 md:mb-0">
-        <Greeting name={user?.name} />
+      <div className="mb-16 md:mb-0 ">
+        <div className="mb-8">
+          <Greeting name={user?.name} />
+        </div>
+        <div className="mb-8">
+          <AlertComponent
+            variant="warning"
+            iconTitle={AlertTriangle}
+            title="Queda Detectada"
+            description="1 hora atrás"
+            buttonLabel="Informações"
+            buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
+            iconButton={AlertCircle}
+            className="h-16 md:h-14"
+          />
+        </div>
         <NewCarousel>
           <div className="text-center flex flex-col h-full justify-between">
             {" "}

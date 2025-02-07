@@ -2,10 +2,8 @@
 
 import { FunctionComponent, RefObject, useRef, ReactNode } from "react";
 import { Swiper, SwiperRef, SwiperSlide, useSwiperSlide } from "swiper/react";
-import { Pagination, EffectCoverflow, Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-
+import { EffectCoverflow, Autoplay } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 const useMediaQuery = (query: string) => {
   if (typeof window === "undefined") return false;
   return window.matchMedia(query).matches;
@@ -34,7 +32,6 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
       } flex flex-col h-full overflow-visible`}
     >
       <div className="flex-1">{content}</div>{" "}
-      {/* Use flex-1 para ocupar o espaço restante */}
       <div className="absolute inset-x-0 -bottom-20 h-24 " />
     </div>
   );
@@ -51,12 +48,11 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({ children }) => {
   return (
     <div className="relative h-[300px]">
       {" "}
-      {/* Defina uma altura fixa ou use min-height */}
       <Swiper
         effect="coverflow"
         spaceBetween={spaceBetween}
         autoHeight={false}
-        modules={[Pagination, EffectCoverflow, Autoplay]}
+        modules={[EffectCoverflow, Autoplay]}
         centeredSlides
         slidesPerView={isMobile ? 1.3 : 3}
         loop={false}

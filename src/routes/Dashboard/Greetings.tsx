@@ -11,7 +11,7 @@ const Greeting = ({ name }: { name?: string }) => {
   const randomGreeting = useMemo(() => {
     const timeGreeting = getTimeBasedGreeting();
 
-    return `${timeGreeting} ,`;
+    return `${timeGreeting}`;
   }, []);
 
   return (
