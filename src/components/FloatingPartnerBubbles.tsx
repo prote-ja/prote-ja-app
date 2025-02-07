@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import BioparkLogo from "@/assets/biopark.png";
 import HugoLogo from "@/assets/hugo.png";
 import UtfprLogo from "@/assets/utfpr.png";
+import Espalmaq from "@/assets/espalmaq.png";
 import SapatilhasLogo from "@/assets/sapatilhas.png";
 // Constants for configuration
 const CONFIG = {
@@ -9,7 +10,7 @@ const CONFIG = {
   speedYRange: { min: 0.8, max: 1.0 },
   speedXRange: { min: -0.3, max: 0.3 },
   animationInterval: 100, // in milliseconds
-  partnerLogos: [BioparkLogo, UtfprLogo, SapatilhasLogo, HugoLogo],
+  partnerLogos: [BioparkLogo, UtfprLogo, SapatilhasLogo, HugoLogo, Espalmaq],
 };
 
 interface Bubble {

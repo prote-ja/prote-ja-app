@@ -8,6 +8,7 @@ import { Outlet, useLocation } from "react-router";
 import BioparkLogo from "@/assets/biopark.png";
 import HugoLogo from "@/assets/hugo.png";
 import UtfprLogo from "@/assets/utfpr.png";
+import Espalmaq from "@/assets/espalmaq.png";
 import SapatilhasLogo from "@/assets/sapatilhas.png";
 
 interface NotAuthenticatedLayoutProps {}
@@ -58,6 +59,7 @@ const NotAuthenticatedLayout: FunctionComponent<
                   logo={HugoLogo}
                   description=""
                 />
+                <PartnerCard name="Espalmaq" logo={Espalmaq} description="" />
               </div>
             </div>
           </BlurredContainer>
