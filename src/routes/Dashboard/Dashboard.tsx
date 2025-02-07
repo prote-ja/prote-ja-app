@@ -65,19 +65,17 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             buttonLabel="Informações"
             buttonRedirectUrl="/device/fall-detected/77:8f:34:64:ec:09"
             iconButton={AlertCircle}
-            className="h-16 md:h-14"
+            className="h-16 md:h-14 md:p-6 p-6"
           />
         </div>
         <NewCarousel>
           <div className="text-center flex flex-col h-full justify-between">
             {" "}
-            {/* Adicione flex, flex-col, h-full e justify-between */}
             <h3 className="text-xl font-semibold">Capítulo 1</h3>
             <p className="text-gray-600">Descrição do capítulo 1.</p>
           </div>
           <div className="text-center flex flex-col h-full justify-between">
             {" "}
-            {/* Adicione flex, flex-col, h-full e justify-between */}
             <h3 className="text-xl font-semibold">Capítulo 2</h3>
             <p className="text-gray-600">Descrição do capítulo 2.</p>
             <Button

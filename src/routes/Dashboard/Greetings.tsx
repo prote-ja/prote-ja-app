@@ -17,7 +17,7 @@ const Greeting = ({ name }: { name?: string }) => {
   return (
     <div>
       <span className="text-white">{randomGreeting} </span>
-      <h1 className="text-xl md:text-3xl font-semibold text-white">{name}</h1>
+      <h1 className="text-2xl md:text-3xl font-semibold text-white">{name}</h1>
     </div>
   );
 };

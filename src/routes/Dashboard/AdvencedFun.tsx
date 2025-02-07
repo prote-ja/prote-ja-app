@@ -11,9 +11,10 @@ interface AdvancedFuncProps {
 const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
   const navigate = useNavigate();
   return (
-    <div className="p-6 mt-8 w-full text-white">
+    <div className="p-6 sm:p-3 mt-8 w-full text-white">
+      {" "}
       <div className="flex justify-between items-center">
-        <div className="text-xl md:text-3xl font-semibold">
+        <div className="text-2xl sm:text-2xl md:text-3xl font-semibold whitespace-nowrap">
           Funções Avançadas
         </div>
         <Button
@@ -24,7 +25,6 @@ const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
           Desbloquear <Crown size={16} />
         </Button>
       </div>
-
       <div className="space-y-4 mt-4">
         {React.Children.map(children, (child, _) => (
           <div className="flex justify-between items-center">

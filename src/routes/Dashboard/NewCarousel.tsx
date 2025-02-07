@@ -27,15 +27,18 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
       onClick={() => {
         sliderRef.current?.swiper.slideTo(myId);
       }}
-      className={`relative rounded-lg shadow-md p-4 transition-all duration-300 ${
-        isActive ? "bg-white scale-100" : "bg-white/20 scale-100"
-      } flex flex-col h-full overflow-visible`}
+      className={`relative rounded-lg transition-all duration-300 ${
+        isActive
+          ? "bg-white scale-100  shadow-xl shadow-black/40 z-10"
+          : "bg-white/30 scale-95 shadow-none"
+      } flex flex-col h-full overflow-visible p-6 md:p-6 sm:p-3`}
     >
-      <div className="flex-1">{content}</div>{" "}
-      <div className="absolute inset-x-0 -bottom-20 h-24 " />
+      <div className="flex-1">{content}</div>
+      <div className="absolute inset-x-0 -bottom-20 h-24" />
     </div>
   );
 };
+
 interface NewCarouselProps {
   children: ReactNode[];
 }
@@ -46,8 +49,7 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({ children }) => {
   const spaceBetween = isMobile ? 50 : -10;
 
   return (
-    <div className="relative h-[300px]">
-      {" "}
+    <div className="relative h-[300px] -mx-2">
       <Swiper
         effect="coverflow"
         spaceBetween={spaceBetween}
@@ -79,7 +81,6 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({ children }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute inset-x-0 bottom-0 h-48 " />
     </div>
   );
 };
