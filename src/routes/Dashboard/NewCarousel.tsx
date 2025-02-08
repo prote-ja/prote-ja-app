@@ -4,6 +4,7 @@ import { FunctionComponent, RefObject, useRef, ReactNode } from "react";
 import { Swiper, SwiperRef, SwiperSlide, useSwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+
 const useMediaQuery = (query: string) => {
   if (typeof window === "undefined") return false;
   return window.matchMedia(query).matches;
@@ -13,12 +14,14 @@ interface CardSlideProps {
   myId: number;
   sliderRef: RefObject<SwiperRef>;
   content: ReactNode;
+  isBordered: boolean;
 }
 
 const CardSlide: FunctionComponent<CardSlideProps> = ({
   myId,
   sliderRef,
   content,
+  isBordered,
 }) => {
   const { isActive } = useSwiperSlide();
 
@@ -27,11 +30,23 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
       onClick={() => {
         sliderRef.current?.swiper.slideTo(myId);
       }}
+      onMouseEnter={() => {
+        if (isActive && sliderRef.current) {
+          sliderRef.current.swiper.autoplay.stop();
+        }
+      }}
+      onMouseLeave={() => {
+        if (isActive && sliderRef.current) {
+          sliderRef.current.swiper.autoplay.start();
+        }
+      }}
       className={`relative rounded-lg transition-all duration-300 ${
         isActive
-          ? "bg-white scale-100  shadow-xl shadow-black/40 z-10 "
-          : "bg-white/30 scale-95 shadow-none "
-      } flex flex-col h-full overflow-visible p-6 md:p-6 sm:p-3`}
+          ? "bg-white scale-100 shadow-xl shadow-black/40 z-10"
+          : "bg-white/30 scale-95 shadow-none"
+      } ${isBordered ? "animate-border" : ""} 
+      
+      flex flex-col h-full overflow-visible p-6 md:p-6 sm:p-3`}
     >
       <div className="flex-1">{content}</div>
       <div className="absolute inset-x-0 -bottom-20 h-24" />
@@ -41,9 +56,13 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
 
 interface NewCarouselProps {
   children: ReactNode[];
+  borderedCardIndex?: number;
 }
 
-const NewCarousel: FunctionComponent<NewCarouselProps> = ({ children }) => {
+const NewCarousel: FunctionComponent<NewCarouselProps> = ({
+  children,
+  borderedCardIndex,
+}) => {
   const sliderRef = useRef<SwiperRef>(null);
   const isMobile = useMediaQuery("(max-width: 640px)");
   const spaceBetween = isMobile ? 50 : -10;
@@ -77,7 +96,12 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({ children }) => {
             key={`slider_${index}`}
             className="h-full cursor-pointer"
           >
-            <CardSlide myId={index} sliderRef={sliderRef} content={child} />
+            <CardSlide
+              myId={index}
+              sliderRef={sliderRef}
+              content={child}
+              isBordered={index === borderedCardIndex}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

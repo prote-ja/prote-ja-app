@@ -70,6 +70,35 @@
     --chart-5: 340 75% 55%;
   } */
 }
+@keyframes borderAnimation {
+  0% { 
+    border-image-source: linear-gradient(0deg, #ff7eb3, #ffffff);
+  }
+  25% { 
+    border-image-source: linear-gradient(90deg, #ff7eb3, #ffffff);
+  }
+  50% { 
+    border-image-source: linear-gradient(180deg, #ff7eb3, #ffffff);
+  }
+  75% { 
+    border-image-source: linear-gradient(270deg, #ff7eb3, #ffffff);
+  }
+  100% { 
+    border-image-source: linear-gradient(360deg, #ff7eb3, #ffffff);
+  }
+}
+
+.animate-border {
+  border-width: 4px;
+  border-style: solid;
+  border-image-slice: 1;
+  border-radius: 10px;
+  animation: borderAnimation 2s linear infinite;
+  will-change: border-image-source;
+  transition: border-image-source 1s ease-in-out;
+}
+
+
 @layer base {
   * {
     @apply border-border;

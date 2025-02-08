@@ -11,12 +11,29 @@ import Greeting from "./Greetings";
 import AlertComponent from "@/components/AlertComponent";
 import { AlertCircle, AlertTriangle, Footprints, Bot } from "lucide-react";
 import BatteryChart from "./BatteryChart";
+import SleepChart from "./SleepChart";
+import LocalChart from "./LocalChart";
 
 interface DashboardProps {}
 
 const Dashboard: FunctionComponent<DashboardProps> = () => {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
+  const sleepData = [
+    { day: "Seg", hours: 7 },
+    { day: "Ter", hours: 6 },
+    { day: "Qua", hours: 8 },
+    { day: "Qui", hours: 5 },
+    { day: "Sex", hours: 7 },
+    { day: "Sáb", hours: 9 },
+    { day: "Dom", hours: 10 },
+  ];
+  const localData = [
+    { name: "Casa", users: 5 },
+    { name: "Praia", users: 2 },
+    { name: "Irmã", users: 4 },
+    { name: "Pilates", users: 2 },
+  ];
 
   useEffect(() => {
     const checkFirstLogin = async () => {
@@ -75,10 +92,19 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             {" "}
             <h3 className="text-xl font-semibold">Nível da Bateria</h3>
             <div>
-              <BatteryChart batteryLevel={75} />
+              <BatteryChart batteryLevel={45} />
             </div>
-            <p className="text-gray-600">Média das Pulseiras</p>
+            <p className="text-gray-600">Pulseira mais Descarregada</p>
           </div>
+
+          <div className="text-center flex flex-col h-full justify-between">
+            {" "}
+            <h3 className="text-xl font-semibold">Usuários por Totens</h3>
+            <div>
+              <LocalChart data={localData} />
+            </div>
+          </div>
+
           <div className="text-center flex flex-col h-full justify-between">
             {" "}
             <h3 className="text-xl font-semibold">Dona Maria</h3>
@@ -106,6 +132,13 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
               pode afetá-la"
             </p>
             <p className="text-gray-600">Recomendações por IA</p>
+          </div>
+          <div className="text-center flex flex-col h-full justify-between">
+            {" "}
+            <h3 className="text-xl font-semibold">Média de Sono</h3>
+            <div>
+              <SleepChart sleepData={sleepData} />
+            </div>
           </div>
         </NewCarousel>
 

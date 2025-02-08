@@ -11,10 +11,8 @@ const BatteryChart: FC<BatteryChartProps> = ({ batteryLevel }) => {
     { name: "Empty", value: 100 - batteryLevel },
   ];
 
-  const getBatteryColor = (level: number) => {
-    if (level > 50) return "#4caf50";
-    if (level > 20) return "#ff9800";
-    return "#f44336";
+  const getBatteryColor = (_: number) => {
+    return "#7357FF";
   };
 
   return (
