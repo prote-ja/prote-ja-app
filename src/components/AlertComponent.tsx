@@ -8,11 +8,13 @@ interface AlertComponentProps {
   variant?: "default" | "destructive" | "warning" | "sucess";
   iconTitle?: LucideIcon;
   title: string;
-  description: string;
+  description?: string;
   buttonLabel?: string;
   buttonRedirectUrl?: string;
   iconButton?: LucideIcon;
   className?: string;
+  buttonClassName?: string;
+  onClick?: () => void;
 }
 
 const AlertComponent: FC<AlertComponentProps> = ({
@@ -24,10 +26,13 @@ const AlertComponent: FC<AlertComponentProps> = ({
   buttonRedirectUrl,
   iconButton: IconButton,
   className,
+  buttonClassName,
+  onClick,
 }) => {
   return (
     <Alert
       variant={variant}
+      onClick={onClick}
       className={`flex justify-between items-center text-white py-2 px-4 gap-4 ${className}`} // Aplicando a classe customizada
     >
       <div className="flex items-center gap-4">
@@ -43,7 +48,7 @@ const AlertComponent: FC<AlertComponentProps> = ({
         <Link to={buttonRedirectUrl}>
           <Button
             variant="outline"
-            className="text-white border-white hover:bg-black/10 flex items"
+            className={`text-white border-white hover:bg-black/10 flex items-center ${buttonClassName}`}
           >
             {buttonLabel}
             {IconButton && (

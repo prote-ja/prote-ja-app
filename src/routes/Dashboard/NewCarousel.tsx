@@ -29,8 +29,8 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
       }}
       className={`relative rounded-lg transition-all duration-300 ${
         isActive
-          ? "bg-white scale-100  shadow-xl shadow-black/40 z-10"
-          : "bg-white/30 scale-95 shadow-none"
+          ? "bg-white scale-100  shadow-xl shadow-black/40 z-10 "
+          : "bg-white/30 scale-95 shadow-none "
       } flex flex-col h-full overflow-visible p-6 md:p-6 sm:p-3`}
     >
       <div className="flex-1">{content}</div>
