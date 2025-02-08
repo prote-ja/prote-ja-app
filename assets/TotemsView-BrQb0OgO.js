@@ -1,1 +1,0 @@
-import{F as t,j as s}from"./index-D7Yp8jQw.js";import"./react-DDCWQfk_.js";import"./react-dom-DZBigVa_.js";const m=()=>{const{id:r}=t();return s.jsxs("div",{children:[s.jsx("h1",{children:"View"}),r]})};export{m as default};
