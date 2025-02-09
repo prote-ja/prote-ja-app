@@ -43,7 +43,7 @@ const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
             </div>
             {hoveredIndex === index && (
               <div
-                className="absolute w-screen h-full -mx-2 inset-0 flex items-center justify-center bg-[#7357FF] bg-opacity-90 rounded-lg z-10 
+                className="absolute w-screen md:w-full h-full -mx-2 inset-0 flex items-center justify-center bg-[#7357FF] bg-opacity-90 rounded-lg z-10 
                 supports-[backdrop-filter]:backdrop-blur-2xl"
               >
                 <div className="flex items-center gap-2 px-4 text-center">
