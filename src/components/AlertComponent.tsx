@@ -33,15 +33,19 @@ const AlertComponent: FC<AlertComponentProps> = ({
     <Alert
       variant={variant}
       onClick={onClick}
-      className={`flex justify-between items-center text-white py-2 px-4 gap-4 ${className}`} // Aplicando a classe customizada
+      className={`flex justify-between items-center text-white min-h-[28px] py-3 px-4 gap-4 ${className}`}
     >
       <div className="flex items-center gap-4">
         {IconTitle && (
           <IconTitle className="h-7 w-7 flex-shrink-0 stroke-white" />
         )}
-        <div>
+        <div className="flex flex-col justify-center">
           <AlertTitle className="text-lg font-semibold">{title}</AlertTitle>
-          <AlertDescription className="text-sm">{description}</AlertDescription>
+          {description && (
+            <AlertDescription className="text-sm">
+              {description}
+            </AlertDescription>
+          )}
         </div>
       </div>
       {buttonLabel && buttonRedirectUrl && (

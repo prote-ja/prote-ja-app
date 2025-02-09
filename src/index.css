@@ -87,6 +87,10 @@
     border-image-source: linear-gradient(360deg, #ff7eb3, #ffffff);
   }
 }
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+}  
 
 .animate-border {
   border-width: 4px;
