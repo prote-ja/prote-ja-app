@@ -13,7 +13,7 @@ const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full text-white ">
+    <div className="w-full text-white">
       <div className="flex flex-wrap items-center justify-between">
         <div className="text-2xl sm:text-2xl md:text-3xl font-semibold flex items-center">
           Funções Avançadas
@@ -29,7 +29,7 @@ const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
       <div className="w-full flex flex-col space-y-4 mt-4">
         {React.Children.map(children, (child, index) => (
           <div
-            className="flex justify-between items-center sm:p-2 relative"
+            className="flex justify-between items-center sm:p-2 relative h-[80px] sm:h-auto"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
@@ -42,8 +42,11 @@ const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
               />
             </div>
             {hoveredIndex === index && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-30 backdrop-blur-sm rounded-lg">
-                <div className="flex items-center gap-2">
+              <div
+                className="absolute w-screen md:w-full h-full -mx-2 inset-0 flex items-center justify-center bg-[#7357FF] bg-opacity-90 rounded-lg z-10 
+                supports-[backdrop-filter]:backdrop-blur-2xl"
+              >
+                <div className="flex items-center gap-2 px-4 text-center">
                   <span className="text-sm text-white">
                     Disponível apenas para assinantes do ProteJá+
                   </span>

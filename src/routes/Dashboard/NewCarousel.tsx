@@ -64,7 +64,7 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({
   const sliderRef = useRef<SwiperRef>(null);
   const isMobile = useMediaQuery("(max-width: 540px)");
   const spaceBetween = isMobile ? 20 : -10;
-  const slidesPerView = isMobile ? 1.5 : 3; // Aumentado para 1.5 no mobile
+  const slidesPerView = isMobile ? 1.5 : 3;
   const scale = isMobile ? 1 : 0.85;
 
   return (
@@ -77,7 +77,7 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({
         centeredSlides
         slidesPerView={slidesPerView}
         loop={false}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        autoplay={{ delay: 4500, disableOnInteraction: false }}
         speed={750}
         className="pb-16 h-full overflow-visible"
         coverflowEffect={{
