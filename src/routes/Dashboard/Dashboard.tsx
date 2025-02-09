@@ -11,7 +11,6 @@ import Greeting from "./Greetings";
 import AlertComponent from "@/components/AlertComponent";
 import { AlertCircle, AlertTriangle, Footprints, Bot } from "lucide-react";
 import BatteryChart from "./BatteryChart";
-import SleepChart from "./SleepChart";
 import LocalChart from "./LocalChart";
 
 interface DashboardProps {}
@@ -19,15 +18,7 @@ interface DashboardProps {}
 const Dashboard: FunctionComponent<DashboardProps> = () => {
   const { user, setUser } = useAuth();
   const navigate = useNavigate();
-  const sleepData = [
-    { day: "Seg", hours: 7 },
-    { day: "Ter", hours: 6 },
-    { day: "Qua", hours: 8 },
-    { day: "Qui", hours: 5 },
-    { day: "Sex", hours: 7 },
-    { day: "Sáb", hours: 9 },
-    { day: "Dom", hours: 10 },
-  ];
+
   const localData = [
     { name: "Casa", users: 5 },
     { name: "Praia", users: 2 },
@@ -72,10 +63,10 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
     <>
       <NotificationPromptDialog />
       <div className="mb-16 md:mb-0 ">
-        <div className="mb-8">
+        <div className="mb-4">
           <Greeting name={user?.name} />
         </div>
-        <div className="mb-8">
+        <div className="mb-6">
           <AlertComponent
             variant="warning"
             iconTitle={AlertTriangle}
@@ -97,10 +88,11 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             <p className="text-gray-600">Pulseira mais Descarregada</p>
           </div>
 
-          <div className="text-center flex flex-col h-full justify-between">
-            {" "}
-            <h3 className="text-xl font-semibold">Usuários por Totens</h3>
-            <div>
+          <div className="text-center flex flex-col h-full justify-between ">
+            <h3 className="text-base md:text-xl font-semibold">
+              Usuários por Totens
+            </h3>
+            <div className="w-full">
               <LocalChart data={localData} />
             </div>
           </div>
@@ -127,18 +119,11 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
               <h3 className="text-xl font-semibold">Jul</h3>
               <h2 className="text-2xl font-bold">IA</h2>
             </div>
-            <p className="text-gray-600">
+            <p className="text-gray-600 ">
               "Dona Maria apresenta nível de estresse elevado, entenda como isso
               pode afetá-la"
             </p>
             <p className="text-gray-600">Recomendações por IA</p>
-          </div>
-          <div className="text-center flex flex-col h-full justify-between">
-            {" "}
-            <h3 className="text-xl font-semibold">Média de Sono</h3>
-            <div>
-              <SleepChart sleepData={sleepData} />
-            </div>
           </div>
         </NewCarousel>
 

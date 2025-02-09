@@ -8,7 +8,12 @@ interface LocalChartProps {
 const LocalChart: FC<LocalChartProps> = ({ data }) => {
   return (
     <div className="flex flex-col items-center w-full h-full">
-      <BarChart width={300} height={150} data={data} barSize={40}>
+      <BarChart
+        width={200} // Faz o gráfico ocupar toda a largura disponível
+        height={200} // Ajusta a altura do gráfico para uma altura razoável
+        data={data}
+        barSize={40}
+      >
         <XAxis
           dataKey="name"
           tick={{ fontSize: 14, fill: "#333" }}

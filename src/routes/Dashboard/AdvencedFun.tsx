@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Crown, Bell } from "lucide-react";
+import { Crown, Bell, Lock } from "lucide-react";
 import { useNavigate } from "react-router";
 import React from "react";
 
@@ -10,32 +10,47 @@ interface AdvancedFuncProps {
 
 const AdvancedFunc: React.FC<AdvancedFuncProps> = ({ children }) => {
   const navigate = useNavigate();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
-    <div className="p-6 sm:p-3 mt-8 w-full text-white">
-      {" "}
-      <div className="flex justify-between items-center">
-        <div className="text-2xl sm:text-2xl md:text-3xl font-semibold whitespace-nowrap">
+    <div className="w-full text-white ">
+      <div className="flex flex-wrap items-center justify-between">
+        <div className="text-2xl sm:text-2xl md:text-3xl font-semibold flex items-center">
           Funções Avançadas
         </div>
         <Button
           variant="secondary"
-          className="ml-4"
+          className="sm:ml-4 self-center"
           onClick={() => navigate("/subscribe")}
         >
           Desbloquear <Crown size={16} />
         </Button>
       </div>
-      <div className="space-y-4 mt-4">
-        {React.Children.map(children, (child, _) => (
-          <div className="flex justify-between items-center">
+      <div className="w-full flex flex-col space-y-4 mt-4">
+        {React.Children.map(children, (child, index) => (
+          <div
+            className="flex justify-between items-center sm:p-2 relative"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
             <div className="flex-1">{child}</div>
-            <div className="ml-4 w-10 h-10 flex items-center justify-center rounded-full border border-white">
+            <div className="w-10 h-10 flex items-center justify-center rounded-full border border-white">
               <Bell
                 size={24}
                 onClick={() => navigate("/subscribe")}
                 className="cursor-pointer"
               />
             </div>
+            {hoveredIndex === index && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-30 backdrop-blur-sm rounded-lg">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-white">
+                    Disponível apenas para assinantes do ProteJá+
+                  </span>
+                  <Lock size={24} className="text-white" />
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
