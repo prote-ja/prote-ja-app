@@ -1,5 +1,3 @@
-"use client";
-
 import { FunctionComponent, RefObject, useRef, ReactNode } from "react";
 import { Swiper, SwiperRef, SwiperSlide, useSwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay } from "swiper/modules";
@@ -40,16 +38,16 @@ const CardSlide: FunctionComponent<CardSlideProps> = ({
           sliderRef.current.swiper.autoplay.start();
         }
       }}
-      className={`relative rounded-lg transition-all duration-300 ${
-        isActive
-          ? "bg-white scale-100 shadow-xl shadow-black/40 z-10"
-          : "bg-white/30 scale-95 shadow-none"
-      } ${isBordered ? "animate-border" : ""} 
-      
-      flex flex-col h-full overflow-visible p-6 md:p-6 sm:p-3`}
+      className={`relative rounded-lg transition-all duration-300 overflow-visible 
+        ${
+          isActive
+            ? "bg-white scale-100 shadow-xl shadow-black/40 z-10"
+            : "bg-white/30 scale-95 shadow-none"
+        } 
+        ${isBordered ? "animate-border" : ""} 
+        flex flex-col h-[250px] p-6 md:p-6 sm:p-3 w-full max-w-[100%]`} // Alterado aqui
     >
-      <div className="flex-1">{content}</div>
-      <div className="absolute inset-x-0 -bottom-20 h-24" />
+      <div className={`flex-1 ${!isActive ? "opacity-30" : ""}`}>{content}</div>
     </div>
   );
 };
@@ -64,26 +62,28 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({
   borderedCardIndex,
 }) => {
   const sliderRef = useRef<SwiperRef>(null);
-  const isMobile = useMediaQuery("(max-width: 640px)");
-  const spaceBetween = isMobile ? 50 : -10;
+  const isMobile = useMediaQuery("(max-width: 540px)");
+  const spaceBetween = isMobile ? 20 : -10;
+  const slidesPerView = isMobile ? 1.5 : 3; // Aumentado para 1.5 no mobile
+  const scale = isMobile ? 1 : 0.85;
 
   return (
-    <div className="relative h-[300px] -mx-2">
+    <div className="relative h-[290px]  -mx-2  overflow-visible">
       <Swiper
         effect="coverflow"
         spaceBetween={spaceBetween}
         autoHeight={false}
         modules={[EffectCoverflow, Autoplay]}
         centeredSlides
-        slidesPerView={isMobile ? 1.3 : 3}
+        slidesPerView={slidesPerView}
         loop={false}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
         speed={750}
-        className="pb-16 h-full"
+        className="pb-16 h-full overflow-visible"
         coverflowEffect={{
           rotate: 0,
           stretch: 20,
-          scale: isMobile ? 1 : 0.85,
+          scale: scale,
           depth: 100,
           modifier: 1,
           slideShadows: false,
@@ -94,7 +94,7 @@ const NewCarousel: FunctionComponent<NewCarouselProps> = ({
         {children.map((child, index) => (
           <SwiperSlide
             key={`slider_${index}`}
-            className="h-full cursor-pointer"
+            className="h-full cursor-pointer overflow-visible"
           >
             <CardSlide
               myId={index}
