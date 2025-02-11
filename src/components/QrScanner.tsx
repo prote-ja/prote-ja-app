@@ -5,22 +5,26 @@ import {
   Html5QrcodeSupportedFormats,
 } from "html5-qrcode";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { RotatingLines } from "react-loader-spinner";
-import { Pencil, QrCode, ShieldX, Check } from "lucide-react";
+import { Pencil, QrCode, ShieldX, Check, CircleHelp } from "lucide-react";
 import { Html5QrcodeScannerConfig } from "html5-qrcode/esm/html5-qrcode-scanner";
+import { useAuth } from "@/hooks/useAuth";
+import { setOwner } from "@/db/devices";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import MacInput from "./MacInput";
+import FieldContainer from "./FieldContainer/FieldContainer";
+import FieldContainerInput from "./FieldContainer/FieldContainerInput";
 
 const QrScanner: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [scanResult, setScanResult] = useState<string | null>(null);
   const [error, setError] = useState("");
-  const [manualMac, setManualMac] = useState("");
-  const [manualPassword, setManualPassword] = useState("");
   const [manualMode, setManualMode] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const config: Html5QrcodeScannerConfig = {
     fps: 14,
     qrbox: 250,
@@ -30,7 +34,28 @@ const QrScanner: React.FC = () => {
   };
 
   const handleSubmit = async (mac: string, password: string) => {
-    console.log(mac, password);
+    setIsLoading(true);
+    setError("");
+    if (!user) {
+      setError("Usuário não autenticado");
+      setIsLoading(false);
+      return;
+    }
+    const owner = user.id;
+    try {
+      const response = await setOwner(mac, password, owner);
+
+      if (response.error) {
+        throw new Error(response.error);
+      }
+      toast.success("Cadastrado com sucesso");
+      navigate("/totems/edit/" + mac);
+    } catch (err) {
+      console.error(err);
+      setError(parseError(err));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const parseError = (error: unknown): string => {
@@ -64,9 +89,10 @@ const QrScanner: React.FC = () => {
         config,
         (decodedText) => {
           const parsedJson = JSON.parse(decodedText);
+
           handleSubmit(parsedJson.mac, parsedJson.password);
-          setScanResult(decodedText);
           stopScanner();
+          console.log(decodedText);
         },
         () => {}
       );
@@ -90,12 +116,15 @@ const QrScanner: React.FC = () => {
     }
   };
 
-  const handleManualSubmit = () => {
-    const data = JSON.stringify({ mac: manualMac, password: manualPassword });
-    setScanResult(data);
+  const handleManualSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    const mac = data.get("mac") as string;
+    const password = data.get("password") as string;
+    handleSubmit(mac, password);
     setManualMode(false);
   };
-
   useEffect(() => {
     return () => {
       stopScanner();
@@ -155,33 +184,40 @@ const QrScanner: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col gap-3 w-full">
-          <Input
-            type="text"
-            placeholder="Endereço MAC"
-            value={manualMac}
-            onChange={(e) => setManualMac(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Senha"
-            value={manualPassword}
-            onChange={(e) => setManualPassword(e.target.value)}
-          />
-          <Button
-            className="w-full bg-white text-primary"
-            onClick={handleManualSubmit}
-          >
-            <Check /> Confirmar
-          </Button>
-          <Button
-            className="w-full"
-            variant={"secondary"}
-            onClick={() => setManualMode(false)}
-          >
-            Cancelar
-          </Button>
-        </div>
+        <form onSubmit={handleManualSubmit} className="w-full">
+          <div className="flex flex-col gap-3 w-full min-w-full">
+            <MacInput name="mac" />
+            <FieldContainer
+              title={
+                <div className="flex items-center gap-1">
+                  Senha
+                  <CircleHelp size={14} className="mb-4" />
+                </div>
+              }
+              tooltip="A senha é composta de 6 dígitos"
+            >
+              <FieldContainerInput
+                type="text"
+                placeholder="123123"
+                name="password"
+                required
+                closedSize="sm"
+                minLength={6}
+                maxLength={6}
+              />
+            </FieldContainer>
+            <Button className="w-full bg-white text-primary" type="submit">
+              <Check /> Confirmar
+            </Button>
+            <Button
+              className="w-full"
+              variant={"secondary"}
+              onClick={() => setManualMode(false)}
+            >
+              Cancelar
+            </Button>
+          </div>
+        </form>
       )}
 
       {error && (
@@ -190,13 +226,6 @@ const QrScanner: React.FC = () => {
           <AlertTitle>Ops, algo deu errado!</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
-      )}
-
-      {scanResult && (
-        <div className="p-4 bg-white rounded-lg shadow-md w-full text-sm break-words">
-          <p className="font-semibold">Dados escaneados:</p>
-          <code>{scanResult}</code>
-        </div>
       )}
     </div>
   );
