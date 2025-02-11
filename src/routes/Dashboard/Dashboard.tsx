@@ -72,7 +72,7 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
             iconTitle={AlertTriangle}
             title="Dona Maria caiu"
             iconButton={AlertCircle}
-            className="h-3 md:h-4 md:p-5 p-4 cursor-pointer mb-0-important"
+            className="h-3 md:h-4 md:p-5 p-4 cursor-pointer mb-0-important "
             onClick={() => {
               navigate("/wearables/view/77:8f:34:64:ec:19");
             }}
