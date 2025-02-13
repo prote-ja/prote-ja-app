@@ -1,12 +1,13 @@
 import { FunctionComponent } from "react";
-import ElementTitleHeader from "@/components/ElementTitleHeader";
-import { TriangleAlert, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MapPin, Clock, Bell, Phone, ShieldAlert, Wifi } from "lucide-react";
 import { useParams } from "react-router";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import { useWearable } from "@/hooks/useWearable";
-import WearableConnectionComponent from "@/components/WearableConnectionComponent";
-
+import BentoItem from "@/components/BentoBox";
+import BentoTitle from "./BentoTitle";
+import BentoUser from "./BentoUser";
+import HistoryBar from "./HistoryBar";
+import Totem from "@/assets/totem_300.png";
+import { Button } from "@/components/ui/button";
 interface DeviceFallDetectedProps {}
 
 const DeviceFallDetected: FunctionComponent<DeviceFallDetectedProps> = () => {
@@ -20,52 +21,80 @@ const DeviceFallDetected: FunctionComponent<DeviceFallDetectedProps> = () => {
   if (!wearable) {
     return <div>Pulseira não encontrada</div>;
   }
-
+  const historyData = [
+    { time: "13:40", location: "Sala" },
+    { time: "13:20", location: "Sala" },
+    { time: "13:00", location: "Jardim" },
+    { time: "12:40", location: "Jardim" },
+  ];
   return (
-    <div className="space-y-4 z-10  ">
-      <AnimatedBackground isBlack={true} />
-      <div className="flex flex-col items-start text-white z-10 ">
-        <div className="flex justify-center w-full">
-          <ElementTitleHeader
-            className="text-white z-10 px-2 mb-6 mt-6 text-center"
-            title="Queda Detectada"
-            titleAppend={
-              <TriangleAlert className="stroke-black fill-red-600 animate-blink w-8 h-8" />
-            }
-          />
-        </div>
-        <div className="w-full z-10">
-          <WearableConnectionComponent wearable={wearable} />
-        </div>
-        <ElementTitleHeader
-          className="text-white z-10 mt-6 text-left"
-          title="Localização estimada"
-          description={`O totem a seguir recebeu o sinal de queda do usuário ${wearable.name}`}
-        />
-        <div className="h-44 flex gap-3 pb-4 px-2 mt-6">
-          {/* {totems.map((totem, index) => (
-            <div key={`totem-${index}`} className="justify-center">
-              <TotemConnectionComponent
-                totem={totem}
-              />
-            </div>
-          ))} */}
-        </div>
-        <hr className=" z-10 " />
-        <ElementTitleHeader
-          className="text-white z-10 px-2 mt-6 text-left"
-          title="Contato de Emergência"
-          description="Dique rápido para o contato de emergência cadastrado"
-        />
+    <div className="grid grid-cols-1 gap-4 z-10">
+      <BentoTitle className="" titleClassName="text-2xl" />
 
-        <Button
-          variant={"secondary"}
-          className="px-2 w-44 h-auto z-10 mt-6 mx-auto sm:mx-0 sm:w-64 flex justify-center items-center"
-          onClick={() => (window.location.href = "tel:+1234567890")}
+      <BentoUser
+        avatarUrl={wearable.avatar_url}
+        name={wearable.name}
+        heartRate={120}
+        className="col-span-1 bg-white/30 text-white "
+        avatarClassName="bg-white/30"
+        nameClassName="text-white"
+      />
+      <div className="grid grid-cols-2 gap-4">
+        <BentoItem
+          title="Histórico"
+          className="col-span-1 bg-white/30 text-white "
+          icon={<Clock size={20} />}
+          bentoBackground="bg-white/30"
+          textClassName="text-xl"
         >
-          <PhoneCall />
-          <span className="sm:block z-10">Discar Agora</span>
-        </Button>
+          <div className="mt-4">
+            {historyData.map((item, index) => (
+              <HistoryBar
+                key={index}
+                time={item.time}
+                location={item.location}
+              />
+            ))}
+          </div>
+        </BentoItem>
+        <BentoItem
+          title="Localização"
+          className="relative col-span-1 bg-white/30 text-white flex flex-col"
+          icon={<MapPin size={20} />}
+          bentoBackground="bg-white/30"
+          textClassName="text-xl"
+        >
+          <div className="flex items-center justify-center flex-grow">
+            <img
+              src={Totem}
+              alt="Totem"
+              className="w-auto h-auto max-h-[80%] sm:w-[80%] sm:p-4"
+            />
+          </div>
+          {/* Ícone de Wi-Fi alinhado com os ícones de bateria e coração */}
+          <div className="absolute bottom-16 right-2">
+            <Wifi className="w-8 h-8 text-[#4ADE80]" />
+          </div>
+          <div className="bg-white p-4 text-center w-full absolute bottom-0 left-0">
+            <span className="text-[#624DE2] font-semibold text-xl">Sala</span>
+          </div>
+        </BentoItem>
+        <BentoItem
+          title="Ações Rápidas"
+          icon={<ShieldAlert size={20} />}
+          className="col-span-2 bg-white/30 text-white  "
+          bentoBackground="bg-white/30"
+          textClassName="text-xl text-center"
+        >
+          <div className="flex justify-center gap-4">
+            <Button variant="secondary">
+              <Phone /> Disque Emergência
+            </Button>
+            <Button variant="secondary">
+              <Bell /> Alertar Pulseira
+            </Button>
+          </div>
+        </BentoItem>
       </div>
     </div>
   );
