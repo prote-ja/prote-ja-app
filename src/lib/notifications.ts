@@ -6,7 +6,7 @@ import { getToken, onMessage } from "firebase/messaging";
 export async function getMessagingToken() {
   try {
     const serviceWorkerRegistration = await navigator.serviceWorker.register(
-      "../prote-ja-app/firebase-messaging-sw.js"
+      "../firebase-messaging-sw.js"
     );
 
     const token = await getToken(messaging, {

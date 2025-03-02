@@ -51,7 +51,7 @@ const Wearables: FunctionComponent<WearablesProps> = () => {
           <TabsList className="w-full flex justify-center">
             <TabsTrigger value={"personal" as ViewType}>Minhas</TabsTrigger>
             <TabsTrigger value={"shared" as ViewType}>
-              Compartilhados
+              Compartilhadas
             </TabsTrigger>
           </TabsList>
         </Tabs>

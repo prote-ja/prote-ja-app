@@ -1,15 +1,16 @@
 {
-  "name": "prote-ja-app",
+  "name": "ProteJÁ",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://prote-ja.github.io/prote-ja-app",
+  "homepage": "https://app.prote-ja.com",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
+    "add-domain": "echo app.prote-ja.com > dist/CNAME",
+    "deploy": "npm run add-domain && gh-pages -d dist",
     "gen": "npx supabase gen types typescript --project-id czhgcnahnjyzimgtcrqx > src/types/database.types.ts",
     "analyze": "npx vite-bundle-visualizer"
   },

@@ -5,7 +5,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/prote-ja-app/",
+  base: "/",
 
   plugins: [
     react(),
