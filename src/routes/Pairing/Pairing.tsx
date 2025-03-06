@@ -101,9 +101,7 @@ const Pairing: FunctionComponent = () => {
         // Check if we're still connected, if not, try to reconnect
         if (!btDevice.gatt?.connected) {
           try {
-            console.log("Attempting to reconnect...");
             await ensureDeviceConnection(btDevice);
-            console.log("Reconnection successful");
             // Wait a moment for connection to stabilize
             await new Promise((resolve) => setTimeout(resolve, 300));
           } catch (connErr) {
@@ -133,18 +131,13 @@ const Pairing: FunctionComponent = () => {
       // Set up disconnect listener before attempting connection
       btDevice.addEventListener("gattserverdisconnected", handleDisconnection);
 
-      console.log("Connecting to device GATT server...");
       const server = await ensureDeviceConnection(btDevice);
-      console.log("Connected to GATT server");
 
-      console.log("Getting primary service...");
       const service = await retryGattOperation(
         () => server.getPrimaryService(SERVICE_UUID),
         btDevice
       );
-      console.log("Primary service acquired");
 
-      console.log("Getting characteristics...");
       const [listChar, ssidChar, passwordChar] = await Promise.all([
         retryGattOperation(
           () => service.getCharacteristic(CHARACTERISTIC_UUIDS.LIST),
@@ -159,7 +152,6 @@ const Pairing: FunctionComponent = () => {
           btDevice
         ),
       ]);
-      console.log("All characteristics acquired");
 
       setCharacteristics({ ssid: ssidChar, password: passwordChar });
 

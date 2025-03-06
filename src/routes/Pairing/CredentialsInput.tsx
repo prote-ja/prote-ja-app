@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SelectContent, SelectItem } from "@/components/ui/select";
 import { Bluetooth, CircleHelp, Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 interface CredentialsInputProps {
   networks: string[];
@@ -26,6 +27,8 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({
     () => networks.filter((e) => e !== "").sort((a, b) => a.localeCompare(b)),
     [networks]
   );
+
+  const navigate = useNavigate();
 
   const [selectedNetwork, setSelectedNetwork] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
@@ -53,11 +56,12 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({
       await ssidCharacteristic.writeValueWithResponse(
         encoder.encode(selectedNetwork)
       );
-      const resp = await passwordCharacteristic.writeValueWithResponse(
+      await passwordCharacteristic.writeValueWithResponse(
         encoder.encode(password)
       );
 
-      console.log("Response: ", resp);
+      toast.success("Credenciais enviadas com sucesso.");
+      navigate("/totems");
     } catch (error) {
       toast.error("Erro ao enviar credenciais.");
       console.error("Failed to send credentials: ", error);
