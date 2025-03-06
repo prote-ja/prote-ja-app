@@ -16,6 +16,7 @@ export interface FieldContainerInputProps
   extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   onConfirm?: (newValue: string) => Promise<void>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   closedSize?: "xs" | "sm" | "md" | "lg";
 }

@@ -23,6 +23,7 @@ const Login = React.lazy(() => import("./routes/Login/Login"));
 const Register = React.lazy(() => import("./routes/Register/Register"));
 const Profile = React.lazy(() => import("./routes/Profile/Profile"));
 const FirstLogin = React.lazy(() => import("./routes/FirstLogin/FirstLogin"));
+const Pairing = React.lazy(() => import("./routes/Pairing/Pairing"));
 
 const AlertPage = React.lazy(() => import("./routes/AlertPage/AlertPage"));
 const BuyPremium = React.lazy(() => import("./routes/BuyPremium/BuyPremium"));
@@ -203,6 +204,17 @@ createRoot(document.getElementById("root")!).render(
                         element={
                           <Suspense fallback={<div>Carregando...</div>}>
                             <Profile />
+                          </Suspense>
+                        }
+                      />
+                    </Route>
+
+                    <Route path="pairing">
+                      <Route
+                        index
+                        element={
+                          <Suspense fallback={<div>Carregando...</div>}>
+                            <Pairing />
                           </Suspense>
                         }
                       />

@@ -14,6 +14,9 @@ export default {
       //     foreground: "hsla(var(--text-secondary))",
       //   },
       // },
+      boxShadow: {
+        full: "0 0 0 9999px rgba(0, 0, 0, 0.5)",
+      },
 
       colors: {
         background: {

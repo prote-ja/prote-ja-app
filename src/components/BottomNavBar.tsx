@@ -1,8 +1,23 @@
 import { FunctionComponent, useMemo, useState } from "react";
 import { Button } from "./ui/button";
 import { Link, useLocation } from "react-router";
-import { Home, Plus, SatelliteDish, User, Watch } from "lucide-react";
+import {
+  BluetoothSearching,
+  Home,
+  Plus,
+  SatelliteDish,
+  User,
+  Watch,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type ValidRoutes = "dashboard" | "wearables" | "totems" | "profile";
 
@@ -84,14 +99,35 @@ const BottomNavBar: FunctionComponent<BottomNavBarProps> = () => {
           ))}
           {/* Center Button */}
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-            <Link to="/device/add">
-              <Button
-                variant={"secondary"}
-                className="rounded-full w-16 h-16 text-primary border-2 [&_svg]:size-12 border-white bg-white/100 hover:bg-purple-200 shadow-inner"
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant={"secondary"}
+                  className="rounded-full w-16 h-16 text-primary border-2 [&_svg]:size-12 border-white bg-white/100 hover:bg-purple-200"
+                >
+                  <Plus className="w-6 h-6" />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent
+                className="backdrop-blur-md bg-white/10 text-white font-medium py-2 "
+                side="top"
               >
-                <Plus />
-              </Button>
-            </Link>
+                <Link to="/device/add">
+                  <DropdownMenuItem className="text-md">
+                    <Plus size={32} className="!w-5 !h-5" />
+                    Adicionar
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator className="bg-white/30" />
+
+                <Link to="/pairing">
+                  <DropdownMenuItem className="text-md">
+                    <BluetoothSearching className="!w-4 !h-4" /> Parear Totem
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
