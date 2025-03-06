@@ -15,8 +15,8 @@ const PairingOpening: FunctionComponent<PairingOpeningProps> = ({
     <>
       <h1 className="font-semibold text-2xl mx-auto">Parear totem</h1>
       <p className="text-sm">
-        Pressione o botão de pareamento do totem até a luz piscar e clique no
-        botão abaixo para iniciar a busca.
+        Mantenha o botão de pareamento do totem pressionado até a luz piscar e
+        clique no botão abaixo para iniciar a busca.
       </p>
 
       <div className="flex flex-col gap-4">

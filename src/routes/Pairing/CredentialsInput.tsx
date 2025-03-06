@@ -61,6 +61,7 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({
       );
 
       toast.success("Credenciais enviadas com sucesso.");
+      disconnect();
       navigate("/totems");
     } catch (error) {
       toast.error("Erro ao enviar credenciais.");
