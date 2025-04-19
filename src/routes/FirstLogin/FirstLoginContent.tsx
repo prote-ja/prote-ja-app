@@ -36,7 +36,7 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
   };
 
   return (
-    <div className="relative w-full max-w-screen-xl flex flex-col  text-white -mx-2 md:mx-0">
+    <div className="relative w-full flex flex-col text-white -mx-2 md:mx-0">
       {/* Header */}
       <div className="px-2 md:px-0 ">
         <div className="flex w-full justify-between h-24">
@@ -53,7 +53,7 @@ const FirstLoginContent: FunctionComponent<FirstLoginContentProps> = ({
             <img
               src={ProtejaLogo}
               alt="Proteja"
-              className="object-contain max-h-full aspect-square logo-animation"
+              className="object-contain aspect-square logo-animation"
             />
           )}
         </div>

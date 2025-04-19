@@ -250,7 +250,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
   const ActiveContent = useMemo(() => Content[step - 1], [step]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-dvh">
       <div className="flex-1 overflow-y-auto p-4">
         <FirstLoginContent
           totalSteps={Content.length}
@@ -265,7 +265,7 @@ const TutorialHandler: FunctionComponent<TutorialHandlerProps> = () => {
         </FirstLoginContent>
       </div>
 
-      <div className="sticky bottom-0 p-4 shadow-md z-10">
+      <div className="sticky bottom-0 py-4 shadow-md z-10">
         {ActiveContent.footerOverride ? (
           ActiveContent.footerOverride
         ) : (
