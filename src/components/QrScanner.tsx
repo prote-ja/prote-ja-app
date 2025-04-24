@@ -13,7 +13,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { setOwner } from "@/db/devices";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import MacInput from "./MacInput";
 import FieldContainer from "./FieldContainer/FieldContainer";
 import FieldContainerInput from "./FieldContainer/FieldContainerInput";
 
@@ -33,7 +32,7 @@ const QrScanner: React.FC = () => {
     formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
   };
 
-  const handleSubmit = async (mac: string, password: string) => {
+  const handleSubmit = async (deviceId: string, password: string) => {
     setIsLoading(true);
     setError("");
     if (!user) {
@@ -43,13 +42,12 @@ const QrScanner: React.FC = () => {
     }
     const owner = user.id;
     try {
-      const response = await setOwner(mac, password, owner);
+      const data = await setOwner(deviceId, password, owner);
 
-      if (response.error) {
-        throw new Error(response.error);
-      }
-      toast.success("Cadastrado com sucesso");
-      navigate("/totems/edit/" + mac);
+      console.log(data);
+      toast.success("Dispositivo cadastrado com sucesso");
+      if (data.type === "totem") navigate("/totems/edit/" + deviceId);
+      else navigate("/wearables/edit/" + deviceId);
     } catch (err) {
       console.error(err);
       setError(parseError(err));
@@ -120,9 +118,9 @@ const QrScanner: React.FC = () => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
 
-    const mac = data.get("mac") as string;
+    const id = data.get("deviceId") as string;
     const password = data.get("password") as string;
-    handleSubmit(mac, password);
+    handleSubmit(id, password);
     setManualMode(false);
   };
   useEffect(() => {
@@ -186,7 +184,29 @@ const QrScanner: React.FC = () => {
       ) : (
         <form onSubmit={handleManualSubmit} className="w-full">
           <div className="flex flex-col gap-3 w-full min-w-full">
-            <MacInput name="mac" />
+            {/* Campo ID */}
+            <FieldContainer
+              title={
+                <div className="flex items-center gap-1">
+                  ID
+                  <CircleHelp size={14} className="mb-4" />
+                </div>
+              }
+              tooltip="A senha precisa conter exatamente 6 caracteres alfanuméricos (letras e números)."
+            >
+              <FieldContainerInput
+                type="text"
+                placeholder="ABCDEF..."
+                name="deviceId"
+                required
+                maxLength={12}
+                minLength={12}
+                closedSize="sm"
+              />
+            </FieldContainer>
+
+            {/* Senha */}
+
             <FieldContainer
               title={
                 <div className="flex items-center gap-1">
